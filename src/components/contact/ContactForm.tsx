@@ -5,6 +5,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Loader2, CheckCircle } from "lucide-react";
 
+// Primary color: rgb(235, 106, 80) - Coral
+const PRIMARY = "rgb(235, 106, 80)";
+const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
+const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
+const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -77,15 +83,33 @@ export default function ContactForm() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className="glass rounded-3xl p-12 text-center"
+        style={{
+          border: `1px solid ${PRIMARY_LIGHT}`,
+          boxShadow: `0 0 40px ${PRIMARY_GLOW}`,
+        }}
       >
-        <CheckCircle className="w-16 h-16 mx-auto mb-6 text-green-400" />
-        <h2 className="text-2xl font-bold mb-4">Request Sent!</h2>
-        <p className="text-zinc-400 mb-6">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: "spring", stiffness: 200 }}
+          className="mx-auto mb-6 w-20 h-20 flex items-center justify-center rounded-full"
+          style={{
+            background: PRIMARY_DARK,
+            border: `2px solid ${PRIMARY}`,
+          }}
+        >
+          <CheckCircle className="w-10 h-10" style={{ color: PRIMARY }} />
+        </motion.div>
+        <h2 className="text-2xl font-bold mb-4 text-white">Request Sent!</h2>
+        <p className="text-white/60 mb-6">
           Thank you for reaching out. We'll get back to you within 24 hours.
         </p>
         <button
           onClick={() => setIsSubmitted(false)}
-          className="text-purple-400 hover:text-purple-300 transition-colors"
+          className="transition-colors"
+          style={{ color: PRIMARY }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#ffffff")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = PRIMARY)}
         >
           Send another request
         </button>
@@ -99,10 +123,11 @@ export default function ContactForm() {
       animate={{ opacity: 1, y: 0 }}
       onSubmit={handleSubmit}
       className="glass rounded-3xl p-8 space-y-6"
+      style={{ border: `1px solid ${PRIMARY_DARK}` }}
     >
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="name" className="block text-sm mb-2">
+          <label htmlFor="name" className="block text-sm mb-2 text-white/60">
             Name *
           </label>
           <input
@@ -113,7 +138,15 @@ export default function ContactForm() {
             onChange={handleChange}
             className={`w-full px-4 py-3 rounded-lg bg-zinc-800/50 border ${
               errors.name ? "border-red-500" : "border-zinc-700"
-            } focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors`}
+            } focus:outline-none focus:ring-1 transition-colors text-white placeholder:text-white/30`}
+            style={
+              {
+                borderColor: errors.name ? undefined : PRIMARY_DARK,
+                "--tw-ring-color": PRIMARY,
+              } as any
+            }
+            onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
+            onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
             placeholder="John Doe"
           />
           {errors.name && (
@@ -122,7 +155,7 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="company" className="block text-sm mb-2">
+          <label htmlFor="company" className="block text-sm mb-2 text-white/60">
             Company
           </label>
           <input
@@ -131,7 +164,10 @@ export default function ContactForm() {
             name="company"
             value={formData.company}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
+            className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:outline-none focus:ring-1 transition-colors text-white placeholder:text-white/30"
+            style={{ borderColor: PRIMARY_DARK }}
+            onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
+            onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
             placeholder="Company Inc."
           />
         </div>
@@ -139,7 +175,7 @@ export default function ContactForm() {
 
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="email" className="block text-sm mb-2">
+          <label htmlFor="email" className="block text-sm mb-2 text-white/60">
             Email *
           </label>
           <input
@@ -150,7 +186,10 @@ export default function ContactForm() {
             onChange={handleChange}
             className={`w-full px-4 py-3 rounded-lg bg-zinc-800/50 border ${
               errors.email ? "border-red-500" : "border-zinc-700"
-            } focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors`}
+            } focus:outline-none focus:ring-1 transition-colors text-white placeholder:text-white/30`}
+            style={{ borderColor: errors.email ? undefined : PRIMARY_DARK }}
+            onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
+            onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
             placeholder="john@company.com"
           />
           {errors.email && (
@@ -159,7 +198,7 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="phone" className="block text-sm mb-2">
+          <label htmlFor="phone" className="block text-sm mb-2 text-white/60">
             Phone (optional)
           </label>
           <input
@@ -168,14 +207,17 @@ export default function ContactForm() {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
+            className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:outline-none focus:ring-1 transition-colors text-white placeholder:text-white/30"
+            style={{ borderColor: PRIMARY_DARK }}
+            onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
+            onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
             placeholder="+1 (555) 123-4567"
           />
         </div>
       </div>
 
       <div>
-        <label htmlFor="website" className="block text-sm mb-2">
+        <label htmlFor="website" className="block text-sm mb-2 text-white/60">
           Website (optional)
         </label>
         <input
@@ -184,13 +226,16 @@ export default function ContactForm() {
           name="website"
           value={formData.website}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
+          className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:outline-none focus:ring-1 transition-colors text-white placeholder:text-white/30"
+          style={{ borderColor: PRIMARY_DARK }}
+          onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
+          onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
           placeholder="https://company.com"
         />
       </div>
 
       <div>
-        <label htmlFor="business" className="block text-sm mb-2">
+        <label htmlFor="business" className="block text-sm mb-2 text-white/60">
           What does your business do? *
         </label>
         <textarea
@@ -201,7 +246,10 @@ export default function ContactForm() {
           rows={3}
           className={`w-full px-4 py-3 rounded-lg bg-zinc-800/50 border ${
             errors.business ? "border-red-500" : "border-zinc-700"
-          } focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors resize-none`}
+          } focus:outline-none focus:ring-1 transition-colors resize-none text-white placeholder:text-white/30`}
+          style={{ borderColor: errors.business ? undefined : PRIMARY_DARK }}
+          onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
+          onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
           placeholder="We provide..."
         />
         {errors.business && (
@@ -210,7 +258,10 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="automation" className="block text-sm mb-2">
+        <label
+          htmlFor="automation"
+          className="block text-sm mb-2 text-white/60"
+        >
           What would you like to automate? *
         </label>
         <textarea
@@ -221,7 +272,10 @@ export default function ContactForm() {
           rows={3}
           className={`w-full px-4 py-3 rounded-lg bg-zinc-800/50 border ${
             errors.automation ? "border-red-500" : "border-zinc-700"
-          } focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors resize-none`}
+          } focus:outline-none focus:ring-1 transition-colors resize-none text-white placeholder:text-white/30`}
+          style={{ borderColor: errors.automation ? undefined : PRIMARY_DARK }}
+          onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
+          onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
           placeholder="We want to automate..."
         />
         {errors.automation && (
@@ -231,7 +285,10 @@ export default function ContactForm() {
 
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="interest" className="block text-sm mb-2">
+          <label
+            htmlFor="interest"
+            className="block text-sm mb-2 text-white/60"
+          >
             What are you interested in?
           </label>
           <select
@@ -239,22 +296,33 @@ export default function ContactForm() {
             name="interest"
             value={formData.interest}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
+            className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:outline-none focus:ring-1 transition-colors text-white"
+            style={{ borderColor: PRIMARY_DARK }}
+            onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
+            onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
           >
             <option value="">Select option</option>
             <option value="ai-automation">AI Automation</option>
             <option value="ai-agents">AI Agents</option>
-            <option value="ai-saas">AI SaaS Development</option>
-            <option value="lead-automation">Lead Automation</option>
-            <option value="customer-support">Customer Support</option>
-            <option value="marketing-automation">Marketing Automation</option>
-            <option value="custom-ai">Custom AI Solution</option>
+            <option value="ai-web-applications">AI Web Applications</option>
+            <option value="ai-saas-development">
+              Custom AI & SaaS Development
+            </option>
+            <option value="ai-automation-audit">
+              AI Strategy & Automation Audit
+            </option>
+            <option value="ai-consultancy">AI Consultancy</option>
+            <option value="ai-integration">AI Integration</option>
+            <option value="ai-maintenance">AI Systems Maintenance</option>
             <option value="other">Other</option>
           </select>
         </div>
 
         <div>
-          <label htmlFor="projectSize" className="block text-sm mb-2">
+          <label
+            htmlFor="projectSize"
+            className="block text-sm mb-2 text-white/60"
+          >
             Estimated project size
           </label>
           <select
@@ -262,7 +330,10 @@ export default function ContactForm() {
             name="projectSize"
             value={formData.projectSize}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
+            className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:outline-none focus:ring-1 transition-colors text-white"
+            style={{ borderColor: PRIMARY_DARK }}
+            onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
+            onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
           >
             <option value="">Select size</option>
             <option value="small">Small (1-2 weeks)</option>
@@ -274,7 +345,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="timeline" className="block text-sm mb-2">
+        <label htmlFor="timeline" className="block text-sm mb-2 text-white/60">
           Preferred timeline
         </label>
         <select
@@ -282,7 +353,10 @@ export default function ContactForm() {
           name="timeline"
           value={formData.timeline}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
+          className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:outline-none focus:ring-1 transition-colors text-white"
+          style={{ borderColor: PRIMARY_DARK }}
+          onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
+          onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
         >
           <option value="">Select timeline</option>
           <option value="immediate">Immediately</option>
@@ -295,7 +369,11 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full px-6 py-4 rounded-full bg-gradient-to-r from-purple-600 to-cyan-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full px-6 py-4 rounded-full text-white font-medium transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        style={{
+          backgroundColor: PRIMARY,
+          boxShadow: `0 10px 30px ${PRIMARY_GLOW}`,
+        }}
       >
         {isSubmitting ? (
           <>

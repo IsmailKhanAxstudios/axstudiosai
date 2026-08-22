@@ -155,11 +155,18 @@
 // }
 
 // components/navbar/MobileMenu.tsx
+// components/navbar/MobileMenu.tsx
 "use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { X, ArrowRight } from "lucide-react";
+import { X, ArrowRight, Zap } from "lucide-react";
+
+// Primary color: rgb(235, 106, 80) - Coral
+const PRIMARY = "rgb(235, 106, 80)";
+const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
+const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
+const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
 
 export default function MobileMenu({ onClose }: { onClose: () => void }) {
   const navLinks = [
@@ -192,13 +199,24 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
       >
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <span className="text-xl font-bold text-white">Menu</span>
+          <div className="flex items-center gap-2">
+            <div
+              className="p-1.5 rounded-lg"
+              style={{
+                background: PRIMARY_DARK,
+                border: `1px solid ${PRIMARY_LIGHT}`,
+              }}
+            >
+              <Zap className="w-4 h-4" style={{ color: PRIMARY }} />
+            </div>
+            <span className="text-xl font-bold text-white">Menu</span>
+          </div>
           <button
             onClick={onClose}
             className="p-2 rounded-lg hover:bg-white/10 transition-colors"
             aria-label="Close menu"
           >
-            <X className="w-5 h-5 text-zinc-400" />
+            <X className="w-5 h-5 text-white/60" />
           </button>
         </div>
 
@@ -213,7 +231,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
               <Link
                 href={link.href}
                 onClick={onClose}
-                className="block px-4 py-3 rounded-xl text-base text-zinc-300 hover:text-white hover:bg-white/5 transition-all"
+                className="block px-4 py-3 rounded-xl text-base text-white/60 hover:text-white hover:bg-white/5 transition-all"
               >
                 {link.label}
               </Link>
@@ -226,7 +244,11 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
           <Link
             href="/contact"
             onClick={onClose}
-            className="gradient-border glass px-6 py-3.5 rounded-full text-center font-medium flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform"
+            className="px-6 py-3.5 rounded-full text-center font-medium text-white flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform"
+            style={{
+              backgroundColor: PRIMARY,
+              boxShadow: `0 10px 30px ${PRIMARY_GLOW}`,
+            }}
           >
             Book a Strategy Call
             <ArrowRight className="w-4 h-4" />
@@ -235,10 +257,10 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
 
         {/* Contact Info */}
         <div className="mt-8 pt-6 border-t border-white/10">
-          <p className="text-xs text-zinc-500 mb-1">Contact</p>
+          <p className="text-xs text-white/40 mb-1">Contact</p>
           <a
             href="mailto:contact@axstudios.tech"
-            className="text-sm text-zinc-400 hover:text-white transition-colors"
+            className="text-sm text-white/60 hover:text-white transition-colors"
           >
             contact@axstudios.tech
           </a>

@@ -79,9 +79,9 @@ export default function Hero() {
   }, [typingInProgress, currentPhrase]);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className="relative min-h-screen flex items-center pt-20 pb-8 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-2">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left">
             <motion.div
@@ -132,12 +132,18 @@ export default function Hero() {
                   />
                 </span>
               </span>
-
-              {/* Line 3 - White */}
-              <span className="block h-[1.2em] leading-[1.2] text-white">
-                Scale Faster.
-              </span>
             </motion.h1>
+
+            <motion.h3
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-3xl lg:text-4xl xl:text-4xl font-bold leading-tight mb-6"
+            >
+              <span className="block h-[1.2em] leading-[1.2] text-white">
+                Innovate Automate Dominate.
+              </span>
+            </motion.h3>
 
             <motion.p
               initial={{ opacity: 0, y: 30 }}
