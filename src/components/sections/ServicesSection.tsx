@@ -12,7 +12,9 @@ import {
   Headphones,
   Megaphone,
   Settings,
+  Globe,
   ArrowRight,
+  SearchCheck,
 } from "lucide-react";
 
 const services = [
@@ -21,7 +23,7 @@ const services = [
     icon: Zap,
     title: "AI Automation",
     description:
-      "Automate repetitive business operations using intelligent workflows.",
+      "Automate repetitive business processes using AI, intelligent workflows, and connected systems.",
     href: "/services/ai-automation",
   },
   {
@@ -29,57 +31,42 @@ const services = [
     icon: Bot,
     title: "AI Agents",
     description:
-      "Build AI agents capable of handling research, support, sales, operations, and internal workflows.",
+      "Build intelligent AI agents that understand context, use tools, and perform business tasks.",
     href: "/services/ai-agents",
   },
   {
     number: "03",
-    icon: Cog,
-    title: "Business Process Automation",
-    description: "Connect your existing systems and remove manual processes.",
-    href: "/services/ai-automation",
+    icon: Globe,
+    title: "AI-Powered Web Applications",
+    description:
+      "Build intelligent websites, portals, dashboards, and custom web applications powered by AI.",
+    href: "/services/ai-web-applications",
   },
   {
     number: "04",
     icon: Code,
-    title: "AI SaaS Development",
-    description: "Build custom AI-powered software products.",
-    href: "/services/ai-saas-development",
+    title: "Custom AI & SaaS Development",
+    description:
+      "Design and build scalable AI-powered software, SaaS platforms, internal tools, and custom systems.",
+    href: "/services/custom-ai-saas-development",
   },
   {
     number: "05",
-    icon: TrendingUp,
-    title: "Sales & Lead Automation",
+    icon: SearchCheck,
+    title: "AI Strategy & Automation Audit",
     description:
-      "Automatically capture, qualify, enrich, and follow up with leads.",
-    href: "/services/sales-automation",
+      "Identify high-impact AI opportunities, eliminate bottlenecks, and create a practical implementation roadmap.",
+    href: "/services/ai-automation-audit",
   },
   {
     number: "06",
-    icon: Headphones,
-    title: "Customer Support Automation",
-    description:
-      "Deploy intelligent support systems that operate around the clock.",
-    href: "/services/customer-support-automation",
-  },
-  {
-    number: "07",
-    icon: Megaphone,
-    title: "Marketing Automation",
-    description:
-      "Automate content workflows, campaigns, reporting, and customer journeys.",
-    href: "/services/marketing-automation",
-  },
-  {
-    number: "08",
     icon: Settings,
-    title: "Custom AI Solutions",
+    title: "AI Systems Maintenance",
     description:
-      "Build bespoke AI systems around unique business requirements.",
-    href: "/services/custom-ai-solutions",
+      "Monitor, maintain, optimize, and continuously improve AI systems and automations.",
+    href: "/services/ai-maintenance",
   },
 ];
-
 export default function ServicesSection() {
   return (
     <section className="py-20 relative">

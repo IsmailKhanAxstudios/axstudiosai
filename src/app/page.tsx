@@ -14,6 +14,7 @@ import ProjectExamples from "@/components/sections/ProjectExamples";
 import FAQ from "@/components/sections/FAQ";
 import CTASection from "@/components/sections/CTASection";
 import AIWorkflowCanvas from "@/components/sections/AIWorkflowCanvas";
+import AIAgentsSection from "@/components/sections/AIAgentsSection";
 
 export default function HomePage() {
   return (
@@ -22,12 +23,17 @@ export default function HomePage() {
       <TrustBar />
       <ProblemSection />
       <ServicesSection />
+
+      {/* AI AUTOMATION SERVICES */}
+      <UseCases />
+      {/* AI AGENTS SERVICES  */}
+      <AIAgentsSection />
+      {/* AI WEBSITE SERVICES  */}
       <SolutionsVisualizer />
       <WorkflowBuilder />
       <AIWorkflowCanvas />
       <ProcessSection />
       <ROICalculator />
-      <UseCases />
 
       <ProjectExamples />
       <FAQ />
