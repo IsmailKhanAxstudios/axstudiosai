@@ -18,6 +18,7 @@ import AIAgentsSection from "@/components/sections/AIAgentsSection";
 import AIWebApplications from "@/components/sections/AIWebApplications";
 import CustomAISaaSDevelopment from "@/components/sections/CustomAISAASDev";
 import AIStrategyAudit from "@/components/sections/AIStrategyAudit";
+import AISystemsMaintenance from "@/components/sections/AISystemMainetnance";
 
 export default function HomePage() {
   return (
@@ -38,6 +39,7 @@ export default function HomePage() {
 
       <AIStrategyAudit />
 
+      {/* <AISystemsMaintenance /> */}
       <SolutionsVisualizer />
       <WorkflowBuilder />
       <AIWorkflowCanvas />

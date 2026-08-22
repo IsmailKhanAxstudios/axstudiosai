@@ -15,6 +15,8 @@ import {
   Globe,
   ArrowRight,
   SearchCheck,
+  Users,
+  Network,
 } from "lucide-react";
 
 const services = [
@@ -25,6 +27,14 @@ const services = [
     description:
       "Automate repetitive business processes using AI, intelligent workflows, and connected systems.",
     href: "/services/ai-automation",
+    color: "#8b5cf6",
+    category: "Core Systems",
+    features: [
+      "Workflow automation",
+      "Process optimization",
+      "Tool integration",
+      "Scalable systems",
+    ],
   },
   {
     number: "02",
@@ -33,6 +43,14 @@ const services = [
     description:
       "Build intelligent AI agents that understand context, use tools, and perform business tasks.",
     href: "/services/ai-agents",
+    color: "#06b6d4",
+    category: "Intelligence",
+    features: [
+      "Context-aware reasoning",
+      "Tool usage",
+      "Autonomous operation",
+      "Multi-agent systems",
+    ],
   },
   {
     number: "03",
@@ -41,6 +59,14 @@ const services = [
     description:
       "Build intelligent websites, portals, dashboards, and custom web applications powered by AI.",
     href: "/services/ai-web-applications",
+    color: "#10b981",
+    category: "Development",
+    features: [
+      "AI websites",
+      "Customer portals",
+      "Business apps",
+      "Intelligent dashboards",
+    ],
   },
   {
     number: "04",
@@ -49,6 +75,14 @@ const services = [
     description:
       "Design and build scalable AI-powered software, SaaS platforms, internal tools, and custom systems.",
     href: "/services/custom-ai-saas-development",
+    color: "#f59e0b",
+    category: "Engineering",
+    features: [
+      "SaaS platforms",
+      "Custom software",
+      "API development",
+      "Infrastructure",
+    ],
   },
   {
     number: "05",
@@ -57,14 +91,62 @@ const services = [
     description:
       "Identify high-impact AI opportunities, eliminate bottlenecks, and create a practical implementation roadmap.",
     href: "/services/ai-automation-audit",
+    color: "#ec4899",
+    category: "Strategy",
+    features: [
+      "Opportunity mapping",
+      "Process analysis",
+      "ROI assessment",
+      "Roadmap creation",
+    ],
   },
   {
     number: "06",
+    icon: Users,
+    title: "AI Consultancy",
+    description:
+      "Expert guidance on AI adoption, strategy, technology selection, and implementation best practices.",
+    href: "/services/ai-consultancy",
+    color: "#6366f1",
+    category: "Advisory",
+    features: [
+      "Technology selection",
+      "AI adoption strategy",
+      "Best practices",
+      "Vendor evaluation",
+    ],
+  },
+  {
+    number: "07",
+    icon: Network,
+    title: "AI Integration",
+    description:
+      "Seamlessly integrate AI capabilities into your existing systems, tools, and business workflows.",
+    href: "/services/ai-integration",
+    color: "#14b8a6",
+    category: "Integration",
+    features: [
+      "API integration",
+      "System connectivity",
+      "Data pipelines",
+      "Workflow embedding",
+    ],
+  },
+  {
+    number: "08",
     icon: Settings,
     title: "AI Systems Maintenance",
     description:
       "Monitor, maintain, optimize, and continuously improve AI systems and automations.",
     href: "/services/ai-maintenance",
+    color: "#f97316",
+    category: "Operations",
+    features: [
+      "24/7 monitoring",
+      "Performance tuning",
+      "Continuous updates",
+      "Technical support",
+    ],
   },
 ];
 export default function ServicesSection() {
