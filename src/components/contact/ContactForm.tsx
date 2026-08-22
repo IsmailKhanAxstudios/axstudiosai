@@ -54,11 +54,37 @@ export default function ContactForm() {
 
     setIsSubmitting(true);
 
-    // Simulate API call - Replace with actual API integration
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to send request");
+      }
+
+      console.log("Success:", result);
+
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error("Form submission error:", error);
+
+      alert(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
