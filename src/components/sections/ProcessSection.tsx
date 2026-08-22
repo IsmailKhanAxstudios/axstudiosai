@@ -34,6 +34,12 @@ import {
   Workflow,
 } from "lucide-react";
 
+// Primary color: rgb(235, 106, 80) - Coral
+const PRIMARY = "rgb(235, 106, 80)";
+const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
+const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
+const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+
 const steps = [
   {
     icon: Search,
@@ -41,8 +47,6 @@ const steps = [
     description:
       "We analyze your business and identify high-value automation opportunities.",
     duration: "Week 1",
-    color: "#8b5cf6",
-    gradient: "from-purple-500 to-purple-700",
     details: [
       "Business analysis",
       "Pain point identification",
@@ -57,8 +61,6 @@ const steps = [
     description:
       "We map workflows, systems, integrations, and AI capabilities.",
     duration: "Week 2",
-    color: "#06b6d4",
-    gradient: "from-cyan-500 to-blue-700",
     details: [
       "Workflow mapping",
       "System architecture",
@@ -72,8 +74,6 @@ const steps = [
     title: "Build",
     description: "We develop the automation system and connect your tools.",
     duration: "Weeks 3-4",
-    color: "#10b981",
-    gradient: "from-green-500 to-emerald-700",
     details: [
       "Custom development",
       "AI implementation",
@@ -87,8 +87,6 @@ const steps = [
     title: "Test",
     description: "We test workflows, edge cases, reliability, and performance.",
     duration: "Week 5",
-    color: "#f59e0b",
-    gradient: "from-amber-500 to-orange-700",
     details: [
       "Quality assurance",
       "Performance testing",
@@ -102,8 +100,6 @@ const steps = [
     title: "Launch",
     description: "We deploy the system into your business.",
     duration: "Week 6",
-    color: "#ec4899",
-    gradient: "from-pink-500 to-rose-700",
     details: [
       "Production deployment",
       "Team training",
@@ -118,8 +114,6 @@ const steps = [
     description:
       "We monitor, improve, and expand your automation infrastructure.",
     duration: "Ongoing",
-    color: "#6366f1",
-    gradient: "from-indigo-500 to-blue-700",
     details: [
       "Performance monitoring",
       "Continuous improvement",
@@ -142,19 +136,20 @@ export default function ProcessSection() {
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage:
-                "radial-gradient(circle, #8b5cf6 1px, transparent 1px)",
+              backgroundImage: `radial-gradient(circle, ${PRIMARY_DARK} 1px, transparent 1px)`,
               backgroundSize: "30px 30px",
             }}
           />
         </div>
         <motion.div
-          className="absolute top-20 left-20 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"
+          className="absolute top-20 left-20 w-96 h-96 rounded-full blur-3xl"
+          style={{ background: PRIMARY_DARK }}
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 5, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-20 right-20 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"
+          className="absolute bottom-20 right-20 w-96 h-96 rounded-full blur-3xl"
+          style={{ background: "rgba(255, 255, 255, 0.03)" }}
           animate={{ scale: [1.2, 1, 1.2] }}
           transition={{ duration: 6, repeat: Infinity }}
         />
@@ -172,16 +167,17 @@ export default function ProcessSection() {
             whileInView={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 200 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4"
+            style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <Workflow className="w-4 h-4 text-purple-400" />
-            <span className="text-sm text-zinc-300">OUR PROCESS</span>
+            <Workflow className="w-4 h-4" style={{ color: PRIMARY }} />
+            <span className="text-sm text-white/80">OUR PROCESS</span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl font-bold mb-4">
-            From idea to{" "}
-            <span className="gradient-text">intelligent system.</span>
+            <span className="text-white">From idea to </span>
+            <span style={{ color: PRIMARY }}>intelligent system.</span>
           </h2>
-          <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+          <p className="text-lg text-white/60 max-w-2xl mx-auto">
             A proven methodology for successful AI automation implementation.
           </p>
         </motion.div>
@@ -191,7 +187,10 @@ export default function ProcessSection() {
           {/* Animated Timeline Line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-px">
             <motion.div
-              className="w-full h-full bg-gradient-to-b from-purple-500 via-cyan-500 to-green-500"
+              className="w-full h-full"
+              style={{
+                background: `linear-gradient(180deg, ${PRIMARY}, ${PRIMARY_LIGHT}, #ffffff, ${PRIMARY_LIGHT}, ${PRIMARY})`,
+              }}
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: 1 }}
               transition={{ duration: 2, ease: "easeInOut" }}
@@ -220,12 +219,16 @@ export default function ProcessSection() {
                     style={{
                       background:
                         activeStep === index || hoveredStep === index
-                          ? `linear-gradient(135deg, ${step.color}15, ${step.color}05)`
+                          ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgba(235, 106, 80, 0.1))`
                           : "rgba(19, 19, 24, 0.7)",
-                      border: `1px solid ${step.color}${activeStep === index || hoveredStep === index ? "88" : "33"}`,
+                      border: `1px solid ${
+                        activeStep === index || hoveredStep === index
+                          ? PRIMARY_LIGHT
+                          : PRIMARY_DARK
+                      }`,
                       boxShadow:
                         activeStep === index || hoveredStep === index
-                          ? `0 0 30px ${step.color}33`
+                          ? `0 0 30px ${PRIMARY_GLOW}`
                           : "none",
                       backdropFilter: "blur(10px)",
                     }}
@@ -235,22 +238,16 @@ export default function ProcessSection() {
                   >
                     {/* Step Number */}
                     <div
-                      className="absolute -top-3 -left-3 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold"
-                      style={{
-                        background: step.color,
-                        color: "white",
-                      }}
+                      className="absolute -top-3 -left-3 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white"
+                      style={{ background: PRIMARY }}
                     >
                       {String(index + 1).padStart(2, "0")}
                     </div>
 
                     {/* Duration Badge */}
                     <div
-                      className="absolute -top-3 -right-3 px-3 py-1 rounded-full text-xs font-medium"
-                      style={{
-                        background: step.color,
-                        color: "white",
-                      }}
+                      className="absolute -top-3 -right-3 px-3 py-1 rounded-full text-xs font-medium text-white"
+                      style={{ background: PRIMARY }}
                     >
                       {step.duration}
                     </div>
@@ -264,35 +261,37 @@ export default function ProcessSection() {
                           ease: "linear",
                         }}
                         className="p-3 rounded-xl"
-                        style={{ background: `${step.color}22` }}
+                        style={{
+                          background: PRIMARY_DARK,
+                          border: `1px solid ${PRIMARY_LIGHT}`,
+                        }}
                       >
                         <step.icon
                           className="w-6 h-6"
-                          style={{ color: step.color }}
+                          style={{ color: PRIMARY }}
                         />
                       </motion.div>
-                      <h3 className="text-xl font-semibold">{step.title}</h3>
+                      <h3 className="text-xl font-semibold text-white">
+                        {step.title}
+                      </h3>
                     </div>
 
-                    <p className="text-zinc-400 mb-3">{step.description}</p>
+                    <p className="text-white/60 mb-3">{step.description}</p>
 
                     {/* Metrics */}
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2">
-                        <Gauge
-                          className="w-4 h-4"
-                          style={{ color: step.color }}
-                        />
-                        <span className="text-sm text-zinc-300">
+                        <Gauge className="w-4 h-4" style={{ color: PRIMARY }} />
+                        <span className="text-sm text-white/60">
                           {step.metrics.efficiency} Efficiency
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <TrendingUp
                           className="w-4 h-4"
-                          style={{ color: step.color }}
+                          style={{ color: PRIMARY }}
                         />
-                        <span className="text-sm text-zinc-300">
+                        <span className="text-sm text-white/60">
                           {step.metrics.savings} Savings
                         </span>
                       </div>
@@ -311,11 +310,11 @@ export default function ProcessSection() {
                     transition={{ type: "spring", stiffness: 300 }}
                     className="w-5 h-5 rounded-full"
                     style={{
-                      background: `linear-gradient(135deg, ${step.color}, ${step.color}88)`,
+                      background: PRIMARY,
                       boxShadow:
                         activeStep === index || hoveredStep === index
-                          ? `0 0 20px ${step.color}`
-                          : `0 0 10px ${step.color}66`,
+                          ? `0 0 20px ${PRIMARY_GLOW}`
+                          : `0 0 10px ${PRIMARY_DARK}`,
                     }}
                   />
 
@@ -324,7 +323,7 @@ export default function ProcessSection() {
                     <motion.div
                       className="absolute top-5 left-1/2 transform -translate-x-1/2 w-px h-16 lg:h-20"
                       style={{
-                        background: `linear-gradient(to bottom, ${step.color}, ${steps[index + 1].color})`,
+                        background: `linear-gradient(to bottom, ${PRIMARY}, ${PRIMARY_LIGHT})`,
                       }}
                       initial={{ scaleY: 0 }}
                       whileInView={{ scaleY: 1 }}
@@ -349,7 +348,10 @@ export default function ProcessSection() {
               exit={{ opacity: 0, height: 0 }}
               className="overflow-hidden mt-8"
             >
-              <div className="glass rounded-2xl p-8">
+              <div
+                className="glass rounded-2xl p-8"
+                style={{ border: `1px solid ${PRIMARY_DARK}` }}
+              >
                 <div className="grid md:grid-cols-2 gap-6">
                   {steps[activeStep].details.map((detail, idx) => (
                     <motion.div
@@ -357,13 +359,14 @@ export default function ProcessSection() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: idx * 0.1 }}
-                      className="flex items-center gap-3 p-4 rounded-xl bg-white/5"
+                      className="flex items-center gap-3 p-4 rounded-xl"
+                      style={{ background: PRIMARY_DARK }}
                     >
                       <CheckCircle2
                         className="w-5 h-5 flex-shrink-0"
-                        style={{ color: steps[activeStep].color }}
+                        style={{ color: PRIMARY }}
                       />
-                      <span className="text-sm text-zinc-300">{detail}</span>
+                      <span className="text-sm text-white/70">{detail}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -382,11 +385,11 @@ export default function ProcessSection() {
           <motion.p
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="text-sm text-zinc-500 inline-flex items-center gap-2"
+            className="text-sm text-white/40 inline-flex items-center gap-2"
           >
-            <Sparkles className="w-4 h-4 text-purple-400" />
+            <Sparkles className="w-4 h-4" style={{ color: PRIMARY }} />
             Click any step to explore details
-            <Sparkles className="w-4 h-4 text-purple-400" />
+            <Sparkles className="w-4 h-4" style={{ color: PRIMARY }} />
           </motion.p>
         </motion.div>
       </div>
