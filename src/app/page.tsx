@@ -43,7 +43,7 @@ export default function HomePage() {
       <SolutionsVisualizer />
       <WorkflowBuilder />
       <AIWorkflowCanvas />
-      <ProcessSection />
+
       <ROICalculator />
 
       <ProjectExamples />
