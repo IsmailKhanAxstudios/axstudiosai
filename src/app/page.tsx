@@ -15,6 +15,9 @@ import FAQ from "@/components/sections/FAQ";
 import CTASection from "@/components/sections/CTASection";
 import AIWorkflowCanvas from "@/components/sections/AIWorkflowCanvas";
 import AIAgentsSection from "@/components/sections/AIAgentsSection";
+import AIWebApplications from "@/components/sections/AIWebApplications";
+import CustomAISaaSDevelopment from "@/components/sections/CustomAISAASDev";
+import AIStrategyAudit from "@/components/sections/AIStrategyAudit";
 
 export default function HomePage() {
   return (
@@ -29,6 +32,12 @@ export default function HomePage() {
       {/* AI AGENTS SERVICES  */}
       <AIAgentsSection />
       {/* AI WEBSITE SERVICES  */}
+      <AIWebApplications />
+
+      <CustomAISaaSDevelopment />
+
+      <AIStrategyAudit />
+
       <SolutionsVisualizer />
       <WorkflowBuilder />
       <AIWorkflowCanvas />
