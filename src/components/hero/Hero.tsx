@@ -9,13 +9,12 @@ import HeroVisualization from "./HeroVisualization";
 
 // Rotating phrases for the headline
 const rotatingPhrases = [
-  "Automate Everything.",
+  "Automate",
   "Scale Faster.",
   "Work Smarter.",
   "Save Time.",
   "Reduce Costs.",
   "Boost Revenue.",
-  "Eliminate Manual Work.",
   "Accelerate Growth.",
 ];
 
