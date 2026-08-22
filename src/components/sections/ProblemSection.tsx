@@ -323,7 +323,8 @@
 //           className="mt-12 text-center"
 //         >
 //           <p className="text-zinc-400 mb-4">
-//             Ready to eliminate these problems from your business?
+//             Ready to eliminate these problemsa
+//  from your business?
 //           </p>
 //           <a
 //             href="/contact"
