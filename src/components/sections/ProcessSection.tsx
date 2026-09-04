@@ -190,11 +190,11 @@ export default function ProcessSection() {
               className="w-full h-full"
               style={{
                 background: `linear-gradient(180deg, ${PRIMARY}, ${PRIMARY_LIGHT}, #ffffff, ${PRIMARY_LIGHT}, ${PRIMARY})`,
+                transformOrigin: "top",
               }}
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: 1 }}
               transition={{ duration: 2, ease: "easeInOut" }}
-              style={{ transformOrigin: "top" }}
             />
           </div>
 

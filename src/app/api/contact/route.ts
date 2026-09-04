@@ -1,113 +1,18 @@
-// import { NextResponse } from "next/server";
-// import { resend } from "@/lib/resend";
-
-// export async function POST(request: Request) {
-//   try {
-//     const body = await request.json();
-
-//     console.log("Contact form received:", body);
-
-//     const { name, email, company } = body;
-
-//     // 1. Send notification to your company
-//     const { data: companyData, error: companyError } = await resend.emails.send(
-//       {
-//         from: "AX Studios <onboarding@resend.dev>",
-//         to: [process.env.CONTACT_RECEIVER_EMAIL!],
-//         subject: "New Contact Form Submission 🚀",
-//         html: `
-//           <h1>New Contact Form Submission 🚀</h1>
-
-//           <p>A new request was submitted through your website.</p>
-
-//           <hr />
-
-//           <p><strong>Name:</strong> ${name}</p>
-//           <p><strong>Email:</strong> ${email}</p>
-//           <p><strong>Company:</strong> ${company || "Not provided"}</p>
-//         `,
-//       },
-//     );
-
-//     if (companyError) {
-//       console.error("Company email error:", companyError);
-
-//       return NextResponse.json(
-//         {
-//           success: false,
-//           message: "Failed to send company notification",
-//         },
-//         { status: 500 },
-//       );
-//     }
-
-//     // 2. Send confirmation to the person who submitted the form
-//     const { data: userData, error: userError } = await resend.emails.send({
-//       from: "AX Studios <onboarding@resend.dev>",
-//       to: [email],
-//       subject: "We received your request — AX Studios",
-//       html: `
-//           <h1>Thanks for reaching out, ${name}!</h1>
-
-//           <p>
-//             We've received your request and our team will get back to you soon.
-//           </p>
-
-//           <hr />
-
-//           <h3>Your submission</h3>
-
-//           <p><strong>Name:</strong> ${name}</p>
-//           <p><strong>Email:</strong> ${email}</p>
-//           <p><strong>Company:</strong> ${company || "Not provided"}</p>
-
-//           <br />
-
-//           <p>
-//             Best regards,<br />
-//             <strong>AX Studios</strong>
-//           </p>
-//         `,
-//     });
-
-//     if (userError) {
-//       console.error("User confirmation email error:", userError);
-
-//       // The company email was already successfully sent,
-//       // so don't report the entire form submission as failed.
-//       return NextResponse.json({
-//         success: true,
-//         message: "Form received, but confirmation email could not be sent",
-//         companyEmail: companyData,
-//       });
-//     }
-
-//     return NextResponse.json({
-//       success: true,
-//       message: "Form submitted and both emails sent successfully",
-//       companyEmail: companyData,
-//       userEmail: userData,
-//     });
-//   } catch (error) {
-//     console.error("Contact API error:", error);
-
-//     return NextResponse.json(
-//       {
-//         success: false,
-//         message: "Something went wrong",
-//       },
-//       { status: 500 },
-//     );
-//   }
-// }
 import { NextResponse } from "next/server";
 import { resend } from "@/lib/resend";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const receiver = process.env.CONTACT_RECEIVER_EMAIL;
+    if (!receiver) {
+      console.error("CONTACT_RECEIVER_EMAIL is not set");
+      return NextResponse.json(
+        { success: false, message: "Server is not configured to accept messages" },
+        { status: 500 },
+      );
+    }
 
-    console.log("Contact form received:", body);
+    const body = await request.json();
 
     const {
       name,
@@ -129,7 +34,7 @@ export async function POST(request: Request) {
     const { data: companyData, error: companyError } = await resend.emails.send(
       {
         from: "AX Studios <onboarding@resend.dev>",
-        to: [process.env.CONTACT_RECEIVER_EMAIL!],
+        to: [receiver],
         subject: `New Lead — ${name}${company ? ` from ${company}` : ""}`,
         html: `
 <!DOCTYPE html>

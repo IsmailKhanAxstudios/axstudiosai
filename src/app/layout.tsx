@@ -20,6 +20,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://axstudios.tech"),
   title: "AxStudios — AI Automation & Intelligent Business Systems",
   description:
     "AxStudios builds AI automation systems, AI agents, custom software, and intelligent workflows that help businesses work smarter and scale faster.",

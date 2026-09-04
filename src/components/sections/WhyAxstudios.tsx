@@ -57,8 +57,8 @@ export default function WhyAxStudios() {
             Why businesses choose AxStudios
           </h2>
           <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-            We're not just another automation agency. We're your strategic
-            partner in digital transformation.
+            We&apos;re not just another automation agency. We&apos;re your
+            strategic partner in digital transformation.
           </p>
         </motion.div>
 

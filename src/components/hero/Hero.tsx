@@ -21,35 +21,28 @@ const rotatingPhrases = [
 // Custom hook for typing effect
 function useTypingEffect(text: string, isActive: boolean) {
   const [displayedText, setDisplayedText] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
-    if (!isActive) {
-      setDisplayedText("");
-      return;
-    }
+    if (!isActive) return;
 
     let currentIndex = 0;
-    setDisplayedText("");
-    setIsTyping(true);
-
     const interval = setInterval(() => {
+      currentIndex++;
       if (currentIndex <= text.length) {
         setDisplayedText(text.slice(0, currentIndex));
-        currentIndex++;
       } else {
         clearInterval(interval);
-        setIsTyping(false);
       }
     }, 60);
 
     return () => {
       clearInterval(interval);
-      setIsTyping(false);
+      setDisplayedText("");
     };
   }, [text, isActive]);
 
-  return { displayedText, isTyping };
+  const displayed = isActive ? displayedText : "";
+  return { displayedText: displayed, isTyping: isActive && displayed !== text };
 }
 
 export default function Hero() {

@@ -14,11 +14,11 @@ export default function ContactPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
-            Let's build your <span className="gradient-text">AI advantage.</span>
+            Let&apos;s build your <span className="gradient-text">AI advantage.</span>
           </h1>
           <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-            Tell us about your business and what you'd like to automate. 
-            We'll get back to you within 24 hours.
+            Tell us about your business and what you&apos;d like to automate.
+            We&apos;ll get back to you within 24 hours.
           </p>
         </div>
 
