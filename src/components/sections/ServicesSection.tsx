@@ -35,7 +35,7 @@ const services = [
     title: "AI Automation",
     description:
       "Automate repetitive business processes using AI, intelligent workflows, and connected systems.",
-    href: "/services/ai-automation",
+    href: "/services#ai-automation",
     category: "Core Systems",
     features: [
       "Workflow automation",
@@ -50,7 +50,7 @@ const services = [
     title: "AI Agents",
     description:
       "Build intelligent AI agents that understand context, use tools, and perform business tasks.",
-    href: "/services/ai-agents",
+    href: "/services#ai-agents",
     category: "Intelligence",
     features: [
       "Context-aware reasoning",
@@ -65,7 +65,7 @@ const services = [
     title: "AI-Powered Web Applications",
     description:
       "Build intelligent websites, portals, dashboards, and custom web applications powered by AI.",
-    href: "/services/ai-web-applications",
+    href: "/services#ai-web-applications",
     category: "Development",
     features: [
       "AI websites",
@@ -80,7 +80,7 @@ const services = [
     title: "Custom AI & SaaS Development",
     description:
       "Design and build scalable AI-powered software, SaaS platforms, internal tools, and custom systems.",
-    href: "/services/custom-ai-saas-development",
+    href: "/services#custom-ai-saas-development",
     category: "Engineering",
     features: [
       "SaaS platforms",
@@ -95,7 +95,7 @@ const services = [
     title: "AI Strategy & Automation Audit",
     description:
       "Identify high-impact AI opportunities, eliminate bottlenecks, and create a practical implementation roadmap.",
-    href: "/services/ai-automation-audit",
+    href: "/services#ai-automation-audit",
     category: "Strategy",
     features: [
       "Opportunity mapping",
@@ -110,7 +110,7 @@ const services = [
     title: "AI Consultancy",
     description:
       "Expert guidance on AI adoption, strategy, technology selection, and implementation best practices.",
-    href: "/services/ai-consultancy",
+    href: "/services#ai-automation-audit",
     category: "Advisory",
     features: [
       "Technology selection",
@@ -125,7 +125,7 @@ const services = [
     title: "AI Integration",
     description:
       "Seamlessly integrate AI capabilities into your existing systems, tools, and business workflows.",
-    href: "/services/ai-integration",
+    href: "/services#ai-automation",
     category: "Integration",
     features: [
       "API integration",
@@ -140,7 +140,7 @@ const services = [
     title: "AI Systems Maintenance",
     description:
       "Monitor, maintain, optimize, and continuously improve AI systems and automations.",
-    href: "/services/ai-maintenance",
+    href: "/services#ai-maintenance",
     category: "Operations",
     features: [
       "24/7 monitoring",

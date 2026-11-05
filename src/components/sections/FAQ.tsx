@@ -290,6 +290,7 @@ export default function FAQ() {
                   }}
                 >
                   <button
+                    aria-expanded={openIndex === index}
                     onClick={() =>
                       setOpenIndex(openIndex === index ? null : index)
                     }

@@ -28,17 +28,17 @@ const servicesData = [
     items: [
       {
         label: "Workflow Automation",
-        href: "/services/ai-automation",
+        href: "/services#ai-automation",
         icon: Workflow,
       },
       {
         label: "Business Process Automation",
-        href: "/services/ai-automation",
+        href: "/services#ai-automation",
         icon: Layers,
       },
       {
         label: "Intelligent Workflows",
-        href: "/services/ai-automation",
+        href: "/services#ai-automation",
         icon: Sparkles,
       },
     ],
@@ -48,9 +48,9 @@ const servicesData = [
     icon: Bot,
     color: "#06b6d4",
     items: [
-      { label: "Sales Agents", href: "/services/ai-agents", icon: TrendingUp },
-      { label: "Support Agents", href: "/services/ai-agents", icon: Bot },
-      { label: "Multi-Agent Systems", href: "/services/ai-agents", icon: Cpu },
+      { label: "Sales Agents", href: "/services#ai-agents", icon: TrendingUp },
+      { label: "Support Agents", href: "/services#ai-agents", icon: Bot },
+      { label: "Multi-Agent Systems", href: "/services#ai-agents", icon: Cpu },
     ],
   },
   {
@@ -60,17 +60,17 @@ const servicesData = [
     items: [
       {
         label: "AI-Powered Web Apps",
-        href: "/services/ai-web-applications",
+        href: "/services#ai-web-applications",
         icon: Globe,
       },
       {
         label: "Custom AI & SaaS",
-        href: "/services/custom-ai-saas-development",
+        href: "/services#custom-ai-saas-development",
         icon: Code,
       },
       {
         label: "Engineering & Infrastructure",
-        href: "/services/custom-ai-saas-development",
+        href: "/services#custom-ai-saas-development",
         icon: Terminal,
       },
     ],
@@ -82,17 +82,17 @@ const servicesData = [
     items: [
       {
         label: "AI Strategy & Audit",
-        href: "/services/ai-automation-audit",
+        href: "/services#ai-automation-audit",
         icon: SearchCheck,
       },
       {
         label: "Systems Maintenance",
-        href: "/services/ai-maintenance",
+        href: "/services#ai-maintenance",
         icon: Settings,
       },
       {
         label: "Ongoing Optimization",
-        href: "/services/ai-maintenance",
+        href: "/services#ai-maintenance",
         icon: Shield,
       },
     ],

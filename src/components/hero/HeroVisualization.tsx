@@ -174,7 +174,7 @@ export default function HeroVisualization() {
 
   // Calculate position based on orbit and angle
   const getPosition = (orbit: number, angle: number) => {
-    const radius = orbit * 45;
+    const radius = orbit * 36;
     const radians = (angle * Math.PI) / 180;
     const x = 50 + radius * Math.cos(radians);
     const y = 50 + radius * Math.sin(radians);
@@ -199,7 +199,7 @@ export default function HeroVisualization() {
   }
 
   return (
-    <div className="relative w-full h-[500px] lg:h-[600px] flex items-center justify-center overflow-visible">
+    <div className="relative w-full h-[500px] lg:h-[600px] flex items-center justify-center overflow-hidden">
       {/* Outer rotating ring */}
       <motion.div
         className="absolute w-[420px] h-[420px] lg:w-[520px] lg:h-[520px] rounded-full"
@@ -359,7 +359,8 @@ export default function HeroVisualization() {
             style={{
               left: pos.x,
               top: pos.y,
-              transform: "translate(-50%, -50%)",
+              x: "-50%",
+              y: "-50%",
             }}
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -433,7 +434,8 @@ export default function HeroVisualization() {
             style={{
               left: pos.x,
               top: pos.y,
-              transform: "translate(-50%, -50%)",
+              x: "-50%",
+              y: "-50%",
             }}
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 0.6, scale: 1 }}

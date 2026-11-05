@@ -17,12 +17,12 @@ export default function ServicesPage() {
   return (
     <>
       <ServicesSection />
-      <UseCases />
-      <AIAgentsSection />
-      <AIWebApplications />
-      <CustomAISaaSDevelopment />
-      <AIStrategyAudit />
-      <AISystemsMaintenance />
+      <div id="ai-automation" className="scroll-mt-24"><UseCases /></div>
+      <div id="ai-agents" className="scroll-mt-24"><AIAgentsSection /></div>
+      <div id="ai-web-applications" className="scroll-mt-24"><AIWebApplications /></div>
+      <div id="custom-ai-saas-development" className="scroll-mt-24"><CustomAISaaSDevelopment /></div>
+      <div id="ai-automation-audit" className="scroll-mt-24"><AIStrategyAudit /></div>
+      <div id="ai-maintenance" className="scroll-mt-24"><AISystemsMaintenance /></div>
     </>
   );
 }

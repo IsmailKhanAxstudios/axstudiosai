@@ -13,3 +13,56 @@
     --text-muted: rgba(255, 255, 255, 0.5);
   }
 }
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+  body { font-family: var(--font-inter), sans-serif; overflow-x: clip; }
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-space-grotesk), sans-serif; overflow-wrap: break-word; }
+  main, footer { position: relative; }
+  input, textarea, select { min-width: 0; }
+  :focus-visible { outline: 2px solid rgb(var(--primary)); outline-offset: 4px; }
+}
+/* Glassmorphism */
+.glass {
+  background: rgba(19, 19, 24, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #eb6a50 0%, #ffb199 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Animated gradient border */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(235, 106, 80, 0.5),
+    rgba(255, 177, 153, 0.5)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

@@ -41,7 +41,7 @@ export default function ROICalculator() {
   const annualCost = employees * hoursPerWeek * hourlyCost * weeksPerYear;
   const potentialSavings = annualCost * 0.7;
   const monthlySavings = potentialSavings / 12;
-  const dailySavings = potentialSavings / 365;
+  const dailySavings = potentialSavings / (weeksPerYear * 5);
   const hoursSaved = employees * hoursPerWeek * weeksPerYear * 0.7;
 
   const calcTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -73,7 +73,7 @@ export default function ROICalculator() {
   };
 
   const roiPercentage = Math.round(
-    (potentialSavings / (annualCost - potentialSavings)) * 100,
+    (potentialSavings / annualCost) * 100,
   );
 
   return (
@@ -118,7 +118,7 @@ export default function ROICalculator() {
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
             <Calculator className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">ROI CALCULATOR</span>
+            <span className="text-sm text-white/80">SAVINGS CALCULATOR</span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl font-bold mb-4">
@@ -136,7 +136,7 @@ export default function ROICalculator() {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="glass rounded-3xl p-8"
+            className="glass rounded-3xl p-5 sm:p-8"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
             <div className="flex items-center justify-between mb-6">
@@ -168,6 +168,7 @@ export default function ROICalculator() {
                   type="range"
                   min="1"
                   max="100"
+                  aria-label="Number of employees"
                   value={employees}
                   onChange={(e) => {
                     setEmployees(Number(e.target.value));
@@ -187,7 +188,7 @@ export default function ROICalculator() {
                 <div className="flex items-center justify-between mb-3">
                   <label className="flex items-center gap-2 text-sm text-white/60">
                     <Clock className="w-4 h-4" style={{ color: PRIMARY }} />
-                    Hours per week (repetitive)
+                    Hours per employee per week
                   </label>
                   <motion.span
                     key={hoursPerWeek}
@@ -202,6 +203,7 @@ export default function ROICalculator() {
                   type="range"
                   min="1"
                   max="40"
+                  aria-label="Repetitive hours per employee per week"
                   value={hoursPerWeek}
                   onChange={(e) => {
                     setHoursPerWeek(Number(e.target.value));
@@ -240,6 +242,7 @@ export default function ROICalculator() {
                   min="20"
                   max="200"
                   step="5"
+                  aria-label="Average hourly cost in USD"
                   value={hourlyCost}
                   onChange={(e) => {
                     setHourlyCost(Number(e.target.value));
@@ -274,6 +277,7 @@ export default function ROICalculator() {
                   type="range"
                   min="40"
                   max="52"
+                  aria-label="Working weeks per year"
                   value={weeksPerYear}
                   onChange={(e) => {
                     setWeeksPerYear(Number(e.target.value));
@@ -298,7 +302,7 @@ export default function ROICalculator() {
             className="flex flex-col justify-center"
           >
             <div
-              className="glass rounded-3xl p-8 relative overflow-hidden"
+              className="glass rounded-3xl p-5 sm:p-8 relative overflow-hidden"
               style={{
                 border: `1px solid ${PRIMARY_LIGHT}`,
                 boxShadow: `0 0 40px ${PRIMARY_GLOW}`,
@@ -397,21 +401,21 @@ export default function ROICalculator() {
                       {formatCurrency(potentialSavings)}
                     </motion.p>
                     <p className="text-xs text-white/40 mt-1">
-                      Based on 70% automation potential
+                      Illustrative estimate assuming 70% automation. Excludes setup and ongoing costs.
                     </p>
                   </div>
 
                   {/* Quick Stats */}
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {[
                       {
                         value: formatCurrency(monthlySavings),
                         label: "Monthly",
                       },
-                      { value: formatCurrency(dailySavings), label: "Daily" },
+                      { value: formatCurrency(dailySavings), label: "Per workday" },
                       {
                         value: `${formatNumber(hoursSaved)}h`,
-                        label: "Hours Saved",
+                        label: "Hours / year",
                       },
                     ].map((stat) => (
                       <div
@@ -437,7 +441,7 @@ export default function ROICalculator() {
                     <div className="flex items-center gap-2">
                       <Rocket className="w-5 h-5" style={{ color: PRIMARY }} />
                       <span className="text-sm text-white/60">
-                        Projected ROI
+                        Estimated cost reduction
                       </span>
                     </div>
                     <span
@@ -450,12 +454,13 @@ export default function ROICalculator() {
 
                   {/* Breakdown Toggle */}
                   <button
+                    aria-expanded={showBreakdown}
                     onClick={() => setShowBreakdown(!showBreakdown)}
                     className="w-full flex items-center justify-between p-3 rounded-lg transition-colors"
                     style={{ background: PRIMARY_DARK }}
                   >
                     <span className="text-sm text-white/60">
-                      View Breakdown
+                      View calculation
                     </span>
                     <ChevronDown
                       className={`w-4 h-4 transition-transform ${showBreakdown ? "rotate-180" : ""}`}
@@ -477,23 +482,23 @@ export default function ROICalculator() {
                           style={{ background: PRIMARY_DARK }}
                         >
                           <div className="flex justify-between text-sm">
-                            <span className="text-white/40">Labor Cost</span>
+                            <span className="text-white/40">Annual manual-work cost</span>
                             <span className="text-white">
-                              {formatCurrency(annualCost * 0.5)}
+                              {formatCurrency(annualCost)}
                             </span>
                           </div>
                           <div className="flex justify-between text-sm">
-                            <span className="text-white/40">Time Savings</span>
+                            <span className="text-white/40">Estimated savings (70%)</span>
                             <span className="text-white">
-                              {formatCurrency(annualCost * 0.3)}
+                              {formatCurrency(potentialSavings)}
                             </span>
                           </div>
                           <div className="flex justify-between text-sm">
                             <span className="text-white/40">
-                              Error Reduction
+                              Remaining manual cost (30%)
                             </span>
                             <span className="text-white">
-                              {formatCurrency(annualCost * 0.2)}
+                              {formatCurrency(annualCost - potentialSavings)}
                             </span>
                           </div>
                         </div>

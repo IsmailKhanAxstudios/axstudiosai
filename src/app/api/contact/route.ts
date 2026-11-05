@@ -1,18 +1,51 @@
 import { NextResponse } from "next/server";
-import { resend } from "@/lib/resend";
+import { Resend } from "resend";
 
 export async function POST(request: Request) {
   try {
     const receiver = process.env.CONTACT_RECEIVER_EMAIL;
-    if (!receiver) {
-      console.error("CONTACT_RECEIVER_EMAIL is not set");
+    const apiKey = process.env.RESEND_API_KEY;
+    let body: unknown;
+    try { body = await request.json(); }
+    catch { return NextResponse.json({ success: false, message: "Invalid JSON" }, { status: 400 }); }
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json({ success: false, message: "Invalid form data" }, { status: 400 });
+    }
+    const input = body as Record<string, unknown>;
+    const fields = ["name", "email", "company", "phone", "website", "business", "automation", "projectSize", "timeline", "interest"];
+    for (const field of fields) {
+      const value = input[field];
+      if (value !== undefined && (typeof value !== "string" || value.length > 5000)) {
+        return NextResponse.json({ success: false, message: "Invalid or oversized form field" }, { status: 400 });
+      }
+    }
+    for (const field of ["name", "email", "business", "automation"]) {
+      if (typeof input[field] !== "string" || !(input[field] as string).trim()) {
+        return NextResponse.json({ success: false, message: "Required fields are missing" }, { status: 400 });
+      }
+    }
+    const replyTo = (input.email as string).trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(replyTo) || /[\r\n]/.test(replyTo)) {
+      return NextResponse.json({ success: false, message: "Invalid email address" }, { status: 400 });
+    }
+    if (input.website) {
+      try {
+        const url = new URL(input.website as string);
+        if (!["https:", "http:"].includes(url.protocol)) throw new Error();
+      } catch { return NextResponse.json({ success: false, message: "Invalid website URL" }, { status: 400 }); }
+    }
+    const escapeHtml = (value: string) => value.replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]!);
+    const safe = Object.fromEntries(fields.map(field => [field, escapeHtml(((input[field] as string) || "").trim())]));
+    if (!receiver || !apiKey) {
+      console.error("Contact email provider is not configured");
       return NextResponse.json(
         { success: false, message: "Server is not configured to accept messages" },
         { status: 500 },
       );
     }
 
-    const body = await request.json();
+    const resend = new Resend(apiKey);
+    const sender = process.env.CONTACT_SENDER_EMAIL || "AX Studios <onboarding@resend.dev>";
 
     const {
       name,
@@ -25,16 +58,17 @@ export async function POST(request: Request) {
       projectSize,
       timeline,
       interest,
-    } = body;
+    } = safe;
 
     // ============================================================
     // 1. INTERNAL EMAIL — AX STUDIOS
     // ============================================================
 
-    const { data: companyData, error: companyError } = await resend.emails.send(
+    const { error: companyError } = await resend.emails.send(
       {
-        from: "AX Studios <onboarding@resend.dev>",
+        from: sender,
         to: [receiver],
+        replyTo,
         subject: `New Lead — ${name}${company ? ` from ${company}` : ""}`,
         html: `
 <!DOCTYPE html>
@@ -378,9 +412,9 @@ export async function POST(request: Request) {
     // 2. CUSTOMER CONFIRMATION EMAIL
     // ============================================================
 
-    const { data: userData, error: userError } = await resend.emails.send({
-      from: "AX Studios <onboarding@resend.dev>",
-      to: [email],
+    const { error: userError } = await resend.emails.send({
+      from: sender,
+      to: [replyTo],
       subject: "We've received your request — AX Studios",
       html: `
 <!DOCTYPE html>
@@ -590,7 +624,6 @@ export async function POST(request: Request) {
       return NextResponse.json({
         success: true,
         message: "Form received, but confirmation email could not be sent",
-        companyEmail: companyData,
       });
     }
 
@@ -601,8 +634,6 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       message: "Form submitted and both emails sent successfully",
-      companyEmail: companyData,
-      userEmail: userData,
     });
   } catch (error) {
     console.error("Contact API error:", error);

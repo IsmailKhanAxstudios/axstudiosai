@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AxStudios
 
-## Getting Started
+AI automation agency website built with Next.js, React, Tailwind CSS and Framer Motion.
 
-First, run the development server:
+## Run locally
 
-```bash
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Run `npm run build` for a production build and `npm start` to serve it. Run `npm run lint` for static checks.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contact form configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The browser form uses EmailJS. Set these values in `.env.local` and rebuild after changing them:
 
-## Learn More
+```dotenv
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
+```
 
-To learn more about Next.js, take a look at the following resources:
+Configure the EmailJS template to accept `name`, `email`, `company`, `phone`, `website`, `business`, `automation`, `interest`, `project_size`, and `timeline`. Restrict permitted origins in EmailJS. If configuration is missing, the form displays an email fallback instead of claiming success.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The separate `/api/contact` endpoint uses Resend and requires `RESEND_API_KEY` and `CONTACT_RECEIVER_EMAIL`. Set `CONTACT_SENDER_EMAIL` to an address on your verified sending domain for production delivery. The default Resend onboarding address is for testing. Server credentials must never use a `NEXT_PUBLIC_` prefix. Builds do not require email credentials.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Content and estimates
 
-## Deploy on Vercel
+Service links target sections on `/services`. Placeholder social and policy links were removed until real destinations and approved policy content are available.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The savings calculator assumes 70% automation and a five-day working week. Its results are illustrative gross labor savings, excluding implementation and operating costs; they are not investment ROI or guaranteed savings.

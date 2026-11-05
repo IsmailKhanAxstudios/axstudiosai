@@ -48,26 +48,7 @@ export default function Footer() {
               AI automation systems for ambitious businesses.
             </p>
 
-            {/* Social Links */}
-            <div className="flex items-center gap-3 mt-4">
-              {["Twitter", "LinkedIn", "GitHub"].map((social) => (
-                <a
-                  key={social}
-                  href="#"
-                  className="p-2 rounded-lg transition-all hover:scale-110"
-                  style={{
-                    background: PRIMARY_DARK,
-                    border: `1px solid ${PRIMARY_DARK}`,
-                  }}
-                  aria-label={social}
-                >
-                  <ArrowUpRight
-                    className="w-4 h-4"
-                    style={{ color: PRIMARY }}
-                  />
-                </a>
-              ))}
-            </div>
+
           </div>
 
           {/* Navigation */}
@@ -97,30 +78,30 @@ export default function Footer() {
             <h3 className="font-semibold mb-4 text-white">Services</h3>
             <div className="space-y-2">
               {[
-                { href: "/services/ai-automation", label: "AI Automation" },
-                { href: "/services/ai-agents", label: "AI Agents" },
+                { href: "/services#ai-automation", label: "AI Automation" },
+                { href: "/services#ai-agents", label: "AI Agents" },
                 {
-                  href: "/services/ai-web-applications",
+                  href: "/services#ai-web-applications",
                   label: "AI Web Applications",
                 },
                 {
-                  href: "/services/custom-ai-saas-development",
+                  href: "/services#custom-ai-saas-development",
                   label: "Custom AI & SaaS",
                 },
                 {
-                  href: "/services/ai-automation-audit",
+                  href: "/services#ai-automation-audit",
                   label: "Strategy & Audit",
                 },
                 {
-                  href: "/services/ai-consultancy",
+                  href: "/services#ai-automation-audit",
                   label: "AI Consultancy",
                 },
                 {
-                  href: "/services/ai-integration",
+                  href: "/services#ai-automation",
                   label: "AI Integration",
                 },
                 {
-                  href: "/services/ai-maintenance",
+                  href: "/services#ai-maintenance",
                   label: "AI Maintenance",
                 },
               ].map((link) => (
@@ -170,19 +151,7 @@ export default function Footer() {
             <p className="text-sm text-white/40">
               © {currentYear} AxStudios. All rights reserved.
             </p>
-            <div className="flex items-center gap-4 text-xs text-white/40">
-              <a href="#" className="hover:text-white transition-colors">
-                Privacy Policy
-              </a>
-              <span className="text-white/20">•</span>
-              <a href="#" className="hover:text-white transition-colors">
-                Terms of Service
-              </a>
-              <span className="text-white/20">•</span>
-              <a href="#" className="hover:text-white transition-colors">
-                Cookie Policy
-              </a>
-            </div>
+
           </div>
         </div>
       </div>

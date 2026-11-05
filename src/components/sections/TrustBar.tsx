@@ -1,8 +1,7 @@
 // components/sections/TrustBar.tsx
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { TrendingUp, Clock, Zap, Infinity as InfinityIcon } from "lucide-react";
 
 const PRIMARY = "rgb(235, 106, 80)";
@@ -11,54 +10,15 @@ const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
 const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
 
 const stats = [
-  { icon: TrendingUp, value: 80, suffix: "%", label: "Less Manual Work" },
-  { icon: Clock, value: 24, suffix: "/7", label: "AI Operations" },
-  { icon: Zap, value: 10, suffix: "x", label: "Faster Workflows" },
-  {
-    icon: InfinityIcon,
-    value: 100,
-    suffix: "%",
-    label: "Automation Potential",
-  },
+  { icon: TrendingUp, value: "Workflows", label: "Reduce repetitive tasks" },
+  { icon: Clock, value: "AI Agents", label: "Support business operations" },
+  { icon: Zap, value: "Integrations", label: "Connect your tools" },
+  { icon: InfinityIcon, value: "Custom AI", label: "Build around your needs" },
 ];
-
-function Counter({ value, suffix }: { value: number; suffix: string }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const [displayValue, setDisplayValue] = useState(0);
-
-  useEffect(() => {
-    if (isInView) {
-      const duration = 2000; // 2 seconds
-      const steps = 60; // 60 frames
-      const increment = value / steps;
-      let current = 0;
-
-      const interval = setInterval(() => {
-        current += increment;
-        if (current >= value) {
-          setDisplayValue(value);
-          clearInterval(interval);
-        } else {
-          setDisplayValue(Math.floor(current));
-        }
-      }, duration / steps);
-
-      return () => clearInterval(interval);
-    }
-  }, [isInView, value]);
-
-  return (
-    <span ref={ref} className="inline-block">
-      {displayValue}
-      {suffix}
-    </span>
-  );
-}
 
 export default function TrustBar() {
   return (
-    <section className="py-16 relative">
+    <section className="py-16 relative overflow-hidden">
       {/* Background subtle glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div
@@ -80,7 +40,7 @@ export default function TrustBar() {
           <span style={{ color: PRIMARY }}>refuse to operate manually.</span>
         </motion.h2>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -108,8 +68,8 @@ export default function TrustBar() {
               </motion.div>
 
               {/* Value */}
-              <div className="text-3xl lg:text-4xl font-bold mb-2 text-white">
-                <Counter value={stat.value} suffix={stat.suffix} />
+              <div className="text-xl lg:text-2xl font-bold mb-2 text-white">
+                {stat.value}
               </div>
 
               {/* Label */}
