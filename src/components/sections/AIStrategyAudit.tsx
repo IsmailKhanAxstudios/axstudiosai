@@ -46,11 +46,10 @@ import {
   Rocket,
 } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const auditSteps = [
   {
@@ -157,7 +156,7 @@ export default function AIStrategyAudit() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+                "linear-gradient(to right, rgb(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--foreground)) 1px, transparent 1px)",
               backgroundSize: "60px 60px",
             }}
           />
@@ -187,17 +186,17 @@ export default function AIStrategyAudit() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <Radar className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">
+            <Radar className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-sm text-foreground/80">
               AI STRATEGY & AUTOMATION AUDIT
             </span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl font-bold mb-4 leading-tight">
-            <span className="text-white">Discover your </span>
-            <span style={{ color: PRIMARY }}>automation potential.</span>
+            <span className="text-foreground">Discover your </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>automation potential.</span>
           </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+          <p className="text-lg text-secondary-text max-w-2xl mx-auto">
             A systematic audit that reveals where AI can create the most value
             for your business.
           </p>
@@ -209,17 +208,17 @@ export default function AIStrategyAudit() {
           style={{ border: `1px solid ${PRIMARY_DARK}` }}
         >
           {/* Board Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/5">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/10 bg-foreground/5">
             <div className="flex items-center gap-2">
-              <FileSearch className="w-4 h-4" style={{ color: PRIMARY }} />
-              <span className="text-sm font-medium text-white/80">
+              <FileSearch className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+              <span className="text-sm font-medium text-foreground/80">
                 Automation Audit Report
               </span>
             </div>
             <div className="flex items-center gap-2">
               <span
                 className="text-[10px] px-2 py-1 rounded-full"
-                style={{ background: PRIMARY_DARK, color: PRIMARY }}
+                style={{ background: PRIMARY_DARK, color: "rgb(var(--accent-text))" }}
               >
                 IN PROGRESS
               </span>
@@ -228,8 +227,8 @@ export default function AIStrategyAudit() {
 
           <div className="flex flex-col lg:flex-row">
             {/* Left Side - Step Timeline */}
-            <div className="lg:w-72 border-b lg:border-b-0 lg:border-r border-white/10 p-4">
-              <div className="text-[10px] uppercase tracking-wider text-white/40 mb-3 px-2">
+            <div className="lg:w-72 border-b lg:border-b-0 lg:border-r border-foreground/10 p-4">
+              <div className="text-[10px] uppercase tracking-wider text-muted mb-3 px-2">
                 Investigation Steps
               </div>
               <div className="space-y-1.5">
@@ -257,7 +256,7 @@ export default function AIStrategyAudit() {
                       {/* Step Number */}
                       <span
                         className="text-xs font-mono font-bold"
-                        style={{ color: PRIMARY }}
+                        style={{ color: "rgb(var(--accent-text))" }}
                       >
                         {step.step}
                       </span>
@@ -270,7 +269,7 @@ export default function AIStrategyAudit() {
                       >
                         <step.icon
                           className="w-4 h-4"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
                       </motion.div>
 
@@ -297,14 +296,14 @@ export default function AIStrategyAudit() {
               </div>
 
               {/* Progress Indicator */}
-              <div className="mt-4 pt-4 border-t border-white/10">
+              <div className="mt-4 pt-4 border-t border-foreground/10">
                 <div className="flex items-center justify-between text-xs mb-2">
-                  <span className="text-white/40">Progress</span>
-                  <span className="text-white/80 font-medium">
+                  <span className="text-muted">Progress</span>
+                  <span className="text-foreground/80 font-medium">
                     {auditSteps.findIndex((s) => s.id === activeStep) + 1}/6
                   </span>
                 </div>
-                <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                <div className="h-1.5 bg-field rounded-full overflow-hidden">
                   <motion.div
                     className="h-full rounded-full"
                     style={{ background: PRIMARY }}
@@ -346,35 +345,35 @@ export default function AIStrategyAudit() {
                     >
                       <selectedStep.icon
                         className="w-7 h-7"
-                        style={{ color: PRIMARY }}
+                        style={{ color: "rgb(var(--accent-text))" }}
                       />
                     </motion.div>
                     <div>
                       <div className="flex items-center gap-2">
                         <span
                           className="text-xs font-mono font-bold"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         >
                           {selectedStep.step}
                         </span>
-                        <h3 className="text-lg font-bold text-white">
+                        <h3 className="text-lg font-bold text-foreground">
                           {selectedStep.name}
                         </h3>
                       </div>
-                      <p className="text-sm text-white/60">
+                      <p className="text-sm text-secondary-text">
                         {selectedStep.action}
                       </p>
                     </div>
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm text-white/70 mb-5 leading-relaxed">
+                  <p className="text-sm text-foreground/70 mb-5 leading-relaxed">
                     {selectedStep.description}
                   </p>
 
                   {/* Findings */}
                   <div className="space-y-2">
-                    <h4 className="text-xs font-semibold text-white/40 uppercase tracking-wider">
+                    <h4 className="text-xs font-semibold text-muted uppercase tracking-wider">
                       Key Findings
                     </h4>
                     <div className="grid sm:grid-cols-2 gap-2">
@@ -392,9 +391,9 @@ export default function AIStrategyAudit() {
                         >
                           <CheckCircle2
                             className="w-4 h-4 flex-shrink-0"
-                            style={{ color: PRIMARY }}
+                            style={{ color: "rgb(var(--accent-text))" }}
                           />
-                          <span className="text-xs text-white/70">
+                          <span className="text-xs text-foreground/70">
                             {finding}
                           </span>
                         </motion.div>
@@ -403,7 +402,7 @@ export default function AIStrategyAudit() {
                   </div>
 
                   {/* Navigation */}
-                  <div className="flex items-center justify-between mt-6 pt-4 border-t border-white/10">
+                  <div className="flex items-center justify-between mt-6 pt-4 border-t border-foreground/10">
                     <button
                       onClick={() => {
                         const currentIndex = auditSteps.findIndex(
@@ -416,7 +415,7 @@ export default function AIStrategyAudit() {
                       disabled={
                         auditSteps.findIndex((s) => s.id === activeStep) === 0
                       }
-                      className="flex items-center gap-1.5 text-xs text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="flex items-center gap-1.5 text-xs text-secondary-text hover:text-foreground transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       <ChevronRight className="w-4 h-4 rotate-180" />
                       Previous
@@ -435,7 +434,7 @@ export default function AIStrategyAudit() {
                         auditSteps.findIndex((s) => s.id === activeStep) ===
                         auditSteps.length - 1
                       }
-                      className="flex items-center gap-1.5 text-xs text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="flex items-center gap-1.5 text-xs text-secondary-text hover:text-foreground transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       Next
                       <ChevronRight className="w-4 h-4" />
@@ -447,10 +446,10 @@ export default function AIStrategyAudit() {
           </div>
 
           {/* Board Footer */}
-          <div className="flex items-center justify-between px-4 py-2.5 border-t border-white/10 bg-white/5">
+          <div className="flex items-center justify-between px-4 py-2.5 border-t border-foreground/10 bg-foreground/5">
             <div className="flex items-center gap-2">
-              <Activity className="w-3.5 h-3.5" style={{ color: PRIMARY }} />
-              <span className="text-[10px] text-white/40">
+              <Activity className="w-3.5 h-3.5" style={{ color: "rgb(var(--accent-text))" }} />
+              <span className="text-[10px] text-muted">
                 Audit in progress...
               </span>
             </div>

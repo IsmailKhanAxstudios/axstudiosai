@@ -24,11 +24,10 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 interface WorkflowNode {
   id: string;
@@ -357,15 +356,15 @@ export default function AIWorkflowCanvas() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <Bot className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">AI AGENT ORCHESTRATOR</span>
+            <Bot className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-sm text-foreground/80">AI AGENT ORCHESTRATOR</span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl font-bold mb-4">
-            <span className="text-white">Intelligent </span>
-            <span style={{ color: PRIMARY }}>Agent Workflow</span>
+            <span className="text-foreground">Intelligent </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>Agent Workflow</span>
           </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+          <p className="text-lg text-secondary-text max-w-2xl mx-auto">
             Watch AI agents collaborate and automate complex business processes
             in real-time.
           </p>
@@ -383,7 +382,7 @@ export default function AIWorkflowCanvas() {
               className="absolute inset-0"
               style={{
                 backgroundImage:
-                  "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+                  "linear-gradient(to right, rgb(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--foreground)) 1px, transparent 1px)",
                 backgroundSize: "40px 40px",
               }}
             />
@@ -503,7 +502,7 @@ export default function AIWorkflowCanvas() {
                   background:
                     node.status === "processing"
                       ? PRIMARY_DARK
-                      : "rgba(10,10,15,0.9)",
+                      : "rgb(var(--background) / 0.9)",
                   border: `2px solid ${PRIMARY_LIGHT}`,
                   boxShadow:
                     node.status === "processing"
@@ -529,13 +528,13 @@ export default function AIWorkflowCanvas() {
                       border: `1px solid ${PRIMARY_LIGHT}`,
                     }}
                   >
-                    <node.icon className="w-6 h-6" style={{ color: PRIMARY }} />
+                    <node.icon className="w-6 h-6" style={{ color: "rgb(var(--accent-text))" }} />
                   </motion.div>
                   <div className="flex-1">
-                    <span className="text-sm font-semibold text-white block">
+                    <span className="text-sm font-semibold text-foreground block">
                       {node.label}
                     </span>
-                    <span className="text-xs text-white/40">{node.type}</span>
+                    <span className="text-xs text-muted">{node.type}</span>
                   </div>
                 </div>
 
@@ -559,7 +558,7 @@ export default function AIWorkflowCanvas() {
                       repeat: node.status === "processing" ? Infinity : 0,
                     }}
                   />
-                  <span className="text-xs text-white/60">
+                  <span className="text-xs text-secondary-text">
                     {node.status === "processing"
                       ? "Processing..."
                       : node.status === "completed"
@@ -577,7 +576,7 @@ export default function AIWorkflowCanvas() {
                       className="p-1 rounded-full"
                       style={{ background: PRIMARY }}
                     >
-                      <Sparkles className="w-3 h-3 text-white" />
+                      <Sparkles className="w-3 h-3 text-foreground" />
                     </motion.div>
                   </div>
                 )}
@@ -585,11 +584,11 @@ export default function AIWorkflowCanvas() {
                 {/* Connection Points */}
                 <div
                   className="absolute -right-1.5 top-1/2 w-3 h-3 rounded-full border-2"
-                  style={{ background: PRIMARY, borderColor: "#0a0a0f" }}
+                  style={{ background: PRIMARY, borderColor: "rgb(var(--background))" }}
                 />
                 <div
                   className="absolute -left-1.5 top-1/2 w-3 h-3 rounded-full border-2"
-                  style={{ background: PRIMARY, borderColor: "#0a0a0f" }}
+                  style={{ background: PRIMARY, borderColor: "rgb(var(--background))" }}
                 />
               </div>
             </motion.div>
@@ -625,50 +624,50 @@ export default function AIWorkflowCanvas() {
                             >
                               <node.icon
                                 className="w-6 h-6"
-                                style={{ color: PRIMARY }}
+                                style={{ color: "rgb(var(--accent-text))" }}
                               />
                             </motion.div>
                             <div>
-                              <h4 className="font-semibold text-white">
+                              <h4 className="font-semibold text-foreground">
                                 {node.label}
                               </h4>
-                              <p className="text-xs text-white/40">
+                              <p className="text-xs text-muted">
                                 {node.type}
                               </p>
                             </div>
                           </div>
                           <button
                             onClick={() => setSelectedNode(null)}
-                            className="text-white/40 hover:text-white"
+                            className="text-muted hover:text-foreground"
                           >
                             <X className="w-5 h-5" />
                           </button>
                         </div>
 
-                        <p className="text-sm text-white/60 mb-4">
+                        <p className="text-sm text-secondary-text mb-4">
                           {node.description}
                         </p>
 
                         {node.metrics && (
                           <div className="space-y-2 mb-4">
                             <div className="flex items-center justify-between text-sm">
-                              <span className="text-white/40">Speed</span>
-                              <span className="text-white font-medium">
+                              <span className="text-muted">Speed</span>
+                              <span className="text-foreground font-medium">
                                 {node.metrics.speed}
                               </span>
                             </div>
                             <div className="flex items-center justify-between text-sm">
-                              <span className="text-white/40">Accuracy</span>
-                              <span className="text-white font-medium">
+                              <span className="text-muted">Accuracy</span>
+                              <span className="text-foreground font-medium">
                                 {node.metrics.accuracy}
                               </span>
                             </div>
                           </div>
                         )}
 
-                        <div className="flex items-center gap-2 text-sm text-white/40">
+                        <div className="flex items-center gap-2 text-sm text-muted">
                           <span>Connections:</span>
-                          <span className="text-white font-medium">
+                          <span className="text-foreground font-medium">
                             {node.connections.length}
                           </span>
                         </div>

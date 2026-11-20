@@ -56,7 +56,7 @@ export default function WhyAxStudios() {
           <h2 className="text-3xl lg:text-5xl font-bold mb-4">
             Why businesses choose AxStudios
           </h2>
-          <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
             We&apos;re not just another automation agency. We&apos;re your
             strategic partner in digital transformation.
           </p>
@@ -70,11 +70,11 @@ export default function WhyAxStudios() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="glass rounded-2xl p-8 gradient-border hover:bg-zinc-900/50 transition-all"
+              className="glass rounded-2xl p-8 gradient-border hover:bg-field/40 transition-all"
             >
               <reason.icon className="w-10 h-10 mb-4 text-purple-400" />
               <h3 className="text-xl font-semibold mb-3">{reason.title}</h3>
-              <p className="text-zinc-400">{reason.description}</p>
+              <p className="text-foreground/70">{reason.description}</p>
             </motion.div>
           ))}
         </div>

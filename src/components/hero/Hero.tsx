@@ -84,9 +84,9 @@ export default function Hero() {
             >
               <Sparkles
                 className="w-4 h-4"
-                style={{ color: "rgb(var(--primary))" }}
+                style={{ color: "rgb(var(--accent-text))" }}
               />
-              <span className="text-sm text-white font-medium tracking-wider">
+              <span className="text-sm text-foreground font-medium tracking-wider">
                 AI AUTOMATION STUDIO
               </span>
             </motion.div>
@@ -98,7 +98,7 @@ export default function Hero() {
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6"
             >
               {/* Line 1 - White */}
-              <span className="block h-[1.2em] leading-[1.2] text-white">
+              <span className="block h-[1.2em] leading-[1.2] text-foreground">
                 Build Smarter.
               </span>
 
@@ -132,7 +132,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl sm:text-3xl lg:text-4xl xl:text-4xl font-bold leading-tight mb-6"
             >
-              <span className="block h-[1.2em] leading-[1.2] text-white">
+              <span className="block h-[1.2em] leading-[1.2] text-foreground">
                 Innovate Automate Dominate.
               </span>
             </motion.h3>
@@ -141,7 +141,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg text-zinc-400 mb-8 max-w-xl mx-auto lg:mx-0"
+              className="text-lg text-foreground/70 mb-8 max-w-xl mx-auto lg:mx-0"
             >
               AxStudios designs and builds intelligent AI automation systems
               that eliminate repetitive work, connect your tools, and help your
@@ -159,7 +159,7 @@ export default function Hero() {
                 className="group relative px-8 py-4 rounded-full text-white font-medium transition-all hover:scale-105"
                 style={{
                   backgroundColor: "rgb(var(--primary))",
-                  boxShadow: "0 10px 30px rgba(235, 106, 80, 0.3)",
+                  boxShadow: "0 10px 30px rgb(var(--primary) / 0.3)",
                 }}
               >
                 <span className="flex items-center gap-2">
@@ -169,8 +169,8 @@ export default function Hero() {
               </Link>
               <Link
                 href="/services"
-                className="glass px-8 py-4 rounded-full font-medium text-white hover:text-white transition-all border"
-                style={{ borderColor: "rgba(235, 106, 80, 0.4)" }}
+                className="glass px-8 py-4 rounded-full font-medium text-foreground hover:text-foreground transition-all border"
+                style={{ borderColor: "rgb(var(--primary) / 0.4)" }}
               >
                 Explore Our Services
               </Link>
@@ -180,19 +180,19 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-8 flex items-center justify-center lg:justify-start gap-3 text-sm text-zinc-500"
+              className="mt-8 flex items-center justify-center lg:justify-start gap-3 text-sm text-muted"
             >
               <Zap
                 className="w-4 h-4"
-                style={{ color: "rgb(var(--primary))" }}
+                style={{ color: "rgb(var(--accent-text))" }}
               />
-              <span className="text-white/70">AI Systems</span>
-              <span className="text-zinc-700">•</span>
-              <span className="text-white/70">Automation</span>
-              <span className="text-zinc-700">•</span>
-              <span className="text-white/70">Integrations</span>
-              <span className="text-zinc-700">•</span>
-              <span className="text-white/70">Custom Software</span>
+              <span className="text-foreground/70">AI Systems</span>
+              <span className="text-muted">•</span>
+              <span className="text-foreground/70">Automation</span>
+              <span className="text-muted">•</span>
+              <span className="text-foreground/70">Integrations</span>
+              <span className="text-muted">•</span>
+              <span className="text-foreground/70">Custom Software</span>
             </motion.div>
           </div>
 

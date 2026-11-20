@@ -134,8 +134,8 @@
 //           onClick={() => setIsSubmitted(false)}
 //           className="transition-colors"
 //           style={{ color: PRIMARY }}
-//           onMouseEnter={(e) => (e.currentTarget.style.color = "#ffffff")}
-//           onMouseLeave={(e) => (e.currentTarget.style.color = PRIMARY)}
+//           onMouseEnter={(e) => (e.currentTarget.style.color = "rgb(var(--foreground))")}
+//           onMouseLeave={(e) => (e.currentTarget.style.color = "rgb(var(--accent-text))")}
 //         >
 //           Send another request
 //         </button>
@@ -420,15 +420,15 @@
 
 "use client";
 import { useState, useRef } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Send, Loader2, CheckCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -488,8 +488,6 @@ export default function ContactForm() {
         project_size: formData.projectSize || "N/A",
         timeline: formData.timeline || "N/A",
       };
-
-      console.log("Sending data:", templateParams); // Debug: Check what's being sent
 
       // Use your demo service and template IDs
       const result = await emailjs.send(
@@ -554,10 +552,10 @@ export default function ContactForm() {
             border: `2px solid ${PRIMARY}`,
           }}
         >
-          <CheckCircle className="w-10 h-10" style={{ color: PRIMARY }} />
+          <CheckCircle className="w-10 h-10" style={{ color: "rgb(var(--accent-text))" }} />
         </motion.div>
-        <h2 className="text-2xl font-bold mb-4 text-white">Request Sent!</h2>
-        <p className="text-white/60 mb-6">
+        <h2 className="text-2xl font-bold mb-4 text-foreground">Request Sent!</h2>
+        <p className="text-secondary-text mb-6">
           Thank you for reaching out. We&apos;ll get back to you within 24
           hours.
         </p>
@@ -578,9 +576,9 @@ export default function ContactForm() {
             });
           }}
           className="transition-colors"
-          style={{ color: PRIMARY }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#ffffff")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = PRIMARY)}
+          style={{ color: "rgb(var(--accent-text))" }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "rgb(var(--foreground))")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "rgb(var(--accent-text))")}
         >
           Send another request
         </button>
@@ -599,7 +597,7 @@ export default function ContactForm() {
     >
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="name" className="block text-sm mb-2 text-white/60">
+          <label htmlFor="name" className="block text-sm mb-2 text-secondary-text">
             Name *
           </label>
           <input
@@ -608,9 +606,9 @@ export default function ContactForm() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className={`w-full px-4 py-3 rounded-lg bg-zinc-800/50 border ${
-              errors.name ? "border-red-500" : "border-zinc-700"
-            } focus:outline-none focus:ring-1 transition-colors text-white placeholder:text-white/30`}
+            className={`w-full px-4 py-3 rounded-lg bg-field/50 border ${
+              errors.name ? "border-red-500" : "border-line"
+            } focus:outline-none focus:ring-1 transition-colors text-foreground placeholder:text-muted`}
             style={
               {
                 borderColor: errors.name ? undefined : PRIMARY_DARK,
@@ -627,7 +625,7 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="company" className="block text-sm mb-2 text-white/60">
+          <label htmlFor="company" className="block text-sm mb-2 text-secondary-text">
             Company
           </label>
           <input
@@ -636,7 +634,7 @@ export default function ContactForm() {
             name="company"
             value={formData.company}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:outline-none focus:ring-1 transition-colors text-white placeholder:text-white/30"
+            className="w-full px-4 py-3 rounded-lg bg-field/50 border border-line focus:outline-none focus:ring-1 transition-colors text-foreground placeholder:text-muted"
             style={{ borderColor: PRIMARY_DARK }}
             onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
             onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
@@ -647,7 +645,7 @@ export default function ContactForm() {
 
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="email" className="block text-sm mb-2 text-white/60">
+          <label htmlFor="email" className="block text-sm mb-2 text-secondary-text">
             Email *
           </label>
           <input
@@ -656,9 +654,9 @@ export default function ContactForm() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-4 py-3 rounded-lg bg-zinc-800/50 border ${
-              errors.email ? "border-red-500" : "border-zinc-700"
-            } focus:outline-none focus:ring-1 transition-colors text-white placeholder:text-white/30`}
+            className={`w-full px-4 py-3 rounded-lg bg-field/50 border ${
+              errors.email ? "border-red-500" : "border-line"
+            } focus:outline-none focus:ring-1 transition-colors text-foreground placeholder:text-muted`}
             style={{ borderColor: errors.email ? undefined : PRIMARY_DARK }}
             onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
             onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
@@ -670,7 +668,7 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="phone" className="block text-sm mb-2 text-white/60">
+          <label htmlFor="phone" className="block text-sm mb-2 text-secondary-text">
             Phone (optional)
           </label>
           <input
@@ -679,7 +677,7 @@ export default function ContactForm() {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:outline-none focus:ring-1 transition-colors text-white placeholder:text-white/30"
+            className="w-full px-4 py-3 rounded-lg bg-field/50 border border-line focus:outline-none focus:ring-1 transition-colors text-foreground placeholder:text-muted"
             style={{ borderColor: PRIMARY_DARK }}
             onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
             onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
@@ -689,7 +687,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="website" className="block text-sm mb-2 text-white/60">
+        <label htmlFor="website" className="block text-sm mb-2 text-secondary-text">
           Website (optional)
         </label>
         <input
@@ -698,7 +696,7 @@ export default function ContactForm() {
           name="website"
           value={formData.website}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:outline-none focus:ring-1 transition-colors text-white placeholder:text-white/30"
+          className="w-full px-4 py-3 rounded-lg bg-field/50 border border-line focus:outline-none focus:ring-1 transition-colors text-foreground placeholder:text-muted"
           style={{ borderColor: PRIMARY_DARK }}
           onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
           onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
@@ -707,7 +705,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="business" className="block text-sm mb-2 text-white/60">
+        <label htmlFor="business" className="block text-sm mb-2 text-secondary-text">
           What does your business do? *
         </label>
         <textarea
@@ -716,9 +714,9 @@ export default function ContactForm() {
           value={formData.business}
           onChange={handleChange}
           rows={3}
-          className={`w-full px-4 py-3 rounded-lg bg-zinc-800/50 border ${
-            errors.business ? "border-red-500" : "border-zinc-700"
-          } focus:outline-none focus:ring-1 transition-colors resize-none text-white placeholder:text-white/30`}
+          className={`w-full px-4 py-3 rounded-lg bg-field/50 border ${
+            errors.business ? "border-red-500" : "border-line"
+          } focus:outline-none focus:ring-1 transition-colors resize-none text-foreground placeholder:text-muted`}
           style={{ borderColor: errors.business ? undefined : PRIMARY_DARK }}
           onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
           onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
@@ -732,7 +730,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="automation"
-          className="block text-sm mb-2 text-white/60"
+          className="block text-sm mb-2 text-secondary-text"
         >
           What would you like to automate? *
         </label>
@@ -742,9 +740,9 @@ export default function ContactForm() {
           value={formData.automation}
           onChange={handleChange}
           rows={3}
-          className={`w-full px-4 py-3 rounded-lg bg-zinc-800/50 border ${
-            errors.automation ? "border-red-500" : "border-zinc-700"
-          } focus:outline-none focus:ring-1 transition-colors resize-none text-white placeholder:text-white/30`}
+          className={`w-full px-4 py-3 rounded-lg bg-field/50 border ${
+            errors.automation ? "border-red-500" : "border-line"
+          } focus:outline-none focus:ring-1 transition-colors resize-none text-foreground placeholder:text-muted`}
           style={{ borderColor: errors.automation ? undefined : PRIMARY_DARK }}
           onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
           onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
@@ -759,7 +757,7 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="interest"
-            className="block text-sm mb-2 text-white/60"
+            className="block text-sm mb-2 text-secondary-text"
           >
             What are you interested in?
           </label>
@@ -768,7 +766,7 @@ export default function ContactForm() {
             name="interest"
             value={formData.interest}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:outline-none focus:ring-1 transition-colors text-white"
+            className="w-full px-4 py-3 rounded-lg bg-field/50 border border-line focus:outline-none focus:ring-1 transition-colors text-foreground"
             style={{ borderColor: PRIMARY_DARK }}
             onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
             onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
@@ -786,6 +784,8 @@ export default function ContactForm() {
             <option value="ai-consultancy">AI Consultancy</option>
             <option value="ai-integration">AI Integration</option>
             <option value="ai-maintenance">AI Systems Maintenance</option>
+            <option value="chrome-extensions">Chrome Extensions</option>
+            <option value="mvp-development">MVP Development</option>
             <option value="other">Other</option>
           </select>
         </div>
@@ -793,7 +793,7 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="projectSize"
-            className="block text-sm mb-2 text-white/60"
+            className="block text-sm mb-2 text-secondary-text"
           >
             Estimated project size
           </label>
@@ -802,7 +802,7 @@ export default function ContactForm() {
             name="projectSize"
             value={formData.projectSize}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:outline-none focus:ring-1 transition-colors text-white"
+            className="w-full px-4 py-3 rounded-lg bg-field/50 border border-line focus:outline-none focus:ring-1 transition-colors text-foreground"
             style={{ borderColor: PRIMARY_DARK }}
             onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
             onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
@@ -817,7 +817,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="timeline" className="block text-sm mb-2 text-white/60">
+        <label htmlFor="timeline" className="block text-sm mb-2 text-secondary-text">
           Preferred timeline
         </label>
         <select
@@ -825,7 +825,7 @@ export default function ContactForm() {
           name="timeline"
           value={formData.timeline}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:outline-none focus:ring-1 transition-colors text-white"
+          className="w-full px-4 py-3 rounded-lg bg-field/50 border border-line focus:outline-none focus:ring-1 transition-colors text-foreground"
           style={{ borderColor: PRIMARY_DARK }}
           onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
           onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
@@ -838,6 +838,10 @@ export default function ContactForm() {
         </select>
       </div>
 
+      <p className="text-sm leading-relaxed text-secondary-text">
+        We use your details to respond to your inquiry. Read our{" "}
+        <Link href="/privacy-policy" className="text-foreground underline underline-offset-4">Privacy Policy</Link>.
+      </p>
       <button
         type="submit"
         disabled={isSubmitting}

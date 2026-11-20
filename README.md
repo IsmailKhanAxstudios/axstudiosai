@@ -33,4 +33,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
+## Blog administration
+
+Open `/admin/login` to sign in and `/admin` to search, view, create, edit, or delete published posts. Included sample posts can be edited and deleted from the same dashboard. Edits preserve the article URL. Configure these settings as server-only environment variables.
+
+- `AXSTUDIOS_ADMIN_EMAIL` is the administrator’s sign-in address.
+- `AXSTUDIOS_ADMIN_PASSWORD_HASH` is a random 16-byte hexadecimal salt, a colon, and a 64-byte hexadecimal scrypt digest. Pass the salt string to scrypt as UTF-8. Keep the password in a password manager.
+- `AXSTUDIOS_ADMIN_SESSION_SECRET` is a random secret of at least 32 characters. Rotate it to invalidate existing sessions.
+- `AXSTUDIOS_BLOG_DIR` is an optional absolute path to writable, persistent storage. Local development defaults to the ignored `.axstudios-data/blogs` directory.
+
+Published posts and covers are stored together in the blog directory. Back up that directory and attach it as a persistent volume when deploying to a Node host or container. Vercel’s normal serverless filesystem does not provide persistent writable storage for these uploads. Use a host with a persistent volume or connect a durable storage backend before enabling publishing there.
+
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

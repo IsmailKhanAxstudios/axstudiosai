@@ -8,7 +8,8 @@ import {
   Zap,
   Bot,
   Code,
-  TrendingUp,
+  Puzzle,
+  Rocket,
   Settings,
   Globe,
   ArrowRight,
@@ -22,11 +23,10 @@ import {
   Gauge,
 } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const services = [
   {
@@ -149,6 +149,40 @@ const services = [
       "Technical support",
     ],
   },
+  {
+    number: "09",
+    id: "chrome-extensions",
+    icon: Puzzle,
+    title: "Chrome Extensions",
+    description:
+      "Build custom Chrome extensions that automate browser workflows and connect with the tools your team uses.",
+    href: "/contact",
+    linkLabel: "Discuss Your Extension",
+    category: "Development",
+    features: [
+      "Browser workflow automation",
+      "Custom extension interfaces",
+      "API integrations",
+      "Chrome Web Store submission support",
+    ],
+  },
+  {
+    number: "10",
+    id: "mvp-development",
+    icon: Rocket,
+    title: "MVP Development",
+    description:
+      "Hire us to turn your idea into a working product you can launch, test with early users, and improve with feedback.",
+    href: "/contact",
+    linkLabel: "Discuss Your MVP",
+    category: "Development",
+    features: [
+      "Product scoping",
+      "Core feature design and development",
+      "Launch support",
+      "Iteration based on user feedback",
+    ],
+  },
 ];
 
 export default function ServicesSection() {
@@ -164,7 +198,7 @@ export default function ServicesSection() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+                "linear-gradient(to right, rgb(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--foreground)) 1px, transparent 1px)",
               backgroundSize: "60px 60px",
             }}
           />
@@ -194,15 +228,15 @@ export default function ServicesSection() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <Sparkles className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">CORE SERVICES</span>
+            <Sparkles className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-sm text-foreground/80">CORE SERVICES</span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight">
-            <span className="text-white">AI systems built </span>
-            <span style={{ color: PRIMARY }}>around your business.</span>
+            <span className="text-foreground">AI systems built </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>around your business.</span>
           </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+          <p className="text-lg text-secondary-text max-w-2xl mx-auto">
             From single workflows to complete automation infrastructure, we
             build systems that scale.
           </p>
@@ -217,6 +251,7 @@ export default function ServicesSection() {
             return (
               <motion.div
                 key={service.title}
+                id={service.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
@@ -227,7 +262,7 @@ export default function ServicesSection() {
                     selectedService === service.title ? null : service.title,
                   )
                 }
-                className="relative group cursor-pointer"
+                className="relative group cursor-pointer scroll-mt-28"
               >
                 <motion.div
                   whileHover={{ y: -5 }}
@@ -235,8 +270,8 @@ export default function ServicesSection() {
                   style={{
                     background:
                       isHovered || isSelected
-                        ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgba(235, 106, 80, 0.1))`
-                        : "rgba(19, 19, 24, 0.7)",
+                        ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgb(var(--primary) / 0.1))`
+                        : "rgb(var(--surface) / 0.7)",
                     border: `1px solid ${
                       isHovered || isSelected ? PRIMARY_LIGHT : PRIMARY_DARK
                     }`,
@@ -251,7 +286,7 @@ export default function ServicesSection() {
                   <div className="flex items-center justify-between mb-3">
                     <span
                       className="text-xs font-mono"
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     >
                       {service.number}
                     </span>
@@ -270,7 +305,7 @@ export default function ServicesSection() {
                     >
                       <service.icon
                         className="w-6 h-6"
-                        style={{ color: PRIMARY }}
+                        style={{ color: "rgb(var(--accent-text))" }}
                       />
                     </motion.div>
                   </div>
@@ -280,17 +315,17 @@ export default function ServicesSection() {
                     className="inline-block text-[9px] uppercase tracking-wider px-2 py-1 rounded-full mb-2"
                     style={{
                       background: PRIMARY_DARK,
-                      color: PRIMARY,
+                      color: "rgb(var(--accent-text))",
                     }}
                   >
                     {service.category}
                   </span>
 
                   {/* Title & Description */}
-                  <h3 className="text-base font-semibold text-white mb-2">
+                  <h3 className="text-base font-semibold text-foreground mb-2">
                     {service.title}
                   </h3>
-                  <p className="text-xs text-white/60 mb-3 leading-relaxed">
+                  <p className="text-xs text-secondary-text mb-3 leading-relaxed">
                     {service.description}
                   </p>
 
@@ -304,18 +339,18 @@ export default function ServicesSection() {
                         transition={{ duration: 0.3 }}
                         className="overflow-hidden"
                       >
-                        <div className="pt-3 mt-3 border-t border-white/10 space-y-1.5">
+                        <div className="pt-3 mt-3 border-t border-foreground/10 space-y-1.5">
                           {service.features.map((feature, idx) => (
                             <motion.div
                               key={feature}
                               initial={{ opacity: 0, x: -10 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ duration: 0.2, delay: idx * 0.05 }}
-                              className="flex items-center gap-2 text-[11px] text-white/60"
+                              className="flex items-center gap-2 text-[11px] text-secondary-text"
                             >
                               <CheckCircle2
                                 className="w-3 h-3 flex-shrink-0"
-                                style={{ color: PRIMARY }}
+                                style={{ color: "rgb(var(--accent-text))" }}
                               />
                               {feature}
                             </motion.div>
@@ -329,9 +364,9 @@ export default function ServicesSection() {
                   <Link
                     href={service.href}
                     className="inline-flex items-center gap-1 text-xs font-medium transition-colors"
-                    style={{ color: PRIMARY }}
+                    style={{ color: "rgb(var(--accent-text))" }}
                   >
-                    Explore Service
+                    {service.linkLabel ?? "Explore Service"}
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </motion.div>
@@ -348,7 +383,7 @@ export default function ServicesSection() {
           className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {[
-            { icon: Cpu, label: "8 Core Services", value: "End-to-end AI" },
+            { icon: Cpu, label: `${services.length} Core Services`, value: "AI and software development" },
             {
               icon: Network,
               label: "50+ Integrations",
@@ -360,7 +395,7 @@ export default function ServicesSection() {
               value: "Security & compliance",
             },
             { icon: Gauge, label: "3x Faster", value: "Time to deployment" },
-          ].map((stat, index) => (
+          ].map((stat) => (
             <motion.div
               key={stat.label}
               whileHover={{ y: -5 }}
@@ -369,12 +404,12 @@ export default function ServicesSection() {
             >
               <stat.icon
                 className="w-8 h-8 mx-auto mb-3"
-                style={{ color: PRIMARY }}
+                style={{ color: "rgb(var(--accent-text))" }}
               />
-              <div className="text-xl font-bold text-white mb-1">
+              <div className="text-xl font-bold text-foreground mb-1">
                 {stat.label}
               </div>
-              <p className="text-sm text-white/60">{stat.value}</p>
+              <p className="text-sm text-secondary-text">{stat.value}</p>
             </motion.div>
           ))}
         </motion.div>

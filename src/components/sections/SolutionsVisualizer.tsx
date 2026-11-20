@@ -18,11 +18,10 @@ import {
   Zap,
 } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const categories = [
   { id: "sales", label: "Sales", icon: TrendingUp },
@@ -139,7 +138,7 @@ export default function SolutionsVisualizer() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+                "linear-gradient(to right, rgb(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--foreground)) 1px, transparent 1px)",
               backgroundSize: "60px 60px",
             }}
           />
@@ -168,15 +167,15 @@ export default function SolutionsVisualizer() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <Zap className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">SOLUTIONS</span>
+            <Zap className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-sm text-foreground/80">SOLUTIONS</span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl font-bold mb-4">
-            <span className="text-white">What can we </span>
-            <span style={{ color: PRIMARY }}>automate?</span>
+            <span className="text-foreground">What can we </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>automate?</span>
           </h2>
-          <p className="text-lg text-white/60">
+          <p className="text-lg text-secondary-text">
             Explore automation possibilities across your entire business.
           </p>
         </motion.div>
@@ -192,7 +191,7 @@ export default function SolutionsVisualizer() {
               className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 activeCategory === category.id
                   ? "text-white"
-                  : "glass text-white/60 hover:text-white"
+                  : "glass text-secondary-text hover:text-foreground"
               }`}
               style={
                 activeCategory === category.id
@@ -220,7 +219,7 @@ export default function SolutionsVisualizer() {
             className="glass rounded-3xl p-8 lg:p-12"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <h3 className="text-2xl font-bold mb-8 text-center text-white">
+            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">
               {workflow.title}
             </h3>
 
@@ -249,18 +248,18 @@ export default function SolutionsVisualizer() {
                     >
                       <CheckCircle
                         className="w-5 h-5"
-                        style={{ color: PRIMARY }}
+                        style={{ color: "rgb(var(--accent-text))" }}
                       />
                     </motion.div>
-                    <p className="font-semibold text-sm mb-1 text-white">
+                    <p className="font-semibold text-sm mb-1 text-foreground">
                       {step.label}
                     </p>
-                    <p className="text-xs text-white/60">{step.description}</p>
+                    <p className="text-xs text-secondary-text">{step.description}</p>
                   </motion.div>
                   {index < workflow.steps.length - 1 && (
                     <ArrowRight
                       className="w-6 h-6 flex-shrink-0"
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     />
                   )}
                 </motion.div>

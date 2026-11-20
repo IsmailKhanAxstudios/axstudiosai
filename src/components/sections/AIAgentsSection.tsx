@@ -41,11 +41,10 @@ import {
   ClipboardList,
 } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const agentCategories = [
   {
@@ -214,7 +213,7 @@ export default function AIAgentsSection() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+                "linear-gradient(to right, rgb(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--foreground)) 1px, transparent 1px)",
               backgroundSize: "60px 60px",
             }}
           />
@@ -244,15 +243,15 @@ export default function AIAgentsSection() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <Sparkles className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">AI AGENT ECOSYSTEM</span>
+            <Sparkles className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-sm text-foreground/80">AI AGENT ECOSYSTEM</span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight">
-            <span className="text-white">Meet your </span>
-            <span style={{ color: PRIMARY }}>AI workforce.</span>
+            <span className="text-foreground">Meet your </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>AI workforce.</span>
           </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+          <p className="text-lg text-secondary-text max-w-2xl mx-auto">
             Hover over any agent category to explore its capabilities.
           </p>
         </motion.div>
@@ -301,7 +300,7 @@ export default function AIAgentsSection() {
                     style={{
                       backfaceVisibility: "hidden",
                       WebkitBackfaceVisibility: "hidden",
-                      background: "rgba(15, 15, 22, 0.95)",
+                      background: "rgb(var(--panel) / 0.95)",
                       border: `1px solid ${isHovered ? PRIMARY_LIGHT : PRIMARY_DARK}`,
                       boxShadow: isHovered
                         ? `0 20px 60px ${PRIMARY_GLOW}`
@@ -329,14 +328,14 @@ export default function AIAgentsSection() {
                       >
                         <category.icon
                           className="w-7 h-7"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
                       </motion.div>
 
-                      <h3 className="text-center font-bold text-base mb-2 text-white">
+                      <h3 className="text-center font-bold text-base mb-2 text-foreground">
                         {category.name}
                       </h3>
-                      <p className="text-center text-[11px] text-white/60 mb-4 leading-relaxed">
+                      <p className="text-center text-[11px] text-secondary-text mb-4 leading-relaxed">
                         {category.description}
                       </p>
 
@@ -349,11 +348,11 @@ export default function AIAgentsSection() {
                           >
                             <p
                               className="text-sm font-bold"
-                              style={{ color: PRIMARY }}
+                              style={{ color: "rgb(var(--accent-text))" }}
                             >
                               {metric.value}
                             </p>
-                            <p className="text-[9px] text-white/50">
+                            <p className="text-[9px] text-muted">
                               {metric.label}
                             </p>
                           </div>
@@ -362,7 +361,7 @@ export default function AIAgentsSection() {
 
                       <span
                         className="text-[10px] uppercase tracking-wider"
-                        style={{ color: PRIMARY }}
+                        style={{ color: "rgb(var(--accent-text))" }}
                       >
                         {category.agents.length} Agents
                       </span>
@@ -376,7 +375,7 @@ export default function AIAgentsSection() {
                       backfaceVisibility: "hidden",
                       WebkitBackfaceVisibility: "hidden",
                       transform: "rotateY(180deg)",
-                      background: `linear-gradient(135deg, ${PRIMARY_DARK}, rgba(10, 10, 15, 0.95))`,
+                      background: `linear-gradient(135deg, ${PRIMARY_DARK}, rgb(var(--background) / 0.95))`,
                       border: `1px solid ${PRIMARY_LIGHT}`,
                       boxShadow: `0 0 30px ${PRIMARY_GLOW}`,
                     }}
@@ -399,11 +398,11 @@ export default function AIAgentsSection() {
                         >
                           <category.icon
                             className="w-4 h-4"
-                            style={{ color: PRIMARY }}
+                            style={{ color: "rgb(var(--accent-text))" }}
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-bold text-sm text-white">
+                          <h3 className="font-bold text-sm text-foreground">
                             {category.name}
                           </h3>
                         </div>
@@ -428,13 +427,13 @@ export default function AIAgentsSection() {
                           >
                             <agent.icon
                               className="w-3.5 h-3.5 flex-shrink-0"
-                              style={{ color: PRIMARY }}
+                              style={{ color: "rgb(var(--accent-text))" }}
                             />
                             <div className="flex-1 min-w-0">
-                              <p className="text-[11px] font-semibold text-white truncate">
+                              <p className="text-[11px] font-semibold text-foreground truncate">
                                 {agent.name}
                               </p>
-                              <p className="text-[9px] text-white/50 truncate">
+                              <p className="text-[9px] text-muted truncate">
                                 {agent.description}
                               </p>
                             </div>
@@ -495,7 +494,7 @@ export default function AIAgentsSection() {
                   style={{
                     backfaceVisibility: "hidden",
                     WebkitBackfaceVisibility: "hidden",
-                    background: "rgba(15, 15, 22, 0.95)",
+                    background: "rgb(var(--panel) / 0.95)",
                     border: `1px solid ${PRIMARY_DARK}`,
                   }}
                 >
@@ -509,13 +508,13 @@ export default function AIAgentsSection() {
                     >
                       <category.icon
                         className="w-7 h-7"
-                        style={{ color: PRIMARY }}
+                        style={{ color: "rgb(var(--accent-text))" }}
                       />
                     </div>
-                    <h3 className="text-center font-bold text-base mb-2 text-white">
+                    <h3 className="text-center font-bold text-base mb-2 text-foreground">
                       {category.name}
                     </h3>
-                    <p className="text-center text-[11px] text-white/60 mb-4">
+                    <p className="text-center text-[11px] text-secondary-text mb-4">
                       {category.description}
                     </p>
                     <div className="grid grid-cols-2 gap-2 mb-4 w-full max-w-[200px]">
@@ -527,11 +526,11 @@ export default function AIAgentsSection() {
                         >
                           <p
                             className="text-sm font-bold"
-                            style={{ color: PRIMARY }}
+                            style={{ color: "rgb(var(--accent-text))" }}
                           >
                             {metric.value}
                           </p>
-                          <p className="text-[9px] text-white/50">
+                          <p className="text-[9px] text-muted">
                             {metric.label}
                           </p>
                         </div>
@@ -539,7 +538,7 @@ export default function AIAgentsSection() {
                     </div>
                     <span
                       className="text-[10px] uppercase tracking-wider"
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     >
                       {category.agents.length} Agents
                     </span>
@@ -553,7 +552,7 @@ export default function AIAgentsSection() {
                     backfaceVisibility: "hidden",
                     WebkitBackfaceVisibility: "hidden",
                     transform: "rotateY(180deg)",
-                    background: `linear-gradient(135deg, ${PRIMARY_DARK}, rgba(10, 10, 15, 0.95))`,
+                    background: `linear-gradient(135deg, ${PRIMARY_DARK}, rgb(var(--background) / 0.95))`,
                     border: `1px solid ${PRIMARY_LIGHT}`,
                   }}
                 >
@@ -565,10 +564,10 @@ export default function AIAgentsSection() {
                       >
                         <category.icon
                           className="w-4 h-4"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
                       </div>
-                      <h3 className="font-bold text-sm text-white">
+                      <h3 className="font-bold text-sm text-foreground">
                         {category.name}
                       </h3>
                     </div>
@@ -584,13 +583,13 @@ export default function AIAgentsSection() {
                         >
                           <agent.icon
                             className="w-3.5 h-3.5 flex-shrink-0"
-                            style={{ color: PRIMARY }}
+                            style={{ color: "rgb(var(--accent-text))" }}
                           />
                           <div className="flex-1 min-w-0">
-                            <p className="text-[11px] font-semibold text-white truncate">
+                            <p className="text-[11px] font-semibold text-foreground truncate">
                               {agent.name}
                             </p>
-                            <p className="text-[9px] text-white/50 truncate">
+                            <p className="text-[9px] text-muted truncate">
                               {agent.description}
                             </p>
                           </div>
@@ -612,18 +611,18 @@ export default function AIAgentsSection() {
           className="mt-12 flex flex-wrap items-center justify-center gap-6 text-xs"
         >
           <div className="flex items-center gap-2">
-            <Activity className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-white/60">ALL AGENTS OPERATIONAL</span>
+            <Activity className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-secondary-text">ALL AGENTS OPERATIONAL</span>
           </div>
-          <span className="text-white/20">•</span>
+          <span className="text-foreground/20">•</span>
           <div className="flex items-center gap-2">
-            <Workflow className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-white/60">MULTI-AGENT ORCHESTRATION</span>
+            <Workflow className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-secondary-text">MULTI-AGENT ORCHESTRATION</span>
           </div>
-          <span className="text-white/20">•</span>
+          <span className="text-foreground/20">•</span>
           <div className="flex items-center gap-2">
-            <Shield className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-white/60">ENTERPRISE SECURITY</span>
+            <Shield className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-secondary-text">ENTERPRISE SECURITY</span>
           </div>
         </motion.div>
       </div>

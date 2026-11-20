@@ -50,11 +50,10 @@ import {
   PanelsTopLeft,
 } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const webAppCategories = [
   {
@@ -193,7 +192,7 @@ export default function AIWebApplications() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+                "linear-gradient(to right, rgb(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--foreground)) 1px, transparent 1px)",
               backgroundSize: "60px 60px",
             }}
           />
@@ -223,15 +222,15 @@ export default function AIWebApplications() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <Monitor className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">AI WEB APPLICATIONS</span>
+            <Monitor className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-sm text-foreground/80">AI WEB APPLICATIONS</span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight">
-            <span className="text-white">Intelligent applications for </span>
-            <span style={{ color: PRIMARY }}>modern business.</span>
+            <span className="text-foreground">Intelligent applications for </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>modern business.</span>
           </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+          <p className="text-lg text-secondary-text max-w-2xl mx-auto">
             We build AI-powered web applications that transform how your
             business interacts with customers and manages operations.
           </p>
@@ -242,8 +241,8 @@ export default function AIWebApplications() {
           {/* Left Side - Category Selector */}
           <div className="order-2 lg:order-1">
             <div className="flex items-center gap-2 mb-4">
-              <Command className="w-4 h-4" style={{ color: PRIMARY }} />
-              <span className="text-sm font-medium text-white/60">
+              <Command className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+              <span className="text-sm font-medium text-secondary-text">
                 Select Application Type
               </span>
             </div>
@@ -264,8 +263,8 @@ export default function AIWebApplications() {
                     className="relative flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-300 text-left w-full"
                     style={{
                       background: isActive
-                        ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgba(235, 106, 80, 0.1))`
-                        : "rgba(15, 15, 22, 0.95)",
+                        ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgb(var(--primary) / 0.1))`
+                        : "rgb(var(--panel) / 0.95)",
                       border: `1px solid ${
                         isActive ? PRIMARY_LIGHT : PRIMARY_DARK
                       }`,
@@ -294,13 +293,13 @@ export default function AIWebApplications() {
                       style={{
                         background: isActive
                           ? PRIMARY_DARK
-                          : "rgba(235, 106, 80, 0.1)",
+                          : "rgb(var(--primary) / 0.1)",
                         border: `1px solid ${PRIMARY_LIGHT}`,
                       }}
                     >
                       <category.icon
                         className="w-5 h-5"
-                        style={{ color: PRIMARY }}
+                        style={{ color: "rgb(var(--accent-text))" }}
                       />
                     </motion.div>
 
@@ -313,7 +312,7 @@ export default function AIWebApplications() {
                       >
                         {category.name}
                       </span>
-                      <span className="block text-[10px] text-white/40 truncate">
+                      <span className="block text-[10px] text-muted truncate">
                         {category.description.split(" ").slice(0, 5).join(" ")}
                         ...
                       </span>
@@ -326,7 +325,7 @@ export default function AIWebApplications() {
                           ? "translate-x-0 opacity-100"
                           : "-translate-x-2 opacity-0"
                       }`}
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     />
                   </motion.button>
                 );
@@ -337,7 +336,7 @@ export default function AIWebApplications() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="mt-4 flex items-center gap-2 text-xs text-white/40"
+              className="mt-4 flex items-center gap-2 text-xs text-muted"
             >
               <MousePointer className="w-3.5 h-3.5" />
               <span>Click to preview in browser</span>
@@ -357,19 +356,19 @@ export default function AIWebApplications() {
               }}
             >
               {/* Mac Browser Chrome */}
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-white/5">
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-foreground/10 bg-foreground/5">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-red-500" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500" />
                   <div className="w-3 h-3 rounded-full bg-green-500" />
                 </div>
                 <div className="flex-1 mx-4">
-                  <div className="bg-white/10 rounded-lg px-3 py-1.5 text-xs text-white/60 text-center flex items-center justify-center gap-2">
+                  <div className="bg-foreground/10 rounded-lg px-3 py-1.5 text-xs text-secondary-text text-center flex items-center justify-center gap-2">
                     <Lock className="w-3 h-3" />
                     app.axstudios.tech/{selectedCategory.id}
                   </div>
                 </div>
-                <RefreshCw className="w-4 h-4 text-white/40" />
+                <RefreshCw className="w-4 h-4 text-muted" />
               </div>
 
               {/* Browser Content */}
@@ -396,14 +395,14 @@ export default function AIWebApplications() {
                       >
                         <selectedCategory.icon
                           className="w-7 h-7"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
                       </motion.div>
                       <div>
-                        <h3 className="text-lg font-bold text-white">
+                        <h3 className="text-lg font-bold text-foreground">
                           {selectedCategory.name}
                         </h3>
-                        <p className="text-xs text-white/60">
+                        <p className="text-xs text-secondary-text">
                           {selectedCategory.description}
                         </p>
                       </div>
@@ -424,11 +423,11 @@ export default function AIWebApplications() {
                             background:
                               hoveredFeature === feature.name
                                 ? PRIMARY_DARK
-                                : "rgba(255, 255, 255, 0.03)",
+                                : "rgb(var(--foreground) / 0.03)",
                             border: `1px solid ${
                               hoveredFeature === feature.name
                                 ? PRIMARY_LIGHT
-                                : "rgba(255, 255, 255, 0.1)"
+                                : "rgb(var(--foreground) / 0.1)"
                             }`,
                           }}
                         >
@@ -438,20 +437,20 @@ export default function AIWebApplications() {
                           >
                             <feature.icon
                               className="w-4 h-4"
-                              style={{ color: PRIMARY }}
+                              style={{ color: "rgb(var(--accent-text))" }}
                             />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold text-white">
+                            <p className="text-sm font-semibold text-foreground">
                               {feature.name}
                             </p>
-                            <p className="text-xs text-white/60">
+                            <p className="text-xs text-secondary-text">
                               {feature.description}
                             </p>
                           </div>
                           <CheckCircle2
                             className="w-4 h-4 flex-shrink-0"
-                            style={{ color: PRIMARY }}
+                            style={{ color: "rgb(var(--accent-text))" }}
                           />
                         </motion.div>
                       ))}

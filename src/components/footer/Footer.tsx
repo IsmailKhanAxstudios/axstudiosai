@@ -4,11 +4,10 @@
 import Link from "next/link";
 import { ArrowUpRight, Mail, Sparkles, Zap } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -38,13 +37,13 @@ export default function Footer() {
                   border: `1px solid ${PRIMARY_LIGHT}`,
                 }}
               >
-                <Zap className="w-4 h-4" style={{ color: PRIMARY }} />
+                <Zap className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
               </div>
-              <span className="font-space-grotesk text-xl font-bold text-white">
+              <span className="font-space-grotesk text-xl font-bold text-foreground">
                 AxStudios
               </span>
             </Link>
-            <p className="text-white/60 text-sm">
+            <p className="text-secondary-text text-sm">
               AI automation systems for ambitious businesses.
             </p>
 
@@ -63,7 +62,7 @@ export default function Footer() {
                 >
                   <ArrowUpRight
                     className="w-4 h-4"
-                    style={{ color: PRIMARY }}
+                    style={{ color: "rgb(var(--accent-text))" }}
                   />
                 </a>
               ))}
@@ -72,19 +71,21 @@ export default function Footer() {
 
           {/* Navigation */}
           <div>
-            <h3 className="font-semibold mb-4 text-white">Navigation</h3>
+            <h3 className="font-semibold mb-4 text-foreground">Navigation</h3>
             <div className="space-y-2">
               {[
                 { href: "/", label: "Home" },
                 { href: "/services", label: "Services" },
                 { href: "/solutions", label: "Solutions" },
+                { href: "/products", label: "Products" },
+                { href: "/blogs", label: "Blogs" },
                 { href: "/about", label: "About" },
                 { href: "/contact", label: "Contact" },
               ].map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="block text-sm text-white/60 hover:text-white transition-colors"
+                  className="block text-sm text-secondary-text hover:text-foreground transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -94,7 +95,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="font-semibold mb-4 text-white">Services</h3>
+            <h3 className="font-semibold mb-4 text-foreground">Services</h3>
             <div className="space-y-2">
               {[
                 { href: "/services/ai-automation", label: "AI Automation" },
@@ -106,6 +107,14 @@ export default function Footer() {
                 {
                   href: "/services/custom-ai-saas-development",
                   label: "Custom AI & SaaS",
+                },
+                {
+                  href: "/services#chrome-extensions",
+                  label: "Chrome Extensions",
+                },
+                {
+                  href: "/services#mvp-development",
+                  label: "MVP Development",
                 },
                 {
                   href: "/services/ai-automation-audit",
@@ -127,7 +136,7 @@ export default function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="block text-sm text-white/60 hover:text-white transition-colors"
+                  className="block text-sm text-secondary-text hover:text-foreground transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -137,15 +146,15 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold mb-4 text-white">Contact</h3>
+            <h3 className="font-semibold mb-4 text-foreground">Contact</h3>
             <div className="space-y-3">
               <a
                 href="mailto:contact@axstudios.tech"
-                className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 text-sm text-secondary-text hover:text-foreground transition-colors"
               >
-                <Mail className="w-4 h-4" style={{ color: PRIMARY }} />
+                <Mail className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
                 contact@axstudios.tech
-                <ArrowUpRight className="w-4 h-4" style={{ color: PRIMARY }} />
+                <ArrowUpRight className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
               </a>
 
               {/* CTA */}
@@ -165,23 +174,19 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-white/10">
+        <div className="mt-12 pt-8 border-t border-foreground/10">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-white/40">
+            <p className="text-sm text-muted">
               © {currentYear} AxStudios. All rights reserved.
             </p>
-            <div className="flex items-center gap-4 text-xs text-white/40">
-              <a href="#" className="hover:text-white transition-colors">
+            <div className="flex items-center gap-4 text-xs text-muted">
+              <Link href="/privacy-policy" className="hover:text-foreground transition-colors">
                 Privacy Policy
-              </a>
-              <span className="text-white/20">•</span>
-              <a href="#" className="hover:text-white transition-colors">
-                Terms of Service
-              </a>
-              <span className="text-white/20">•</span>
-              <a href="#" className="hover:text-white transition-colors">
-                Cookie Policy
-              </a>
+              </Link>
+              <span className="text-foreground/20" aria-hidden="true">•</span>
+              <Link href="/terms-and-conditions" className="hover:text-foreground transition-colors">
+                Terms &amp; Conditions
+              </Link>
             </div>
           </div>
         </div>

@@ -132,7 +132,7 @@ export default function AISystemsMaintenance() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+                "linear-gradient(to right, rgb(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--foreground)) 1px, transparent 1px)",
               backgroundSize: "60px 60px",
             }}
           />
@@ -154,7 +154,7 @@ export default function AISystemsMaintenance() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4"
           >
             <HeartPulse className="w-4 h-4 text-purple-400" />
-            <span className="text-sm text-zinc-300">
+            <span className="text-sm text-foreground/80">
               AI SYSTEMS MAINTENANCE
             </span>
           </motion.div>
@@ -192,7 +192,7 @@ export default function AISystemsMaintenance() {
                 boxShadow: `0 0 30px ${selectedCategory.color}44`,
               }}
             >
-              <div className="w-20 h-20 rounded-full bg-[#0a0a0f] flex items-center justify-center">
+              <div className="w-20 h-20 rounded-full bg-background flex items-center justify-center">
                 <selectedCategory.icon
                   className="w-8 h-8"
                   style={{ color: selectedCategory.color }}
@@ -281,7 +281,7 @@ export default function AISystemsMaintenance() {
                       background:
                         isActive || isHovered
                           ? `linear-gradient(135deg, ${category.color}15, ${category.color}05)`
-                          : "rgba(15, 15, 22, 0.95)",
+                          : "rgb(var(--panel) / 0.95)",
                       border: `1px solid ${category.color}${
                         isActive ? "88" : isHovered ? "44" : "22"
                       }`,
@@ -306,7 +306,7 @@ export default function AISystemsMaintenance() {
                             repeat: isActive ? Infinity : 0,
                           }}
                         />
-                        <span className="text-[9px] text-zinc-500">
+                        <span className="text-[9px] text-muted">
                           {category.pulse}
                         </span>
                       </div>
@@ -322,7 +322,7 @@ export default function AISystemsMaintenance() {
                     </h3>
 
                     {/* Items count */}
-                    <p className="text-[10px] text-zinc-500 text-center">
+                    <p className="text-[10px] text-muted text-center">
                       {category.items.length} services
                     </p>
                   </div>
@@ -369,7 +369,7 @@ export default function AISystemsMaintenance() {
                     <h3 className="font-bold text-base">
                       {selectedCategory.name}
                     </h3>
-                    <p className="text-xs text-zinc-400">
+                    <p className="text-xs text-foreground/70">
                       {selectedCategory.description}
                     </p>
                   </div>
@@ -393,7 +393,7 @@ export default function AISystemsMaintenance() {
                         className="w-3.5 h-3.5 flex-shrink-0"
                         style={{ color: selectedCategory.color }}
                       />
-                      <span className="text-zinc-300">{item}</span>
+                      <span className="text-foreground/80">{item}</span>
                     </motion.div>
                   ))}
                 </div>

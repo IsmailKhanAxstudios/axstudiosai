@@ -16,7 +16,7 @@ export default function ContactPage() {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
             Let&apos;s build your <span className="gradient-text">AI advantage.</span>
           </h1>
-          <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
             Tell us about your business and what you&apos;d like to automate.
             We&apos;ll get back to you within 24 hours.
           </p>

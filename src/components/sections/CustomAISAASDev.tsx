@@ -54,11 +54,10 @@ import {
   Binary,
 } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const developmentCategories = [
   {
@@ -121,7 +120,7 @@ export default function CustomAISaaSDevelopment() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+                "linear-gradient(to right, rgb(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--foreground)) 1px, transparent 1px)",
               backgroundSize: "60px 60px",
             }}
           />
@@ -151,15 +150,15 @@ export default function CustomAISaaSDevelopment() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <Code2 className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">
+            <Code2 className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-sm text-foreground/80">
               CUSTOM AI & SAAS DEVELOPMENT
             </span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl font-bold mb-4 leading-tight">
-            <span className="text-white">Engineering </span>
-            <span style={{ color: PRIMARY }}>intelligent software.</span>
+            <span className="text-foreground">Engineering </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>intelligent software.</span>
           </h2>
         </motion.div>
 
@@ -169,28 +168,28 @@ export default function CustomAISaaSDevelopment() {
           style={{ border: `1px solid ${PRIMARY_DARK}` }}
         >
           {/* IDE Top Bar */}
-          <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-white/5">
+          <div className="flex items-center gap-2 px-4 py-3 border-b border-foreground/10 bg-foreground/5">
             <div className="flex gap-1.5">
               <div className="w-3 h-3 rounded-full bg-red-500" />
               <div className="w-3 h-3 rounded-full bg-yellow-500" />
               <div className="w-3 h-3 rounded-full bg-green-500" />
             </div>
             <div className="flex-1 text-center">
-              <span className="text-xs text-white/40 font-mono">
+              <span className="text-xs text-muted font-mono">
                 axstudios-dev — {selectedCategory.id}.tsx
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <GitBranch className="w-4 h-4 text-white/40" />
-              <span className="text-xs text-white/40 font-mono">main</span>
+              <GitBranch className="w-4 h-4 text-muted" />
+              <span className="text-xs text-muted font-mono">main</span>
             </div>
           </div>
 
           {/* IDE Body */}
           <div className="flex flex-col lg:flex-row">
             {/* Sidebar - File Explorer */}
-            <div className="lg:w-56 border-b lg:border-b-0 lg:border-r border-white/10 p-3">
-              <div className="text-[10px] uppercase tracking-wider text-white/40 mb-2 px-2">
+            <div className="lg:w-56 border-b lg:border-b-0 lg:border-r border-foreground/10 p-3">
+              <div className="text-[10px] uppercase tracking-wider text-muted mb-2 px-2">
                 Explorer
               </div>
               <div className="space-y-1">
@@ -204,7 +203,7 @@ export default function CustomAISaaSDevelopment() {
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setActiveCategory(category.id)}
                       className={`flex items-center gap-2 w-full px-3 py-2 rounded-lg text-left transition-all ${
-                        isActive ? "bg-white/10" : "hover:bg-white/5"
+                        isActive ? "bg-foreground/10" : "hover:bg-foreground/5"
                       }`}
                     >
                       <ChevronRight
@@ -230,8 +229,8 @@ export default function CustomAISaaSDevelopment() {
               </div>
 
               {/* File Items */}
-              <div className="mt-4 pt-4 border-t border-white/10">
-                <div className="text-[10px] uppercase tracking-wider text-white/40 mb-2 px-2">
+              <div className="mt-4 pt-4 border-t border-foreground/10">
+                <div className="text-[10px] uppercase tracking-wider text-muted mb-2 px-2">
                   {selectedCategory.name}
                 </div>
                 <AnimatePresence mode="wait">
@@ -247,13 +246,13 @@ export default function CustomAISaaSDevelopment() {
                         key={item.name}
                         onMouseEnter={() => setHoveredItem(item.name)}
                         onMouseLeave={() => setHoveredItem(null)}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded cursor-pointer transition-colors hover:bg-white/5"
+                        className="flex items-center gap-2 px-3 py-1.5 rounded cursor-pointer transition-colors hover:bg-foreground/5"
                       >
                         <FileCode
                           className="w-3.5 h-3.5"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
-                        <span className="text-xs text-white/60">
+                        <span className="text-xs text-secondary-text">
                           {item.name.toLowerCase().replace(/\s+/g, "-")}.tsx
                         </span>
                       </motion.div>
@@ -277,7 +276,7 @@ export default function CustomAISaaSDevelopment() {
                   <div className="flex items-center gap-2 mb-4">
                     <span
                       className="text-xs font-mono"
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     >
                       {"// "}
                       {selectedCategory.tagline}
@@ -288,16 +287,16 @@ export default function CustomAISaaSDevelopment() {
                   <div className="space-y-3">
                     {/* Import statement */}
                     <div className="flex items-center gap-2 font-mono text-xs sm:text-sm flex-wrap">
-                      <span style={{ color: PRIMARY }}>import</span>
-                      <span className="text-white/60">{"{"}</span>
-                      <span style={{ color: PRIMARY }}>
+                      <span style={{ color: "rgb(var(--accent-text))" }}>import</span>
+                      <span className="text-secondary-text">{"{"}</span>
+                      <span style={{ color: "rgb(var(--accent-text))" }}>
                         {selectedCategory.items
                           .map((item) => item.name.replace(/\s+/g, ""))
                           .join(", ")}
                       </span>
-                      <span className="text-white/60">{"}"}</span>
-                      <span style={{ color: PRIMARY }}>from</span>
-                      <span className="text-white/60">{'"@axstudios/ai"'}</span>
+                      <span className="text-secondary-text">{"}"}</span>
+                      <span style={{ color: "rgb(var(--accent-text))" }}>from</span>
+                      <span className="text-secondary-text">{'"@axstudios/ai"'}</span>
                     </div>
 
                     {/* Items */}
@@ -323,19 +322,19 @@ export default function CustomAISaaSDevelopment() {
                             }`,
                           }}
                         >
-                          <span className="text-white/30">{index + 1}</span>
+                          <span className="text-muted">{index + 1}</span>
                           <item.icon
                             className="w-4 h-4 flex-shrink-0"
-                            style={{ color: PRIMARY }}
+                            style={{ color: "rgb(var(--accent-text))" }}
                           />
-                          <span className="text-white/70">{item.name}:</span>
-                          <span style={{ color: PRIMARY }}>
+                          <span className="text-foreground/70">{item.name}:</span>
+                          <span style={{ color: "rgb(var(--accent-text))" }}>
                             {`"${item.desc}"`}
                           </span>
                           {hoveredItem === item.name && (
                             <CheckCircle2
                               className="w-4 h-4 ml-auto"
-                              style={{ color: PRIMARY }}
+                              style={{ color: "rgb(var(--accent-text))" }}
                             />
                           )}
                         </motion.div>
@@ -344,9 +343,9 @@ export default function CustomAISaaSDevelopment() {
 
                     {/* Closing tag */}
                     <div className="flex items-center gap-2 font-mono text-xs sm:text-sm">
-                      <span style={{ color: PRIMARY }}>export</span>
-                      <span style={{ color: PRIMARY }}>default</span>
-                      <span style={{ color: PRIMARY }}>
+                      <span style={{ color: "rgb(var(--accent-text))" }}>export</span>
+                      <span style={{ color: "rgb(var(--accent-text))" }}>default</span>
+                      <span style={{ color: "rgb(var(--accent-text))" }}>
                         {selectedCategory.name.replace(/\s+/g, "")}
                       </span>
                     </div>
@@ -374,30 +373,30 @@ export default function CustomAISaaSDevelopment() {
           </div>
 
           {/* IDE Status Bar */}
-          <div className="flex items-center justify-between px-4 py-2 border-t border-white/10 bg-white/5">
+          <div className="flex items-center justify-between px-4 py-2 border-t border-foreground/10 bg-foreground/5">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-1.5">
-                <GitCommit className="w-3.5 h-3.5 text-white/40" />
-                <span className="text-[10px] text-white/40 font-mono">
+                <GitCommit className="w-3.5 h-3.5 text-muted" />
+                <span className="text-[10px] text-muted font-mono">
                   main
                 </span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle2
                   className="w-3.5 h-3.5"
-                  style={{ color: PRIMARY }}
+                  style={{ color: "rgb(var(--accent-text))" }}
                 />
-                <span className="text-[10px] text-white/40 font-mono">
+                <span className="text-[10px] text-muted font-mono">
                   0 errors
                 </span>
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <span className="text-[10px] text-white/40 font-mono">
+              <span className="text-[10px] text-muted font-mono">
                 TypeScript
               </span>
-              <span className="text-[10px] text-white/40 font-mono">UTF-8</span>
-              <span className="text-[10px] text-white/40 font-mono">LF</span>
+              <span className="text-[10px] text-muted font-mono">UTF-8</span>
+              <span className="text-[10px] text-muted font-mono">LF</span>
             </div>
           </div>
         </div>
@@ -427,12 +426,12 @@ export default function CustomAISaaSDevelopment() {
             >
               <stat.icon
                 className="w-6 h-6 mx-auto mb-2"
-                style={{ color: PRIMARY }}
+                style={{ color: "rgb(var(--accent-text))" }}
               />
-              <div className="text-sm sm:text-base font-bold text-white mb-0.5">
+              <div className="text-sm sm:text-base font-bold text-foreground mb-0.5">
                 {stat.label}
               </div>
-              <p className="text-[10px] sm:text-xs text-white/60">
+              <p className="text-[10px] sm:text-xs text-secondary-text">
                 {stat.value}
               </p>
             </motion.div>

@@ -40,7 +40,7 @@ export default function Values() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">Our Values</h2>
-          <p className="text-lg text-zinc-400 max-w-3xl mx-auto">
+          <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
             The core values that define who we are and how we work.
           </p>
         </motion.div>
@@ -56,7 +56,7 @@ export default function Values() {
             >
               <value.icon className="w-10 h-10 mx-auto mb-4 text-purple-400" />
               <h3 className="font-semibold mb-2">{value.title}</h3>
-              <p className="text-sm text-zinc-400">{value.description}</p>
+              <p className="text-sm text-foreground/70">{value.description}</p>
             </motion.div>
           ))}
         </div>

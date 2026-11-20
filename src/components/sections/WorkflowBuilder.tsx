@@ -24,11 +24,10 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 interface WorkflowStep {
   id: string;
@@ -170,7 +169,7 @@ export default function WorkflowBuilder() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+                "linear-gradient(to right, rgb(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--foreground)) 1px, transparent 1px)",
               backgroundSize: "60px 60px",
             }}
           />
@@ -186,7 +185,7 @@ export default function WorkflowBuilder() {
         <motion.div
           className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full"
           style={{
-            background: `radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%)`,
+            background: `radial-gradient(circle, rgb(var(--foreground) / 0.03) 0%, transparent 70%)`,
           }}
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -218,20 +217,20 @@ export default function WorkflowBuilder() {
                 style={{ background: PRIMARY }}
               ></span>
             </span>
-            <span className="text-xs font-medium tracking-wider text-white/80">
+            <span className="text-xs font-medium tracking-wider text-foreground/80">
               AUTOMATION ENGINE ONLINE
             </span>
-            <span className="text-xs text-white/20">|</span>
-            <span className="text-xs text-white/40">5 ACTIVE NODES</span>
+            <span className="text-xs text-foreground/20">|</span>
+            <span className="text-xs text-muted">5 ACTIVE NODES</span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight">
-            <span className="text-white">Your workflow. </span>
-            <span style={{ color: PRIMARY }}>
+            <span className="text-foreground">Your workflow. </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>
               Re-engineered by intelligence.
             </span>
           </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+          <p className="text-lg text-secondary-text max-w-2xl mx-auto">
             We don&apos;t just build automations. We engineer autonomous systems
             that understand, decide, and execute — in real time.
           </p>
@@ -316,8 +315,8 @@ export default function WorkflowBuilder() {
                       style={{
                         background:
                           selectedStep === step.id
-                            ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgba(235, 106, 80, 0.1))`
-                            : "rgba(10, 10, 15, 0.9)",
+                            ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgb(var(--primary) / 0.1))`
+                            : "rgb(var(--background) / 0.9)",
                         border: `1px solid ${
                           selectedStep === step.id || hoveredStep === step.id
                             ? PRIMARY_LIGHT
@@ -332,7 +331,7 @@ export default function WorkflowBuilder() {
                     >
                       {/* Step Number */}
                       <div
-                        className="absolute -top-3 -left-2 text-xs font-mono px-2 py-1 rounded text-white"
+                        className="absolute -top-3 -left-2 text-xs font-mono px-2 py-1 rounded text-foreground"
                         style={{ background: PRIMARY }}
                       >
                         {step.number}
@@ -374,16 +373,16 @@ export default function WorkflowBuilder() {
                       >
                         <step.icon
                           className="w-6 h-6"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
                       </motion.div>
 
                       {/* Label */}
                       <div className="text-center">
-                        <p className="text-sm font-semibold text-white mb-1">
+                        <p className="text-sm font-semibold text-foreground mb-1">
                           {step.label}
                         </p>
-                        <p className="text-[10px] text-white/40 uppercase tracking-wider">
+                        <p className="text-[10px] text-muted uppercase tracking-wider">
                           {step.status}
                         </p>
                       </div>
@@ -404,7 +403,7 @@ export default function WorkflowBuilder() {
                     >
                       <ChevronRight
                         className="w-5 h-5"
-                        style={{ color: PRIMARY }}
+                        style={{ color: "rgb(var(--accent-text))" }}
                       />
                     </motion.div>
                   )}
@@ -487,8 +486,8 @@ export default function WorkflowBuilder() {
                         style={{
                           background:
                             selectedStep === step.id
-                              ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgba(235, 106, 80, 0.1))`
-                              : "rgba(10, 10, 15, 0.9)",
+                              ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgb(var(--primary) / 0.1))`
+                              : "rgb(var(--background) / 0.9)",
                           border: `1px solid ${
                             selectedStep === step.id
                               ? PRIMARY_LIGHT
@@ -506,22 +505,22 @@ export default function WorkflowBuilder() {
                           >
                             <step.icon
                               className="w-5 h-5"
-                              style={{ color: PRIMARY }}
+                              style={{ color: "rgb(var(--accent-text))" }}
                             />
                           </div>
                           <div className="flex-1">
                             <div className="flex items-center gap-2">
                               <span
                                 className="text-xs font-mono"
-                                style={{ color: PRIMARY }}
+                                style={{ color: "rgb(var(--accent-text))" }}
                               >
                                 {step.number}
                               </span>
-                              <p className="text-sm font-semibold text-white">
+                              <p className="text-sm font-semibold text-foreground">
                                 {step.label}
                               </p>
                             </div>
-                            <p className="text-[10px] text-white/40 uppercase tracking-wider mt-0.5">
+                            <p className="text-[10px] text-muted uppercase tracking-wider mt-0.5">
                               {step.status}
                             </p>
                           </div>
@@ -529,7 +528,7 @@ export default function WorkflowBuilder() {
                             className={`w-4 h-4 transition-transform ${
                               selectedStep === step.id ? "rotate-90" : ""
                             }`}
-                            style={{ color: PRIMARY }}
+                            style={{ color: "rgb(var(--accent-text))" }}
                           />
                         </div>
                       </div>
@@ -555,7 +554,7 @@ export default function WorkflowBuilder() {
               <div
                 className="relative rounded-2xl p-6 lg:p-8 overflow-hidden"
                 style={{
-                  background: `linear-gradient(135deg, ${PRIMARY_DARK}, rgba(235, 106, 80, 0.05))`,
+                  background: `linear-gradient(135deg, ${PRIMARY_DARK}, rgb(var(--primary) / 0.05))`,
                   border: `1px solid ${PRIMARY_LIGHT}`,
                   boxShadow: `0 0 40px ${PRIMARY_GLOW}`,
                 }}
@@ -586,36 +585,36 @@ export default function WorkflowBuilder() {
                       >
                         <selectedDetails.icon
                           className="w-7 h-7"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
                       </motion.div>
                       <div>
                         <div className="flex items-center gap-3">
                           <span
                             className="text-xs font-mono"
-                            style={{ color: PRIMARY }}
+                            style={{ color: "rgb(var(--accent-text))" }}
                           >
                             {selectedDetails.number}
                           </span>
-                          <h4 className="text-xl font-bold text-white">
+                          <h4 className="text-xl font-bold text-foreground">
                             {selectedDetails.label}
                           </h4>
                         </div>
-                        <p className="text-xs text-white/40 uppercase tracking-wider mt-1">
+                        <p className="text-xs text-muted uppercase tracking-wider mt-1">
                           {selectedDetails.status}
                         </p>
                       </div>
                     </div>
                     <button
                       onClick={() => setSelectedStep(null)}
-                      className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+                      className="p-2 rounded-lg hover:bg-foreground/10 transition-colors"
                       aria-label="Close details"
                     >
-                      <X className="w-5 h-5 text-white/40" />
+                      <X className="w-5 h-5 text-muted" />
                     </button>
                   </div>
 
-                  <p className="text-white/70 mb-6 text-base leading-relaxed">
+                  <p className="text-foreground/70 mb-6 text-base leading-relaxed">
                     {selectedDetails.description}
                   </p>
 
@@ -626,12 +625,12 @@ export default function WorkflowBuilder() {
                         className="p-4 rounded-lg"
                         style={{ background: PRIMARY_DARK }}
                       >
-                        <p className="text-xs text-white/40 mb-1">
+                        <p className="text-xs text-muted mb-1">
                           {metric.label}
                         </p>
                         <p
                           className="text-lg font-bold"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         >
                           {metric.value}
                         </p>
@@ -651,9 +650,9 @@ export default function WorkflowBuilder() {
                       >
                         <CheckCircle2
                           className="w-4 h-4 flex-shrink-0"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
-                        <span className="text-sm text-white/70">{detail}</span>
+                        <span className="text-sm text-foreground/70">{detail}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -671,18 +670,18 @@ export default function WorkflowBuilder() {
           className="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs"
         >
           <div className="flex items-center gap-2">
-            <Shield className="w-3.5 h-3.5" style={{ color: PRIMARY }} />
-            <span className="text-white/60">SYSTEM STATUS: OPERATIONAL</span>
+            <Shield className="w-3.5 h-3.5" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-secondary-text">SYSTEM STATUS: OPERATIONAL</span>
           </div>
-          <span className="text-white/20">•</span>
+          <span className="text-foreground/20">•</span>
           <div className="flex items-center gap-2">
-            <Activity className="w-3.5 h-3.5" style={{ color: PRIMARY }} />
-            <span className="text-white/60">REAL-TIME PROCESSING</span>
+            <Activity className="w-3.5 h-3.5" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-secondary-text">REAL-TIME PROCESSING</span>
           </div>
-          <span className="text-white/20">•</span>
+          <span className="text-foreground/20">•</span>
           <div className="flex items-center gap-2">
-            <Layers className="w-3.5 h-3.5" style={{ color: PRIMARY }} />
-            <span className="text-white/60">AUTONOMOUS EXECUTION</span>
+            <Layers className="w-3.5 h-3.5" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-secondary-text">AUTONOMOUS EXECUTION</span>
           </div>
         </motion.div>
       </div>

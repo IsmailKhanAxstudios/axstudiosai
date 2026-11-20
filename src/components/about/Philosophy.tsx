@@ -10,11 +10,10 @@ import {
   Users,
 } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const principles = [
   {
@@ -66,10 +65,10 @@ export default function Philosophy() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            <span className="text-white">Our </span>
-            <span style={{ color: PRIMARY }}>Philosophy</span>
+            <span className="text-foreground">Our </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>Philosophy</span>
           </h2>
-          <p className="text-lg text-white/60 max-w-3xl mx-auto">
+          <p className="text-lg text-secondary-text max-w-3xl mx-auto">
             The principles that guide how we work and build.
           </p>
         </motion.div>
@@ -100,14 +99,14 @@ export default function Philosophy() {
                 >
                   <principle.icon
                     className="w-6 h-6"
-                    style={{ color: PRIMARY }}
+                    style={{ color: "rgb(var(--accent-text))" }}
                   />
                 </motion.div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-3">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
                     {principle.title}
                   </h3>
-                  <p className="text-white/60">{principle.description}</p>
+                  <p className="text-secondary-text">{principle.description}</p>
                 </div>
               </div>
 

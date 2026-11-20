@@ -5,10 +5,10 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { TrendingUp, Clock, Zap, Infinity as InfinityIcon } from "lucide-react";
 
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const stats = [
   { icon: TrendingUp, value: 80, suffix: "%", label: "Less Manual Work" },
@@ -74,10 +74,10 @@ export default function TrustBar() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center text-2xl lg:text-3xl font-bold mb-12 text-white"
+          className="text-center text-2xl lg:text-3xl font-bold mb-12 text-foreground"
         >
           Built for businesses that{" "}
-          <span style={{ color: PRIMARY }}>refuse to operate manually.</span>
+          <span style={{ color: "rgb(var(--accent-text))" }}>refuse to operate manually.</span>
         </motion.h2>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
@@ -104,16 +104,16 @@ export default function TrustBar() {
                   border: `1px solid ${PRIMARY_LIGHT}`,
                 }}
               >
-                <stat.icon className="w-7 h-7" style={{ color: PRIMARY }} />
+                <stat.icon className="w-7 h-7" style={{ color: "rgb(var(--accent-text))" }} />
               </motion.div>
 
               {/* Value */}
-              <div className="text-3xl lg:text-4xl font-bold mb-2 text-white">
+              <div className="text-3xl lg:text-4xl font-bold mb-2 text-foreground">
                 <Counter value={stat.value} suffix={stat.suffix} />
               </div>
 
               {/* Label */}
-              <p className="text-sm text-white/60">{stat.label}</p>
+              <p className="text-sm text-secondary-text">{stat.label}</p>
 
               {/* Bottom accent line */}
               <motion.div

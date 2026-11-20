@@ -24,11 +24,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 export default function ROICalculator() {
   const [employees, setEmployees] = useState(10);
@@ -97,7 +96,7 @@ export default function ROICalculator() {
         />
         <motion.div
           className="absolute bottom-20 right-20 w-96 h-96 rounded-full blur-3xl"
-          style={{ background: "rgba(255, 255, 255, 0.03)" }}
+          style={{ background: "rgb(var(--foreground) / 0.03)" }}
           animate={{ scale: [1.2, 1, 1.2] }}
           transition={{ duration: 6, repeat: Infinity }}
         />
@@ -117,15 +116,15 @@ export default function ROICalculator() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <Calculator className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">ROI CALCULATOR</span>
+            <Calculator className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-sm text-foreground/80">ROI CALCULATOR</span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl font-bold mb-4">
-            <span className="text-white">How much could </span>
-            <span style={{ color: PRIMARY }}>automation save you?</span>
+            <span className="text-foreground">How much could </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>automation save you?</span>
           </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+          <p className="text-lg text-secondary-text max-w-2xl mx-auto">
             Calculate your potential savings with AI automation in real-time.
           </p>
         </motion.div>
@@ -140,26 +139,26 @@ export default function ROICalculator() {
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-semibold flex items-center gap-2 text-white">
-                <Calculator className="w-6 h-6" style={{ color: PRIMARY }} />
+              <h3 className="text-xl font-semibold flex items-center gap-2 text-foreground">
+                <Calculator className="w-6 h-6" style={{ color: "rgb(var(--accent-text))" }} />
                 Your Inputs
               </h3>
-              <Info className="w-5 h-5 text-white/40 cursor-help" />
+              <Info className="w-5 h-5 text-muted cursor-help" />
             </div>
 
             <div className="space-y-8">
               {/* Employees */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="flex items-center gap-2 text-sm text-white/60">
-                    <Users className="w-4 h-4" style={{ color: PRIMARY }} />
+                  <label className="flex items-center gap-2 text-sm text-secondary-text">
+                    <Users className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
                     Number of employees
                   </label>
                   <motion.span
                     key={employees}
                     initial={{ scale: 1.5 }}
                     animate={{ scale: 1 }}
-                    className="text-lg font-bold text-white"
+                    className="text-lg font-bold text-foreground"
                   >
                     {employees}
                   </motion.span>
@@ -173,10 +172,10 @@ export default function ROICalculator() {
                     setEmployees(Number(e.target.value));
                     pulseCalculating();
                   }}
-                  className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-2 bg-track rounded-lg appearance-none cursor-pointer"
                   style={{ accentColor: PRIMARY }}
                 />
-                <div className="flex justify-between text-xs text-white/40 mt-1">
+                <div className="flex justify-between text-xs text-muted mt-1">
                   <span>1</span>
                   <span>100</span>
                 </div>
@@ -185,15 +184,15 @@ export default function ROICalculator() {
               {/* Hours */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="flex items-center gap-2 text-sm text-white/60">
-                    <Clock className="w-4 h-4" style={{ color: PRIMARY }} />
+                  <label className="flex items-center gap-2 text-sm text-secondary-text">
+                    <Clock className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
                     Hours per week (repetitive)
                   </label>
                   <motion.span
                     key={hoursPerWeek}
                     initial={{ scale: 1.5 }}
                     animate={{ scale: 1 }}
-                    className="text-lg font-bold text-white"
+                    className="text-lg font-bold text-foreground"
                   >
                     {hoursPerWeek}h
                   </motion.span>
@@ -207,10 +206,10 @@ export default function ROICalculator() {
                     setHoursPerWeek(Number(e.target.value));
                     pulseCalculating();
                   }}
-                  className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-2 bg-track rounded-lg appearance-none cursor-pointer"
                   style={{ accentColor: PRIMARY }}
                 />
-                <div className="flex justify-between text-xs text-white/40 mt-1">
+                <div className="flex justify-between text-xs text-muted mt-1">
                   <span>1h</span>
                   <span>40h</span>
                 </div>
@@ -219,10 +218,10 @@ export default function ROICalculator() {
               {/* Hourly Cost */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="flex items-center gap-2 text-sm text-white/60">
+                  <label className="flex items-center gap-2 text-sm text-secondary-text">
                     <DollarSign
                       className="w-4 h-4"
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     />
                     Average hourly cost
                   </label>
@@ -230,7 +229,7 @@ export default function ROICalculator() {
                     key={hourlyCost}
                     initial={{ scale: 1.5 }}
                     animate={{ scale: 1 }}
-                    className="text-lg font-bold text-white"
+                    className="text-lg font-bold text-foreground"
                   >
                     ${hourlyCost}
                   </motion.span>
@@ -245,10 +244,10 @@ export default function ROICalculator() {
                     setHourlyCost(Number(e.target.value));
                     pulseCalculating();
                   }}
-                  className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-2 bg-track rounded-lg appearance-none cursor-pointer"
                   style={{ accentColor: PRIMARY }}
                 />
-                <div className="flex justify-between text-xs text-white/40 mt-1">
+                <div className="flex justify-between text-xs text-muted mt-1">
                   <span>$20</span>
                   <span>$200</span>
                 </div>
@@ -257,15 +256,15 @@ export default function ROICalculator() {
               {/* Weeks */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <label className="flex items-center gap-2 text-sm text-white/60">
-                    <Calendar className="w-4 h-4" style={{ color: PRIMARY }} />
+                  <label className="flex items-center gap-2 text-sm text-secondary-text">
+                    <Calendar className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
                     Working weeks per year
                   </label>
                   <motion.span
                     key={weeksPerYear}
                     initial={{ scale: 1.5 }}
                     animate={{ scale: 1 }}
-                    className="text-lg font-bold text-white"
+                    className="text-lg font-bold text-foreground"
                   >
                     {weeksPerYear}
                   </motion.span>
@@ -279,10 +278,10 @@ export default function ROICalculator() {
                     setWeeksPerYear(Number(e.target.value));
                     pulseCalculating();
                   }}
-                  className="w-full h-2 bg-zinc-700 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-2 bg-track rounded-lg appearance-none cursor-pointer"
                   style={{ accentColor: PRIMARY }}
                 />
-                <div className="flex justify-between text-xs text-white/40 mt-1">
+                <div className="flex justify-between text-xs text-muted mt-1">
                   <span>40</span>
                   <span>52</span>
                 </div>
@@ -315,8 +314,8 @@ export default function ROICalculator() {
 
               <div className="relative">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-xl font-semibold flex items-center gap-2 text-white">
-                    <PiggyBank className="w-6 h-6" style={{ color: PRIMARY }} />
+                  <h3 className="text-xl font-semibold flex items-center gap-2 text-foreground">
+                    <PiggyBank className="w-6 h-6" style={{ color: "rgb(var(--accent-text))" }} />
                     Your Results
                   </h3>
                   {isCalculating ? (
@@ -326,13 +325,13 @@ export default function ROICalculator() {
                     >
                       <Activity
                         className="w-5 h-5"
-                        style={{ color: PRIMARY }}
+                        style={{ color: "rgb(var(--accent-text))" }}
                       />
                     </motion.div>
                   ) : (
                     <CheckCircle2
                       className="w-5 h-5"
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     />
                   )}
                 </div>
@@ -344,23 +343,23 @@ export default function ROICalculator() {
                     style={{ background: PRIMARY_DARK }}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm text-white/60 flex items-center gap-2">
+                      <p className="text-sm text-secondary-text flex items-center gap-2">
                         <ThumbsDown
                           className="w-4 h-4"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
                         Annual manual-work cost
                       </p>
                       <AlertCircle
                         className="w-4 h-4"
-                        style={{ color: PRIMARY }}
+                        style={{ color: "rgb(var(--accent-text))" }}
                       />
                     </div>
                     <motion.p
                       key={annualCost}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="text-3xl font-bold text-white"
+                      className="text-3xl font-bold text-foreground"
                     >
                       {formatCurrency(annualCost)}
                     </motion.p>
@@ -370,21 +369,21 @@ export default function ROICalculator() {
                   <div
                     className="p-4 rounded-xl"
                     style={{
-                      background: `linear-gradient(135deg, ${PRIMARY_DARK}, rgba(235, 106, 80, 0.15))`,
+                      background: `linear-gradient(135deg, ${PRIMARY_DARK}, rgb(var(--primary) / 0.15))`,
                       border: `1px solid ${PRIMARY_LIGHT}`,
                     }}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm text-white/60 flex items-center gap-2">
+                      <p className="text-sm text-secondary-text flex items-center gap-2">
                         <ThumbsUp
                           className="w-4 h-4"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
                         Potential automation savings
                       </p>
                       <TrendingUp
                         className="w-4 h-4"
-                        style={{ color: PRIMARY }}
+                        style={{ color: "rgb(var(--accent-text))" }}
                       />
                     </div>
                     <motion.p
@@ -392,11 +391,11 @@ export default function ROICalculator() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="text-4xl font-bold"
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     >
                       {formatCurrency(potentialSavings)}
                     </motion.p>
-                    <p className="text-xs text-white/40 mt-1">
+                    <p className="text-xs text-muted mt-1">
                       Based on 70% automation potential
                     </p>
                   </div>
@@ -419,10 +418,10 @@ export default function ROICalculator() {
                         className="text-center p-3 rounded-lg"
                         style={{ background: PRIMARY_DARK }}
                       >
-                        <p className="text-lg font-bold text-white">
+                        <p className="text-lg font-bold text-foreground">
                           {stat.value}
                         </p>
-                        <p className="text-xs text-white/40">{stat.label}</p>
+                        <p className="text-xs text-muted">{stat.label}</p>
                       </div>
                     ))}
                   </div>
@@ -435,14 +434,14 @@ export default function ROICalculator() {
                     }}
                   >
                     <div className="flex items-center gap-2">
-                      <Rocket className="w-5 h-5" style={{ color: PRIMARY }} />
-                      <span className="text-sm text-white/60">
+                      <Rocket className="w-5 h-5" style={{ color: "rgb(var(--accent-text))" }} />
+                      <span className="text-sm text-secondary-text">
                         Projected ROI
                       </span>
                     </div>
                     <span
                       className="text-lg font-bold"
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     >
                       {roiPercentage}%
                     </span>
@@ -454,12 +453,12 @@ export default function ROICalculator() {
                     className="w-full flex items-center justify-between p-3 rounded-lg transition-colors"
                     style={{ background: PRIMARY_DARK }}
                   >
-                    <span className="text-sm text-white/60">
+                    <span className="text-sm text-secondary-text">
                       View Breakdown
                     </span>
                     <ChevronDown
                       className={`w-4 h-4 transition-transform ${showBreakdown ? "rotate-180" : ""}`}
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     />
                   </button>
 
@@ -477,22 +476,22 @@ export default function ROICalculator() {
                           style={{ background: PRIMARY_DARK }}
                         >
                           <div className="flex justify-between text-sm">
-                            <span className="text-white/40">Labor Cost</span>
-                            <span className="text-white">
+                            <span className="text-muted">Labor Cost</span>
+                            <span className="text-foreground">
                               {formatCurrency(annualCost * 0.5)}
                             </span>
                           </div>
                           <div className="flex justify-between text-sm">
-                            <span className="text-white/40">Time Savings</span>
-                            <span className="text-white">
+                            <span className="text-muted">Time Savings</span>
+                            <span className="text-foreground">
                               {formatCurrency(annualCost * 0.3)}
                             </span>
                           </div>
                           <div className="flex justify-between text-sm">
-                            <span className="text-white/40">
+                            <span className="text-muted">
                               Error Reduction
                             </span>
-                            <span className="text-white">
+                            <span className="text-foreground">
                               {formatCurrency(annualCost * 0.2)}
                             </span>
                           </div>

@@ -3,15 +3,13 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import MobileMenu from "./MobileMenu";
+import ThemeToggle from "./ThemeToggle";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
 
 // Logo Component
 function Logo({ className = "" }: { className?: string }) {
@@ -22,7 +20,6 @@ function Logo({ className = "" }: { className?: string }) {
       viewBox="0 0 1186 248"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ color: "white" }}
     >
       <g clipPath="url(#clip0_312_354)">
         <path
@@ -53,15 +50,18 @@ function Logo({ className = "" }: { className?: string }) {
 }
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const merged = isScrolled || isMobileMenuOpen;
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -69,78 +69,79 @@ export default function Navbar() {
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
     { href: "/solutions", label: "Solutions" },
-    { href: "/process", label: "Process" },
+    { href: "/products", label: "Products" },
+    { href: "/blogs", label: "Blogs" },
     { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
   ];
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-[#0a0a0f]/95 backdrop-blur-xl shadow-lg shadow-black/20 border-b border-white/10"
-            : "bg-transparent"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20">
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+        <nav
+          aria-label="Main navigation"
+          data-merged={merged}
+          className={`pointer-events-auto mx-auto border border-foreground/10 bg-background/95 backdrop-blur-xl transition-[width,max-width,margin,border-radius,box-shadow] duration-300 ease-out motion-reduce:transition-none ${
+            merged
+              ? "mt-0 w-full max-w-full rounded-none border-x-transparent border-t-transparent shadow-sm shadow-black/10"
+              : "mt-2 w-[calc(100%-1rem)] max-w-7xl rounded-full shadow-lg shadow-black/15 sm:mt-3 sm:w-[calc(100%-2rem)]"
+          }`}
+        >
+          <div className="mx-auto flex h-[54px] max-w-7xl items-center justify-between gap-2 px-3 sm:px-5 md:h-[62px] lg:gap-3">
             {/* Logo */}
-            <Link href="/" className="flex items-center group">
-              <Logo className="h-10 md:h-12 w-auto transition-all group-hover:opacity-80" />
+            <Link href="/" aria-label="AxStudios home" className="group flex shrink-0 items-center rounded-full">
+              <Logo className="h-7 w-auto transition-opacity group-hover:opacity-80 xl:h-9" />
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="relative text-sm text-white/60 hover:text-white transition-colors group"
-                >
-                  {link.label}
-                  {/* Hover underline */}
-                  <span
-                    className="absolute -bottom-1 left-0 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full"
-                    style={{ background: PRIMARY }}
-                  />
-                </Link>
-              ))}
+            <div className="hidden items-center gap-0.5 lg:flex">
+              {navLinks.map((link) => {
+                const current = pathname === link.href;
+                const active = current || pathname.startsWith(`${link.href}/`);
+
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    aria-current={current ? "page" : active ? "location" : undefined}
+                    className={`whitespace-nowrap rounded-full px-2.5 py-2 text-xs font-medium transition-colors focus-visible:outline-offset-0 xl:px-3.5 xl:text-sm ${
+                      active
+                        ? "bg-[rgb(var(--primary)/0.15)] text-[rgb(var(--accent-text))]"
+                        : "text-secondary-text hover:bg-foreground/5 hover:text-foreground"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </div>
 
-            {/* CTA */}
-            <div className="hidden lg:block">
+            <div className="flex shrink-0 items-center gap-2 xl:gap-3">
               <Link
                 href="/contact"
-                className="group px-6 py-2.5 rounded-full text-sm font-medium text-white transition-all hover:scale-105 inline-flex items-center gap-2"
-                style={{
-                  backgroundColor: PRIMARY,
-                  boxShadow: `0 5px 20px ${PRIMARY_GLOW}`,
-                }}
+                className="group hidden items-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5 text-xs font-semibold text-white transition-opacity hover:opacity-90 lg:inline-flex xl:px-5 xl:text-sm"
+                style={{ backgroundColor: PRIMARY }}
               >
                 Book a Strategy Call
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
+              <ThemeToggle />
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen((open) => !open)}
+                className="lg:hidden p-2 text-secondary-text hover:text-foreground transition-colors"
+                aria-label="Toggle menu"
+                aria-expanded={isMobileMenuOpen}
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
             </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-white/60 hover:text-white transition-colors"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
           </div>
-        </div>
-      </motion.nav>
+        </nav>
+      </header>
 
       {/* Mobile Menu */}
       <AnimatePresence>

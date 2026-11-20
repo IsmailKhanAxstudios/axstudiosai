@@ -4,11 +4,10 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.15)";
-const PRIMARY_SUBTLE = "rgba(235, 106, 80, 0.08)";
-const PRIMARY_FAINT = "rgba(235, 106, 80, 0.04)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.15)";
+const PRIMARY_SUBTLE = "rgb(var(--primary) / 0.08)";
+const PRIMARY_FAINT = "rgb(var(--primary) / 0.04)";
 
 export default function Background() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -29,8 +28,8 @@ export default function Background() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(to right, #fff 1px, transparent 1px), 
-                           linear-gradient(to bottom, #fff 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(to right, rgb(var(--foreground)) 1px, transparent 1px),
+                           linear-gradient(to bottom, rgb(var(--foreground)) 1px, transparent 1px)`,
             backgroundSize: "80px 80px",
           }}
         />
@@ -54,7 +53,7 @@ export default function Background() {
       <motion.div
         className="absolute -bottom-20 -right-20 w-[500px] h-[500px]"
         style={{
-          background: `radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)`,
+          background: `radial-gradient(circle, rgb(var(--foreground) / 0.04) 0%, transparent 70%)`,
           filter: "blur(40px)",
         }}
         animate={{

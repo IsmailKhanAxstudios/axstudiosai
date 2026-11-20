@@ -39,11 +39,10 @@ import {
   ThumbsUp,
 } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const faqs = [
   {
@@ -153,7 +152,7 @@ export default function FAQ() {
         />
         <motion.div
           className="absolute bottom-20 right-20 w-96 h-96 rounded-full blur-3xl"
-          style={{ background: "rgba(255, 255, 255, 0.03)" }}
+          style={{ background: "rgb(var(--foreground) / 0.03)" }}
           animate={{ scale: [1.2, 1, 1.2] }}
           transition={{ duration: 6, repeat: Infinity }}
         />
@@ -180,7 +179,7 @@ export default function FAQ() {
           <element.icon
             className="w-8 h-8"
             style={{
-              color: PRIMARY,
+              color: "rgb(var(--accent-text))",
               filter: `drop-shadow(0 0 10px ${PRIMARY_GLOW})`,
             }}
           />
@@ -201,15 +200,15 @@ export default function FAQ() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <HelpCircle className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">KNOWLEDGE BASE</span>
+            <HelpCircle className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-sm text-foreground/80">KNOWLEDGE BASE</span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl font-bold mb-4">
-            <span className="text-white">Frequently asked </span>
-            <span style={{ color: PRIMARY }}>questions</span>
+            <span className="text-foreground">Frequently asked </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>questions</span>
           </h2>
-          <p className="text-lg text-white/60">
+          <p className="text-lg text-secondary-text">
             Everything you need to know about working with AxStudios.
           </p>
         </motion.div>
@@ -223,7 +222,7 @@ export default function FAQ() {
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
               activeCategory === null
                 ? "text-white"
-                : "glass text-white/60 hover:text-white"
+                : "glass text-secondary-text hover:text-foreground"
             }`}
             style={
               activeCategory === null
@@ -245,7 +244,7 @@ export default function FAQ() {
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 activeCategory === category
                   ? "text-white"
-                  : "glass text-white/60 hover:text-white"
+                  : "glass text-secondary-text hover:text-foreground"
               }`}
               style={
                 activeCategory === category
@@ -308,15 +307,15 @@ export default function FAQ() {
                       >
                         <faq.icon
                           className="w-5 h-5"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
                       </motion.div>
 
                       <div>
-                        <span className="font-semibold text-white block">
+                        <span className="font-semibold text-foreground block">
                           {faq.question}
                         </span>
-                        <span className="text-xs text-white/40">
+                        <span className="text-xs text-muted">
                           {faq.category}
                         </span>
                       </div>
@@ -333,7 +332,7 @@ export default function FAQ() {
                       >
                         <ChevronDown
                           className="w-5 h-5"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
                       </div>
                     </motion.div>
@@ -359,7 +358,7 @@ export default function FAQ() {
                               className="w-1 h-full rounded-full"
                               style={{ background: PRIMARY }}
                             />
-                            <p className="text-white/60 leading-relaxed">
+                            <p className="text-secondary-text leading-relaxed">
                               {faq.answer}
                             </p>
                           </div>
@@ -384,7 +383,7 @@ export default function FAQ() {
             className="glass rounded-2xl p-8 inline-block"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <p className="text-white/60 mb-4">Still have questions?</p>
+            <p className="text-secondary-text mb-4">Still have questions?</p>
             <a
               href="mailto:contact@axstudios.tech"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-medium transition-all hover:scale-105"

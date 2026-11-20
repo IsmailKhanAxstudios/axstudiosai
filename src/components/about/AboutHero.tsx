@@ -4,11 +4,10 @@
 import { motion } from "framer-motion";
 import { Sparkles, Zap, Brain, Rocket } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 export default function AboutHero() {
   return (
@@ -20,7 +19,7 @@ export default function AboutHero() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+                "linear-gradient(to right, rgb(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--foreground)) 1px, transparent 1px)",
               backgroundSize: "60px 60px",
             }}
           />
@@ -36,7 +35,7 @@ export default function AboutHero() {
         <motion.div
           className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full"
           style={{
-            background: `radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%)`,
+            background: `radial-gradient(circle, rgb(var(--foreground) / 0.03) 0%, transparent 70%)`,
           }}
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -83,8 +82,8 @@ export default function AboutHero() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <Sparkles className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">ABOUT AXSTUDIOS</span>
+            <Sparkles className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-sm text-foreground/80">ABOUT AXSTUDIOS</span>
           </motion.div>
 
           <motion.h1
@@ -93,16 +92,16 @@ export default function AboutHero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
           >
-            <span className="text-white">We build systems that make</span>
+            <span className="text-foreground">We build systems that make</span>
             <br />
-            <span style={{ color: PRIMARY }}>businesses smarter.</span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>businesses smarter.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-white/60 max-w-2xl mx-auto"
+            className="text-lg text-secondary-text max-w-2xl mx-auto"
           >
             AxStudios is an AI automation studio focused on creating intelligent
             systems, automation, AI agents, and custom software that transform
@@ -123,10 +122,10 @@ export default function AboutHero() {
               { value: "3x", label: "Faster Growth" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <p className="text-2xl font-bold" style={{ color: PRIMARY }}>
+                <p className="text-2xl font-bold" style={{ color: "rgb(var(--accent-text))" }}>
                   {stat.value}
                 </p>
-                <p className="text-xs text-white/40 mt-1">{stat.label}</p>
+                <p className="text-xs text-muted mt-1">{stat.label}</p>
               </div>
             ))}
           </motion.div>

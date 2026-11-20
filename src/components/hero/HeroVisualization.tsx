@@ -20,15 +20,14 @@ import {
 import { useState } from "react";
 import { useHydrated } from "@/lib/useHydrated";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 // Orbital nodes - Using primary and white variations
 const orbitalNodes = [
-  { id: 1, label: "Lead", icon: Zap, orbit: 1, angle: 0, color: PRIMARY },
+  { id: 1, label: "Lead", icon: Zap, orbit: 1, angle: 0, color: "rgb(var(--accent-text))" },
   {
     id: 2,
     label: "AI Agent",
@@ -73,7 +72,7 @@ const orbitalNodes = [
 
 // Secondary orbiting elements
 const techNodes = [
-  { id: 7, icon: Cpu, orbit: 0.7, angle: 30, color: PRIMARY },
+  { id: 7, icon: Cpu, orbit: 0.7, angle: 30, color: "rgb(var(--accent-text))" },
   { id: 8, icon: Network, orbit: 0.7, angle: 90, color: "#ffffff" },
   { id: 9, icon: Shield, orbit: 0.7, angle: 150, color: PRIMARY_LIGHT },
   { id: 10, icon: Globe, orbit: 0.7, angle: 210, color: "#ffffff" },
@@ -101,7 +100,7 @@ const floatingShapes = [
     y: "15%",
     duration: 6,
     delay: 0,
-    color: PRIMARY,
+    color: "rgb(var(--accent-text))",
   },
   {
     id: 2,
@@ -137,7 +136,7 @@ const floatingShapes = [
     y: "5%",
     duration: 6.5,
     delay: 1.5,
-    color: PRIMARY,
+    color: "rgb(var(--accent-text))",
   },
   {
     id: 6,
@@ -164,7 +163,7 @@ const floatingShapes = [
     y: "95%",
     duration: 6.8,
     delay: 1.8,
-    color: PRIMARY,
+    color: "rgb(var(--accent-text))",
   },
 ];
 
@@ -191,7 +190,7 @@ export default function HeroVisualization() {
             style={{ background: PRIMARY }}
           />
           <div className="relative w-full h-full rounded-full glass gradient-border flex items-center justify-center">
-            <Bot className="w-16 h-16 lg:w-20 lg:h-20 text-white" />
+            <Bot className="w-16 h-16 lg:w-20 lg:h-20 text-foreground" />
           </div>
         </div>
       </div>
@@ -211,7 +210,7 @@ export default function HeroVisualization() {
           className="absolute -top-1.5 left-1/2 w-3 h-3 rounded-full"
           style={{ background: PRIMARY, boxShadow: `0 0 15px ${PRIMARY_GLOW}` }}
         />
-        <div className="absolute -bottom-1.5 left-1/2 w-3 h-3 rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.6)]" />
+        <div className="absolute -bottom-1.5 left-1/2 w-3 h-3 rounded-full bg-foreground shadow-[0_0_15px_rgb(var(--foreground)/0.6)]" />
         <div
           className="absolute top-1/2 -left-1.5 w-3 h-3 rounded-full"
           style={{
@@ -219,7 +218,7 @@ export default function HeroVisualization() {
             boxShadow: `0 0 15px ${PRIMARY_GLOW}`,
           }}
         />
-        <div className="absolute top-1/2 -right-1.5 w-3 h-3 rounded-full bg-white/70 shadow-[0_0_15px_rgba(255,255,255,0.4)]" />
+        <div className="absolute top-1/2 -right-1.5 w-3 h-3 rounded-full bg-foreground/70 shadow-[0_0_15px_rgb(var(--foreground)/0.4)]" />
       </motion.div>
 
       {/* Inner rotating ring */}
@@ -229,7 +228,7 @@ export default function HeroVisualization() {
         animate={{ rotate: -360 }}
         transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
       >
-        <div className="absolute -top-1 left-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]" />
+        <div className="absolute -top-1 left-1/2 w-2 h-2 rounded-full bg-foreground shadow-[0_0_12px_rgb(var(--foreground)/0.6)]" />
         <div
           className="absolute -bottom-1 left-1/2 w-2 h-2 rounded-full"
           style={{ background: PRIMARY, boxShadow: `0 0 12px ${PRIMARY_GLOW}` }}
@@ -238,7 +237,7 @@ export default function HeroVisualization() {
           className="absolute top-1/2 -left-1 w-2 h-2 rounded-full"
           style={{ background: PRIMARY_LIGHT }}
         />
-        <div className="absolute top-1/2 -right-1 w-2 h-2 rounded-full bg-white/70" />
+        <div className="absolute top-1/2 -right-1 w-2 h-2 rounded-full bg-foreground/70" />
       </motion.div>
 
       {/* Dotted ring */}
@@ -255,7 +254,7 @@ export default function HeroVisualization() {
               left: "50%",
               top: "50%",
               transform: `rotate(${i * 15}deg) translateY(-180px)`,
-              background: i % 2 === 0 ? PRIMARY_DARK : "rgba(255,255,255,0.15)",
+              background: i % 2 === 0 ? PRIMARY_DARK : "rgb(var(--foreground) / 0.15)",
             }}
           />
         ))}
@@ -294,8 +293,8 @@ export default function HeroVisualization() {
           <shape.icon
             className="w-6 h-6 lg:w-8 lg:h-8"
             style={{
-              color: shape.color,
-              filter: `drop-shadow(0 0 10px ${shape.color === "#ffffff" ? "rgba(255,255,255,0.5)" : PRIMARY_GLOW})`,
+              color: shape.color === "#ffffff" ? "rgb(var(--foreground))" : shape.color,
+              filter: `drop-shadow(0 0 10px ${shape.color === "#ffffff" ? "rgb(var(--foreground) / 0.5)" : PRIMARY_GLOW})`,
             }}
           />
         </motion.div>
@@ -315,7 +314,7 @@ export default function HeroVisualization() {
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute -inset-4 rounded-full blur-2xl bg-white/10"
+          className="absolute -inset-4 rounded-full blur-2xl bg-foreground/10"
           animate={{ opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -332,12 +331,12 @@ export default function HeroVisualization() {
           />
 
           {/* Inner circle */}
-          <div className="absolute inset-[3px] rounded-full bg-[#0a0a0f]/90 backdrop-blur-xl flex items-center justify-center">
+          <div className="absolute inset-[3px] rounded-full bg-background/90 backdrop-blur-xl flex items-center justify-center">
             <motion.div
               animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.1, 1] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
-              <Bot className="w-12 h-12 lg:w-16 lg:h-16 text-white" />
+              <Bot className="w-12 h-12 lg:w-16 lg:h-16 text-foreground" />
             </motion.div>
             <div
               className="absolute inset-0 rounded-full"
@@ -381,7 +380,7 @@ export default function HeroVisualization() {
               <motion.div
                 className="absolute top-1/2 left-1/2 w-[120px] h-px origin-left"
                 style={{
-                  background: `linear-gradient(90deg, ${node.color === "#ffffff" ? "rgba(255,255,255,0.4)" : PRIMARY_LIGHT}, transparent)`,
+                  background: `linear-gradient(90deg, ${node.color === "#ffffff" ? "rgb(var(--foreground) / 0.4)" : PRIMARY_LIGHT}, transparent)`,
                   transform: `rotate(${node.angle}deg)`,
                 }}
                 initial={{ scaleX: 0, opacity: 0 }}
@@ -400,21 +399,21 @@ export default function HeroVisualization() {
               {/* Node card */}
               <div
                 className={`relative rounded-2xl p-3 lg:p-4 cursor-pointer transition-all duration-300 ${
-                  hoveredNode === node.id ? "scale-110 bg-white/10" : "glass"
+                  hoveredNode === node.id ? "scale-110 bg-foreground/10" : "glass"
                 }`}
                 style={{
-                  border: `1px solid ${node.color === "#ffffff" ? "rgba(255,255,255,0.3)" : PRIMARY_LIGHT}`,
+                  border: `1px solid ${node.color === "#ffffff" ? "rgb(var(--foreground) / 0.3)" : PRIMARY_LIGHT}`,
                   boxShadow:
                     hoveredNode === node.id
-                      ? `0 0 30px ${node.color === "#ffffff" ? "rgba(255,255,255,0.4)" : PRIMARY_GLOW}`
-                      : `0 0 10px ${node.color === "#ffffff" ? "rgba(255,255,255,0.2)" : PRIMARY_DARK}`,
+                      ? `0 0 30px ${node.color === "#ffffff" ? "rgb(var(--foreground) / 0.4)" : PRIMARY_GLOW}`
+                      : `0 0 10px ${node.color === "#ffffff" ? "rgb(var(--foreground) / 0.2)" : PRIMARY_DARK}`,
                 }}
               >
                 <node.icon
                   className="w-6 h-6 lg:w-8 lg:h-8 mx-auto"
-                  style={{ color: node.color }}
+                  style={{ color: node.color === "#ffffff" ? "rgb(var(--foreground))" : node.color }}
                 />
-                <span className="mt-2 text-xs lg:text-sm text-white block text-center font-medium">
+                <span className="mt-2 text-xs lg:text-sm text-foreground block text-center font-medium">
                   {node.label}
                 </span>
               </div>
@@ -448,13 +447,13 @@ export default function HeroVisualization() {
               }}
               className="glass rounded-xl p-2"
               style={{
-                border: `1px solid ${node.color === "#ffffff" ? "rgba(255,255,255,0.3)" : PRIMARY_DARK}`,
-                boxShadow: `0 0 10px ${node.color === "#ffffff" ? "rgba(255,255,255,0.2)" : PRIMARY_DARK}`,
+                border: `1px solid ${node.color === "#ffffff" ? "rgb(var(--foreground) / 0.3)" : PRIMARY_DARK}`,
+                boxShadow: `0 0 10px ${node.color === "#ffffff" ? "rgb(var(--foreground) / 0.2)" : PRIMARY_DARK}`,
               }}
             >
               <node.icon
                 className="w-4 h-4 lg:w-5 lg:h-5"
-                style={{ color: node.color }}
+                style={{ color: node.color === "#ffffff" ? "rgb(var(--foreground))" : node.color }}
               />
             </motion.div>
           </motion.div>
@@ -475,7 +474,7 @@ export default function HeroVisualization() {
               height: `${particle.size}px`,
               borderRadius: "50%",
               background: particle.color,
-              boxShadow: `0 0 ${particle.size * 3}px ${particle.color === "#ffffff" ? "rgba(255,255,255,0.5)" : PRIMARY_GLOW}`,
+              boxShadow: `0 0 ${particle.size * 3}px ${particle.color === "#ffffff" ? "rgb(var(--foreground) / 0.5)" : PRIMARY_GLOW}`,
             }}
             animate={{ opacity: [0, 1, 0], scale: [0, 1, 0] }}
             transition={{
@@ -499,12 +498,12 @@ export default function HeroVisualization() {
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-white/20"
+        className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-foreground/20"
         animate={{ opacity: [0.3, 0.7, 0.3] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-white/20"
+        className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-foreground/20"
         animate={{ opacity: [0.3, 0.7, 0.3] }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       />

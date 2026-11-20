@@ -1,26 +1,26 @@
-// app/services/page.tsx
-import { Metadata } from "next";
-
+import type { Metadata } from "next";
 import UseCases from "@/components/sections/UseCases";
-import AIAgentsSection from "@/components/sections/AIAgentsSection";
-import AIWebApplications from "@/components/sections/AIWebApplications";
-import CustomAISaaSDevelopment from "@/components/sections/CustomAISAASDev";
-import AIStrategyAudit from "@/components/sections/AIStrategyAudit";
-import AISystemsMaintenance from "@/components/sections/AISystemMainetnance";
+import SolutionsVisualizer from "@/components/sections/SolutionsVisualizer";
+import WorkflowBuilder from "@/components/sections/WorkflowBuilder";
+import ROICalculator from "@/components/sections/ROICalculator";
+import FAQ from "@/components/sections/FAQ";
+import ProjectExamples from "@/components/sections/ProjectExamples";
+
 export const metadata: Metadata = {
-  title: "Our Services — AI Automation, Agents & Development | AxStudios",
+  title: "Solutions — AI Workflows, Demos & ROI Calculator | AxStudios",
   description:
-    "Explore AxStudios' complete AI services: AI Automation, AI Agents, Web Applications, SaaS Development, Strategy & Audit, Consultancy, Integration, and Maintenance.",
+    "Explore AI automation use cases, try interactive workflow demos, and estimate the potential time and cost savings for your team.",
 };
 
 export default function SolutionsPage() {
   return (
     <>
       <UseCases />
-      <AIAgentsSection />
-      <AIWebApplications />
-      <CustomAISaaSDevelopment />
-      <AIStrategyAudit />
+      <ProjectExamples />
+      <SolutionsVisualizer />
+      <WorkflowBuilder />
+      <ROICalculator />
+      <FAQ />
     </>
   );
 }

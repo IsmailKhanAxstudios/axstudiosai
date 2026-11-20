@@ -4,11 +4,10 @@
 import { motion } from "framer-motion";
 import { Shield, Heart, Lightbulb, Users } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const values = [
   {
@@ -58,10 +57,10 @@ export default function Values() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            <span className="text-white">Our </span>
-            <span style={{ color: PRIMARY }}>Values</span>
+            <span className="text-foreground">Our </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>Values</span>
           </h2>
-          <p className="text-lg text-white/60 max-w-3xl mx-auto">
+          <p className="text-lg text-secondary-text max-w-3xl mx-auto">
             The core values that define who we are and how we work.
           </p>
         </motion.div>
@@ -89,10 +88,10 @@ export default function Values() {
                   border: `1px solid ${PRIMARY_LIGHT}`,
                 }}
               >
-                <value.icon className="w-7 h-7" style={{ color: PRIMARY }} />
+                <value.icon className="w-7 h-7" style={{ color: "rgb(var(--accent-text))" }} />
               </motion.div>
-              <h3 className="font-semibold text-white mb-2">{value.title}</h3>
-              <p className="text-sm text-white/60">{value.description}</p>
+              <h3 className="font-semibold text-foreground mb-2">{value.title}</h3>
+              <p className="text-sm text-secondary-text">{value.description}</p>
             </motion.div>
           ))}
         </div>

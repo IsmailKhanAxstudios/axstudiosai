@@ -1,54 +1,30 @@
-// app/page.tsx
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import Hero from "@/components/hero/Hero";
-import TrustBar from "@/components/sections/TrustBar";
-import ProblemSection from "@/components/sections/ProblemSection";
 import ServicesSection from "@/components/sections/ServicesSection";
-import SolutionsVisualizer from "@/components/sections/SolutionsVisualizer";
-import WorkflowBuilder from "@/components/sections/WorkflowBuilder";
-// import WhyAxStudios from "@/components/sections/WhyAxStudios";
-import ProcessSection from "@/components/sections/ProcessSection";
-import ROICalculator from "@/components/sections/ROICalculator";
-import UseCases from "@/components/sections/UseCases";
-// import TechnologySection from "@/components/sections/TechnologySection";
-import ProjectExamples from "@/components/sections/ProjectExamples";
-import FAQ from "@/components/sections/FAQ";
-import CTASection from "@/components/sections/CTASection";
 import AIWorkflowCanvas from "@/components/sections/AIWorkflowCanvas";
-import AIAgentsSection from "@/components/sections/AIAgentsSection";
-import AIWebApplications from "@/components/sections/AIWebApplications";
-import CustomAISaaSDevelopment from "@/components/sections/CustomAISAASDev";
-import AIStrategyAudit from "@/components/sections/AIStrategyAudit";
-import AISystemsMaintenance from "@/components/sections/AISystemMainetnance";
+import ProductsSection from "@/components/sections/ProductsSection";
+import ProcessSection from "@/components/sections/ProcessSection";
+import ExploreWithAI from "@/components/blog/ExploreWithAI";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <TrustBar />
-      <ProblemSection />
+      <ExploreWithAI company />
       <ServicesSection />
-
-      {/* AI AUTOMATION SERVICES */}
-      <UseCases />
-      {/* AI AGENTS SERVICES  */}
-      <AIAgentsSection />
-      {/* AI WEBSITE SERVICES  */}
-      <AIWebApplications />
-
-      <CustomAISaaSDevelopment />
-
-      <AIStrategyAudit />
-
-      {/* <AISystemsMaintenance /> */}
-      <SolutionsVisualizer />
-      <WorkflowBuilder />
       <AIWorkflowCanvas />
-
-      <ROICalculator />
-
-      <ProjectExamples />
-      <FAQ />
-      <CTASection />
+      <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+        <Link
+          href="/solutions"
+          className="inline-flex items-center gap-2 rounded-full border border-foreground/20 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-foreground/5"
+        >
+          Explore more solutions
+          <ArrowRight className="size-4" aria-hidden="true" />
+        </Link>
+      </div>
+      <ProductsSection preview />
+      <ProcessSection />
     </>
   );
 }

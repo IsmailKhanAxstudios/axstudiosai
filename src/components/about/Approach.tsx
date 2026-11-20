@@ -57,7 +57,7 @@ export default function Approach() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">Our Approach</h2>
-          <p className="text-lg text-zinc-400 max-w-3xl mx-auto">
+          <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
             A proven methodology for successful AI automation implementation.
           </p>
         </motion.div>
@@ -73,12 +73,12 @@ export default function Approach() {
             >
               <div className="flex items-center gap-3 mb-4">
                 <step.icon className="w-6 h-6 text-purple-400" />
-                <span className="text-sm text-zinc-500 font-mono">
+                <span className="text-sm text-muted font-mono">
                   Step {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
               <h3 className="font-semibold mb-2">{step.title}</h3>
-              <p className="text-sm text-zinc-400">{step.description}</p>
+              <p className="text-sm text-foreground/70">{step.description}</p>
             </motion.div>
           ))}
         </div>

@@ -22,11 +22,10 @@ import {
   ShieldAlert,
 } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const problems = [
   {
@@ -108,7 +107,7 @@ export default function ProblemSection() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+                "linear-gradient(to right, rgb(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--foreground)) 1px, transparent 1px)",
               backgroundSize: "60px 60px",
             }}
           />
@@ -124,7 +123,7 @@ export default function ProblemSection() {
         <motion.div
           className="absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full"
           style={{
-            background: `radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%)`,
+            background: `radial-gradient(circle, rgb(var(--foreground) / 0.03) 0%, transparent 70%)`,
           }}
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -146,15 +145,15 @@ export default function ProblemSection() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <AlertTriangle className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">THE PROBLEM</span>
+            <AlertTriangle className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-sm text-foreground/80">THE PROBLEM</span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight">
-            <span className="text-white">Manual work is </span>
-            <span style={{ color: PRIMARY }}>costing you.</span>
+            <span className="text-foreground">Manual work is </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>costing you.</span>
           </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+          <p className="text-lg text-secondary-text max-w-2xl mx-auto">
             Every hour spent on repetitive tasks is an hour not spent growing
             your business. Here&apos;s what&apos;s holding you back.
           </p>
@@ -187,8 +186,8 @@ export default function ProblemSection() {
                   style={{
                     background:
                       isHovered || isSelected
-                        ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgba(235, 106, 80, 0.1))`
-                        : "rgba(19, 19, 24, 0.7)",
+                        ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgb(var(--primary) / 0.1))`
+                        : "rgb(var(--surface) / 0.7)",
                     border: `1px solid ${
                       isHovered || isSelected ? PRIMARY_LIGHT : PRIMARY_DARK
                     }`,
@@ -213,26 +212,26 @@ export default function ProblemSection() {
                   >
                     <problem.icon
                       className="w-6 h-6"
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     />
                   </motion.div>
 
                   {/* Title */}
-                  <h3 className="font-semibold text-sm mb-2 text-white">
+                  <h3 className="font-semibold text-sm mb-2 text-foreground">
                     {problem.title}
                   </h3>
 
                   {/* Impact Metric */}
                   <div
                     className="flex items-center gap-1.5 mb-2"
-                    style={{ color: PRIMARY }}
+                    style={{ color: "rgb(var(--accent-text))" }}
                   >
                     <Gauge className="w-3.5 h-3.5" />
                     <span className="text-xs font-bold">{problem.impact}</span>
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs text-white/60 leading-relaxed mb-3">
+                  <p className="text-xs text-secondary-text leading-relaxed mb-3">
                     {problem.description}
                   </p>
 
@@ -243,7 +242,7 @@ export default function ProblemSection() {
                   >
                     <span
                       className="text-[10px] font-bold"
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     >
                       {problem.metric}
                     </span>
@@ -251,7 +250,7 @@ export default function ProblemSection() {
                       className={`w-3.5 h-3.5 transition-transform ${
                         isSelected ? "rotate-90" : ""
                       }`}
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     />
                   </div>
                 </motion.div>
@@ -299,12 +298,12 @@ export default function ProblemSection() {
             >
               <stat.icon
                 className="w-6 h-6 mx-auto mb-2"
-                style={{ color: PRIMARY }}
+                style={{ color: "rgb(var(--accent-text))" }}
               />
-              <div className="text-lg font-bold text-white mb-0.5">
+              <div className="text-lg font-bold text-foreground mb-0.5">
                 {stat.value}
               </div>
-              <p className="text-[11px] text-white/60">{stat.label}</p>
+              <p className="text-[11px] text-secondary-text">{stat.label}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -316,7 +315,7 @@ export default function ProblemSection() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-12 text-center"
         >
-          <p className="text-white/60 mb-4">
+          <p className="text-secondary-text mb-4">
             Ready to eliminate these problems from your business?
           </p>
           <a

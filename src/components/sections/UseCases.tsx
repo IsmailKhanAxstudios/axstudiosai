@@ -46,11 +46,10 @@ import {
   Play,
 } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const useCases = [
   // Sales & Lead Automation
@@ -576,7 +575,7 @@ export default function UseCases() {
         />
         <motion.div
           className="absolute bottom-20 right-20 w-96 h-96 rounded-full blur-3xl"
-          style={{ background: "rgba(255, 255, 255, 0.03)" }}
+          style={{ background: "rgb(var(--foreground) / 0.03)" }}
           animate={{ scale: [1.2, 1, 1.2] }}
           transition={{ duration: 6, repeat: Infinity }}
         />
@@ -596,15 +595,15 @@ export default function UseCases() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <Sparkles className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">AUTOMATION SOLUTIONS</span>
+            <Sparkles className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-sm text-foreground/80">AUTOMATION SOLUTIONS</span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl font-bold mb-4">
-            <span className="text-white">Complete </span>
-            <span style={{ color: PRIMARY }}>automation solutions</span>
+            <span className="text-foreground">Complete </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>automation solutions</span>
           </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+          <p className="text-lg text-secondary-text max-w-2xl mx-auto">
             Explore how AI automation transforms every aspect of your business
             operations.
           </p>
@@ -624,7 +623,7 @@ export default function UseCases() {
               className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
                 activeCategory === category
                   ? "text-white"
-                  : "glass text-white/60 hover:text-white"
+                  : "glass text-secondary-text hover:text-foreground"
               }`}
               style={
                 activeCategory === category
@@ -743,14 +742,14 @@ export default function UseCases() {
                       >
                         <caseData.icon
                           className="w-7 h-7"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-white">
+                        <h3 className="text-xl font-bold text-foreground">
                           {caseData.title}
                         </h3>
-                        <p className="text-sm text-white/60">
+                        <p className="text-sm text-secondary-text">
                           {caseData.description}
                         </p>
                       </div>
@@ -759,11 +758,11 @@ export default function UseCases() {
                       {caseData.features.map((feature) => (
                         <div
                           key={feature}
-                          className="flex items-center gap-2 text-sm text-white/60 p-3 rounded-lg bg-white/5"
+                          className="flex items-center gap-2 text-sm text-secondary-text p-3 rounded-lg bg-foreground/5"
                         >
                           <CheckCircle2
                             className="w-4 h-4 flex-shrink-0"
-                            style={{ color: PRIMARY }}
+                            style={{ color: "rgb(var(--accent-text))" }}
                           />
                           {feature}
                         </div>
@@ -805,12 +804,12 @@ export default function UseCases() {
             >
               <stat.icon
                 className="w-8 h-8 mx-auto mb-3"
-                style={{ color: PRIMARY }}
+                style={{ color: "rgb(var(--accent-text))" }}
               />
-              <div className="text-2xl font-bold text-white mb-1">
+              <div className="text-2xl font-bold text-foreground mb-1">
                 {stat.label}
               </div>
-              <p className="text-sm text-white/60">{stat.value}</p>
+              <p className="text-sm text-secondary-text">{stat.value}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -841,8 +840,8 @@ function UseCaseCard({
         className="glass rounded-2xl p-5 transition-all duration-300"
         style={{
           background: isSelected
-            ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgba(235, 106, 80, 0.1))`
-            : "rgba(19, 19, 24, 0.7)",
+            ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgb(var(--primary) / 0.1))`
+            : "rgb(var(--surface) / 0.7)",
           border: `1px solid ${isSelected ? PRIMARY_LIGHT : PRIMARY_DARK}`,
           boxShadow: isSelected ? `0 0 30px ${PRIMARY_GLOW}` : "none",
         }}
@@ -856,28 +855,28 @@ function UseCaseCard({
               border: `1px solid ${PRIMARY_LIGHT}`,
             }}
           >
-            <useCase.icon className="w-6 h-6" style={{ color: PRIMARY }} />
+            <useCase.icon className="w-6 h-6" style={{ color: "rgb(var(--accent-text))" }} />
           </div>
-          <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-white transition-colors" />
+          <ArrowUpRight className="w-4 h-4 text-muted group-hover:text-foreground transition-colors" />
         </div>
 
         {/* Title & Description */}
-        <h3 className="font-semibold text-sm mb-2 text-white">
+        <h3 className="font-semibold text-sm mb-2 text-foreground">
           {useCase.title}
         </h3>
-        <p className="text-xs text-white/60 mb-3">{useCase.description}</p>
+        <p className="text-xs text-secondary-text mb-3">{useCase.description}</p>
 
         {/* Metrics */}
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center gap-1.5">
-            <TrendingUp className="w-3.5 h-3.5" style={{ color: PRIMARY }} />
-            <span className="text-xs text-white/60">
+            <TrendingUp className="w-3.5 h-3.5" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-xs text-secondary-text">
               {useCase.metrics.efficiency}
             </span>
           </div>
           <div className="flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5" style={{ color: PRIMARY }} />
-            <span className="text-xs text-white/60">
+            <Clock className="w-3.5 h-3.5" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-xs text-secondary-text">
               {useCase.metrics.response}
             </span>
           </div>
@@ -889,7 +888,7 @@ function UseCaseCard({
             className="text-[10px] px-2 py-1 rounded-full"
             style={{
               background: PRIMARY_DARK,
-              color: PRIMARY,
+              color: "rgb(var(--accent-text))",
             }}
           >
             {useCase.category}
@@ -898,7 +897,7 @@ function UseCaseCard({
             className={`w-4 h-4 transition-transform ${
               isSelected ? "rotate-90" : ""
             }`}
-            style={{ color: PRIMARY }}
+            style={{ color: "rgb(var(--accent-text))" }}
           />
         </div>
       </div>

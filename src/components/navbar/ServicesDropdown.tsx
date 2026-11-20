@@ -123,7 +123,7 @@ export default function ServicesDropdown({ onClose }: { onClose: () => void }) {
                   style={{ color: section.color }}
                 />
               </motion.div>
-              <h3 className="text-sm font-semibold text-white">
+              <h3 className="text-sm font-semibold text-foreground">
                 {section.title}
               </h3>
             </div>
@@ -132,7 +132,7 @@ export default function ServicesDropdown({ onClose }: { onClose: () => void }) {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors py-1.5 px-2 rounded-lg hover:bg-white/5 group"
+                  className="flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-colors py-1.5 px-2 rounded-lg hover:bg-foreground/5 group"
                 >
                   <item.icon
                     className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -149,10 +149,10 @@ export default function ServicesDropdown({ onClose }: { onClose: () => void }) {
       {/* Promotional Card */}
       <div className="mt-8 p-4 rounded-xl bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-purple-500/20 flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-white mb-1">
+          <p className="text-sm font-medium text-foreground mb-1">
             Not sure where to start?
           </p>
-          <p className="text-sm text-zinc-400">
+          <p className="text-sm text-foreground/70">
             Get a free AI automation audit for your business.
           </p>
         </div>

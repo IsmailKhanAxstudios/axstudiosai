@@ -15,6 +15,7 @@
 
 # next.js
 /.next/
+/.axstudios-data/
 /out/
 
 # production

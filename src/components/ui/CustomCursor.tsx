@@ -70,7 +70,7 @@ export default function CustomCursor() {
           transition={{ duration: 0.2 }}
         >
           <div className="absolute -top-1 -left-1 w-3 h-3 bg-white rounded-full" />
-          <div className="absolute -top-4 -left-4 w-8 h-8 border border-white/30 rounded-full" />
+          <div className="absolute -top-4 -left-4 w-8 h-8 border border-foreground/30 rounded-full" />
         </motion.div>
       </motion.div>
     </>

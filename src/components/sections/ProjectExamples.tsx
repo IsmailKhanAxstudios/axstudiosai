@@ -14,11 +14,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const projects = [
   {
@@ -71,7 +70,7 @@ export default function ProjectExamples() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+                "linear-gradient(to right, rgb(var(--foreground)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--foreground)) 1px, transparent 1px)",
               backgroundSize: "60px 60px",
             }}
           />
@@ -100,15 +99,15 @@ export default function ProjectExamples() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-            <Sparkles className="w-4 h-4" style={{ color: PRIMARY }} />
-            <span className="text-sm text-white/80">PROJECT EXAMPLES</span>
+            <Sparkles className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
+            <span className="text-sm text-foreground/80">PROJECT EXAMPLES</span>
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl font-bold mb-4">
-            <span className="text-white">What we </span>
-            <span style={{ color: PRIMARY }}>can build</span>
+            <span className="text-foreground">What we </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>can build</span>
           </h2>
-          <p className="text-lg text-white/60">
+          <p className="text-lg text-secondary-text">
             Conceptual examples of automation systems we can create for your
             business.
           </p>
@@ -133,8 +132,8 @@ export default function ProjectExamples() {
                   className="glass rounded-2xl p-8 transition-all duration-300"
                   style={{
                     background: isHovered
-                      ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgba(235, 106, 80, 0.1))`
-                      : "rgba(19, 19, 24, 0.7)",
+                      ? `linear-gradient(135deg, ${PRIMARY_DARK}, rgb(var(--primary) / 0.1))`
+                      : "rgb(var(--surface) / 0.7)",
                     border: `1px solid ${isHovered ? PRIMARY_LIGHT : PRIMARY_DARK}`,
                     boxShadow: isHovered ? `0 0 30px ${PRIMARY_GLOW}` : "none",
                     backdropFilter: "blur(10px)",
@@ -152,17 +151,17 @@ export default function ProjectExamples() {
                   >
                     <project.icon
                       className="w-10 h-10"
-                      style={{ color: PRIMARY }}
+                      style={{ color: "rgb(var(--accent-text))" }}
                     />
                   </motion.div>
 
                   {/* Title */}
-                  <h3 className="text-2xl font-bold mb-3 text-white">
+                  <h3 className="text-2xl font-bold mb-3 text-foreground">
                     {project.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-white/60 mb-6">{project.description}</p>
+                  <p className="text-secondary-text mb-6">{project.description}</p>
 
                   {/* Features */}
                   <div className="space-y-2.5 mb-6">
@@ -172,11 +171,11 @@ export default function ProjectExamples() {
                         initial={{ opacity: 0, x: -10 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: idx * 0.05 }}
-                        className="flex items-center gap-2.5 text-sm text-white/60"
+                        className="flex items-center gap-2.5 text-sm text-secondary-text"
                       >
                         <CheckCircle2
                           className="w-4 h-4 flex-shrink-0"
-                          style={{ color: PRIMARY }}
+                          style={{ color: "rgb(var(--accent-text))" }}
                         />
                         {feature}
                       </motion.div>
@@ -187,7 +186,7 @@ export default function ProjectExamples() {
                   <Link
                     href="/contact"
                     className="inline-flex items-center gap-2 transition-colors"
-                    style={{ color: PRIMARY }}
+                    style={{ color: "rgb(var(--accent-text))" }}
                     onMouseEnter={(e) =>
                       (e.currentTarget.style.color = "#ffffff")
                     }
@@ -211,7 +210,7 @@ export default function ProjectExamples() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-12 text-center"
         >
-          <p className="text-white/60 mb-4">
+          <p className="text-secondary-text mb-4">
             Want to see what we can build for your business?
           </p>
           <Link

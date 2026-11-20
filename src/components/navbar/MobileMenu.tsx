@@ -5,20 +5,19 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { X, ArrowRight, Zap } from "lucide-react";
 
-// Primary color: rgb(235, 106, 80) - Coral
-const PRIMARY = "rgb(235, 106, 80)";
-const PRIMARY_LIGHT = "rgba(235, 106, 80, 0.6)";
-const PRIMARY_DARK = "rgba(235, 106, 80, 0.3)";
-const PRIMARY_GLOW = "rgba(235, 106, 80, 0.5)";
+const PRIMARY = "rgb(var(--primary))";
+const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
+const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
+const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 export default function MobileMenu({ onClose }: { onClose: () => void }) {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
     { href: "/solutions", label: "Solutions" },
-    { href: "/process", label: "Process" },
+    { href: "/products", label: "Products" },
+    { href: "/blogs", label: "Blogs" },
     { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
   ];
 
   return (
@@ -26,7 +25,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-40 lg:hidden"
+      className="fixed inset-0 top-14 z-40 md:top-16 lg:hidden"
     >
       <div
         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
@@ -38,7 +37,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
         animate={{ x: 0 }}
         exit={{ x: "100%" }}
         transition={{ type: "spring", damping: 30 }}
-        className="absolute right-0 top-0 h-full w-full max-w-sm bg-[#0a0a0f] border-l border-white/10 p-6 overflow-y-auto"
+        className="absolute right-0 top-0 h-full w-full max-w-sm bg-background border-l border-foreground/10 p-6 overflow-y-auto"
       >
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -50,16 +49,16 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
                 border: `1px solid ${PRIMARY_LIGHT}`,
               }}
             >
-              <Zap className="w-4 h-4" style={{ color: PRIMARY }} />
+              <Zap className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
             </div>
-            <span className="text-xl font-bold text-white">Menu</span>
+            <span className="text-xl font-bold text-foreground">Menu</span>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+            className="p-2 rounded-lg hover:bg-foreground/10 transition-colors"
             aria-label="Close menu"
           >
-            <X className="w-5 h-5 text-white/60" />
+            <X className="w-5 h-5 text-secondary-text" />
           </button>
         </div>
 
@@ -74,7 +73,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
               <Link
                 href={link.href}
                 onClick={onClose}
-                className="block px-4 py-3 rounded-xl text-base text-white/60 hover:text-white hover:bg-white/5 transition-all"
+                className="block px-4 py-3 rounded-xl text-base text-secondary-text hover:text-foreground hover:bg-foreground/5 transition-all"
               >
                 {link.label}
               </Link>
@@ -98,16 +97,6 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
           </Link>
         </div>
 
-        {/* Contact Info */}
-        <div className="mt-8 pt-6 border-t border-white/10">
-          <p className="text-xs text-white/40 mb-1">Contact</p>
-          <a
-            href="mailto:contact@axstudios.tech"
-            className="text-sm text-white/60 hover:text-white transition-colors"
-          >
-            contact@axstudios.tech
-          </a>
-        </div>
       </motion.div>
     </motion.div>
   );
