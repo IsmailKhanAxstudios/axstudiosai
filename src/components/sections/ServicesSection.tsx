@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import type { PublicService } from "@/lib/catalogStore";
 import {
   Zap,
   Bot,
@@ -28,164 +29,9 @@ const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
 const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
 const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
-const services = [
-  {
-    number: "01",
-    icon: Zap,
-    title: "AI Automation",
-    description:
-      "Automate repetitive business processes using AI, intelligent workflows, and connected systems.",
-    href: "/services/ai-automation",
-    category: "Core Systems",
-    features: [
-      "Workflow automation",
-      "Process optimization",
-      "Tool integration",
-      "Scalable systems",
-    ],
-  },
-  {
-    number: "02",
-    icon: Bot,
-    title: "AI Agents",
-    description:
-      "Build intelligent AI agents that understand context, use tools, and perform business tasks.",
-    href: "/services/ai-agents",
-    category: "Intelligence",
-    features: [
-      "Context-aware reasoning",
-      "Tool usage",
-      "Autonomous operation",
-      "Multi-agent systems",
-    ],
-  },
-  {
-    number: "03",
-    icon: Globe,
-    title: "AI-Powered Web Applications",
-    description:
-      "Build intelligent websites, portals, dashboards, and custom web applications powered by AI.",
-    href: "/services/ai-web-applications",
-    category: "Development",
-    features: [
-      "AI websites",
-      "Customer portals",
-      "Business apps",
-      "Intelligent dashboards",
-    ],
-  },
-  {
-    number: "04",
-    icon: Code,
-    title: "Custom AI & SaaS Development",
-    description:
-      "Design and build scalable AI-powered software, SaaS platforms, internal tools, and custom systems.",
-    href: "/services/custom-ai-saas-development",
-    category: "Engineering",
-    features: [
-      "SaaS platforms",
-      "Custom software",
-      "API development",
-      "Infrastructure",
-    ],
-  },
-  {
-    number: "05",
-    icon: SearchCheck,
-    title: "AI Strategy & Automation Audit",
-    description:
-      "Identify high-impact AI opportunities, eliminate bottlenecks, and create a practical implementation roadmap.",
-    href: "/services/ai-automation-audit",
-    category: "Strategy",
-    features: [
-      "Opportunity mapping",
-      "Process analysis",
-      "ROI assessment",
-      "Roadmap creation",
-    ],
-  },
-  {
-    number: "06",
-    icon: Users,
-    title: "AI Consultancy",
-    description:
-      "Expert guidance on AI adoption, strategy, technology selection, and implementation best practices.",
-    href: "/services/ai-consultancy",
-    category: "Advisory",
-    features: [
-      "Technology selection",
-      "AI adoption strategy",
-      "Best practices",
-      "Vendor evaluation",
-    ],
-  },
-  {
-    number: "07",
-    icon: Network,
-    title: "AI Integration",
-    description:
-      "Seamlessly integrate AI capabilities into your existing systems, tools, and business workflows.",
-    href: "/services/ai-integration",
-    category: "Integration",
-    features: [
-      "API integration",
-      "System connectivity",
-      "Data pipelines",
-      "Workflow embedding",
-    ],
-  },
-  {
-    number: "08",
-    icon: Settings,
-    title: "AI Systems Maintenance",
-    description:
-      "Monitor, maintain, optimize, and continuously improve AI systems and automations.",
-    href: "/services/ai-maintenance",
-    category: "Operations",
-    features: [
-      "24/7 monitoring",
-      "Performance tuning",
-      "Continuous updates",
-      "Technical support",
-    ],
-  },
-  {
-    number: "09",
-    id: "chrome-extensions",
-    icon: Puzzle,
-    title: "Chrome Extensions",
-    description:
-      "Build custom Chrome extensions that automate browser workflows and connect with the tools your team uses.",
-    href: "/contact",
-    linkLabel: "Discuss Your Extension",
-    category: "Development",
-    features: [
-      "Browser workflow automation",
-      "Custom extension interfaces",
-      "API integrations",
-      "Chrome Web Store submission support",
-    ],
-  },
-  {
-    number: "10",
-    id: "mvp-development",
-    icon: Rocket,
-    title: "MVP Development",
-    description:
-      "Hire us to turn your idea into a working product you can launch, test with early users, and improve with feedback.",
-    href: "/contact",
-    linkLabel: "Discuss Your MVP",
-    category: "Development",
-    features: [
-      "Product scoping",
-      "Core feature design and development",
-      "Launch support",
-      "Iteration based on user feedback",
-    ],
-  },
-];
+const serviceIcons = { Zap, Bot, Globe, Code, SearchCheck, Users, Network, Settings, Puzzle, Rocket, Sparkles, Gauge };
 
-export default function ServicesSection() {
+export default function ServicesSection({ services }: { services: PublicService[] }) {
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [selectedService, setSelectedService] = useState<string | null>(null);
 
@@ -245,6 +91,7 @@ export default function ServicesSection() {
         {/* Services Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {services.map((service, index) => {
+            const ServiceIcon = serviceIcons[service.icon];
             const isHovered = hoveredService === service.title;
             const isSelected = selectedService === service.title;
 
@@ -288,7 +135,7 @@ export default function ServicesSection() {
                       className="text-xs font-mono"
                       style={{ color: "rgb(var(--accent-text))" }}
                     >
-                      {service.number}
+                      {String(index + 1).padStart(2, "0")}
                     </span>
                     <motion.div
                       animate={
@@ -303,7 +150,7 @@ export default function ServicesSection() {
                         border: `1px solid ${PRIMARY_LIGHT}`,
                       }}
                     >
-                      <service.icon
+                      <ServiceIcon
                         className="w-6 h-6"
                         style={{ color: "rgb(var(--accent-text))" }}
                       />

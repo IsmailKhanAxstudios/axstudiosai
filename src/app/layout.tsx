@@ -7,8 +7,11 @@ import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import Background from "@/components/ui/Background";
 import CustomCursor from "@/components/ui/CustomCursor";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import { themeInitScript } from "@/lib/theme";
 import { siteOrigin } from "@/lib/site";
+import { organizationId, websiteId } from "@/lib/seo";
+import StructuredData from "@/components/ui/StructuredData";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,6 +57,15 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-background text-foreground antialiased">
+        <StructuredData data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            { "@type": "Organization", "@id": organizationId, name: "AxStudios", url: siteOrigin,
+              logo: `${siteOrigin}/logo-land.svg`, email: "contact@axstudios.tech", telephone: "+918591897818",
+              address: { "@type": "PostalAddress", addressLocality: "Dubai", addressCountry: "AE" } },
+            { "@type": "WebSite", "@id": websiteId, name: "AxStudios", url: siteOrigin, publisher: { "@id": organizationId } },
+          ],
+        }} />
         <Script id="theme-init" strategy="beforeInteractive">
           {themeInitScript}
         </Script>
@@ -61,6 +73,7 @@ export default function RootLayout({
         <CustomCursor />
         <Navbar />
         <main>{children}</main>
+        <WhatsAppButton />
         <Footer />
       </body>
     </html>

@@ -103,9 +103,9 @@ export default function AboutHero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg text-secondary-text max-w-2xl mx-auto"
           >
-            AxStudios is an AI automation studio focused on creating intelligent
-            systems, automation, AI agents, and custom software that transform
-            how businesses operate.
+            AxStudios is an AI agency headquartered in Dubai, United Arab
+            Emirates. We help businesses automate workflows, control AI costs,
+            and build custom software they can put into production.
           </motion.p>
 
           {/* Stats */}

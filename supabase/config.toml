@@ -1,0 +1,10 @@
+project_id = "axstudios"
+
+[auth]
+site_url = "https://axstudios.tech"
+additional_redirect_urls = [
+  "http://localhost:3000/admin/login",
+  "https://axstudios.tech/admin/login",
+  "https://axstudiostech.netlify.app/admin/login",
+]
+enable_signup = false

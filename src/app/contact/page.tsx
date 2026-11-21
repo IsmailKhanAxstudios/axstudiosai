@@ -1,12 +1,14 @@
+import { pageMetadata } from "@/lib/seo";
 // app/contact/page.tsx
-import { Metadata } from 'next'
 import ContactForm from '@/components/contact/ContactForm'
 import ContactInfo from '@/components/contact/ContactInfo'
+import { companyLocation, companyPhone, whatsappUrl } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: 'Contact AxStudios — Book a Strategy Call',
-  description: 'Get in touch with AxStudios to discuss your AI automation needs.',
-}
+export const metadata = pageMetadata(
+  "/contact",
+  "Contact Our AI Agency in Dubai",
+  "Book a strategy call with AxStudios for AI automation, token cost optimization, an AI audit, or MVP development. Contact us by form or WhatsApp.",
+);
 
 export default function ContactPage() {
   return (
@@ -14,11 +16,13 @@ export default function ContactPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
-            Let&apos;s build your <span className="gradient-text">AI advantage.</span>
+            Contact our <span className="text-[rgb(var(--accent-text))]">AI agency</span>
           </h1>
           <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-            Tell us about your business and what you&apos;d like to automate.
-            We&apos;ll get back to you within 24 hours.
+            Tell us what you’d like to automate, where AI costs are rising, or what you want to build.
+          </p>
+          <p className="mt-3 text-sm text-secondary-text">
+            Headquartered in {companyLocation}. <a href={whatsappUrl} className="font-medium text-foreground underline underline-offset-4">WhatsApp {companyPhone}</a>
           </p>
         </div>
 

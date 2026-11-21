@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import LegalPage from "@/components/ui/LegalPage";
 
-export const metadata: Metadata = {
-  title: "Terms & Conditions | AxStudios",
-  description: "Terms for using the AxStudios website and making project inquiries.",
-};
+export const metadata = pageMetadata(
+  "/terms-and-conditions",
+  "Terms & Conditions",
+  "Read the terms for using the AxStudios website, viewing service and product information, and submitting project inquiries.",
+);
 
 export default function TermsPage() {
   return (

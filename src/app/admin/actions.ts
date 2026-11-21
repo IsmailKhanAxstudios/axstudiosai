@@ -5,6 +5,11 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { adminConfigured, endAdminSession, hasAdminSession, startAdminSession, validCredentials } from "@/lib/adminAuth";
 import { BlogInputError, deleteBlogPost, saveBlogPost } from "@/lib/blogStore";
+import { createCatalogEntry } from "@/lib/catalogStore";
+import { catalogTable, isManagedKind, type ManagedKind } from "@/lib/catalogAdmin";
+import { saveCaseStudy } from "@/lib/caseStudies";
+import { sessionSupabase, supabaseConfig } from "@/lib/supabaseServer";
+import { ContentConflict, deleteRemoteCatalog } from "@/lib/supabaseContent";
 
 const windowMs = 15 * 60 * 1000;
 const failures = new Map<string, { count: number; reset: number }>();
@@ -23,7 +28,16 @@ export async function login(_previous: string, form: FormData) {
 
   const email = String(form.get("email") ?? "").trim();
   const password = String(form.get("password") ?? "");
-  if (!validCredentials(email, password)) {
+  const client = await sessionSupabase();
+  let accepted = false;
+  if (client && email.length <= 254 && password.length <= 256) {
+    const { data } = await client.auth.signInWithPassword({ email, password });
+    accepted = data.user?.app_metadata.axstudios_role === "admin";
+    if (data.user && !accepted) await client.auth.signOut({ scope: "local" });
+  } else if (!client) {
+    accepted = validCredentials(email, password);
+  }
+  if (!accepted) {
     failures.set(ip, { ...attempt, count: attempt.count + 1 });
     return "The email or password is incorrect.";
   }
@@ -33,7 +47,7 @@ export async function login(_previous: string, form: FormData) {
   const isLocal = host === "localhost" || host === "127.0.0.1";
   const secure = requestHeaders.get("x-forwarded-proto") === "https" ||
     (process.env.NODE_ENV === "production" && !isLocal);
-  await startAdminSession(secure);
+  if (!client) await startAdminSession(secure);
   redirect("/admin");
 }
 
@@ -44,7 +58,7 @@ export async function logout() {
 
 async function changeBlog(operation: () => Promise<string>) {
   if (!(await hasAdminSession())) return { error: "Your session expired. Sign in again to manage posts." };
-  if (process.env.VERCEL && !process.env.AXSTUDIOS_BLOG_DIR) {
+  if (!supabaseConfig() && (process.env.VERCEL || process.env.NETLIFY) && !process.env.AXSTUDIOS_BLOG_DIR) {
     return { error: "This deployment needs a persistent blog storage directory before posts can be published." };
   }
 
@@ -52,7 +66,7 @@ async function changeBlog(operation: () => Promise<string>) {
   try {
     slug = await operation();
   } catch (error) {
-    if (error instanceof BlogInputError) return { error: error.message };
+    if (error instanceof BlogInputError || error instanceof ContentConflict) return { error: error.message };
     console.error("Blog change failed", error);
     return { error: "The change could not be saved. Check that blog storage is writable and try again." };
   }
@@ -76,4 +90,49 @@ export async function removePost(slug: string, revision: string) {
     await deleteBlogPost(slug, revision);
     return slug;
   });
+}
+
+function refreshCatalog(kind: ManagedKind) {
+  revalidatePath("/");
+  revalidatePath("/services");
+  revalidatePath("/services/ai-cost-optimization");
+  revalidatePath("/products");
+  revalidatePath("/solutions");
+  revalidatePath("/case-studies");
+  revalidatePath("/services/[slug]", "page");
+  revalidatePath("/case-studies/[slug]", "page");
+  revalidatePath(`/admin/catalog/${kind}`);
+}
+
+export async function addCatalogEntry(kind: ManagedKind, form: FormData, edit?: { slug: string; revision: string }) {
+  if (!(await hasAdminSession())) return { error: "Your session expired. Sign in again to manage the catalog." };
+  if (!isManagedKind(kind)) return { error: "Choose a valid catalog section." };
+  if (!supabaseConfig() && (edit || kind === "case-studies")) return { error: "Connect Supabase to manage these entries." };
+  if (!supabaseConfig() && (process.env.VERCEL || process.env.NETLIFY) && !process.env.AXSTUDIOS_BLOG_DIR) {
+    return { error: "This deployment needs persistent storage before entries can be added." };
+  }
+  try {
+    if (kind === "case-studies") await saveCaseStudy(form, edit);
+    else await createCatalogEntry(kind, form, edit);
+  } catch (error) {
+    if (error instanceof BlogInputError || error instanceof ContentConflict) return { error: error.message };
+    console.error("Catalog entry could not be saved", error);
+    return { error: "The entry could not be saved. Check that catalog storage is writable and try again." };
+  }
+  refreshCatalog(kind);
+  return { success: true };
+}
+
+export async function removeCatalogEntry(kind: ManagedKind, slug: string, revision: string) {
+  if (!(await hasAdminSession())) return { error: "Your session expired. Sign in again to manage the catalog." };
+  if (!isManagedKind(kind) || !supabaseConfig()) return { error: "Catalog deletion is unavailable." };
+  try {
+    await deleteRemoteCatalog(catalogTable(kind), slug, revision);
+  } catch (error) {
+    if (error instanceof ContentConflict) return { error: error.message };
+    console.error("Catalog entry could not be deleted", error);
+    return { error: "The entry could not be deleted. Try again." };
+  }
+  refreshCatalog(kind);
+  return { success: true };
 }

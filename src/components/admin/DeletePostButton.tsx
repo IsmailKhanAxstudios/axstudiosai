@@ -2,9 +2,10 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { removePost } from "@/app/admin/actions";
+import { removeCatalogEntry, removePost } from "@/app/admin/actions";
+import type { ManagedKind } from "@/lib/catalogAdmin";
 
-export default function DeletePostButton({ slug, title, revision }: { slug: string; title: string; revision: string }) {
+export default function DeletePostButton({ slug, title, revision, kind }: { slug: string; title: string; revision: string; kind?: ManagedKind }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const deleting = useRef(false);
   const router = useRouter();
@@ -17,13 +18,13 @@ export default function DeletePostButton({ slug, title, revision }: { slug: stri
     setPending(true);
     setError("");
     try {
-      const result = await removePost(slug, revision);
+      const result = kind ? await removeCatalogEntry(kind, slug, revision) : await removePost(slug, revision);
       if (result.error) {
         setError(result.error);
         return;
       }
       dialog.current?.close();
-      router.replace("/admin?changed=deleted");
+      router.replace(kind ? `/admin/catalog/${kind}?changed=deleted` : "/admin?changed=deleted");
       router.refresh();
     } catch {
       setError("The post could not be deleted. Try again.");
@@ -51,9 +52,9 @@ export default function DeletePostButton({ slug, title, revision }: { slug: stri
         onCancel={(event) => { if (pending) event.preventDefault(); }}
         className="m-auto w-[calc(100%-2rem)] max-w-md rounded-2xl border border-foreground/15 bg-surface p-6 text-foreground shadow-xl backdrop:bg-black/60"
       >
-        <h2 id={`delete-${slug}`} className="text-xl font-semibold">Delete this post?</h2>
+        <h2 id={`delete-${slug}`} className="text-xl font-semibold">Delete this {kind ? "entry" : "post"}?</h2>
         <p className="mt-3 break-words text-sm leading-relaxed text-secondary-text">
-          “{title}” will be removed from the public blog and its article URL will stop working.
+          “{title}” will be removed from the {kind ? "public site" : "public blog and its article URL will stop working"}.
         </p>
         {error && <p role="alert" className="mt-3 text-sm text-[rgb(var(--accent-text))]">{error}</p>}
         <div className="mt-6 flex flex-wrap justify-end gap-2">
@@ -61,7 +62,7 @@ export default function DeletePostButton({ slug, title, revision }: { slug: stri
             Cancel
           </button>
           <button type="button" disabled={pending} onClick={confirmDelete} className="rounded-lg bg-red-700 px-4 py-2 text-sm font-semibold text-white disabled:opacity-60">
-            {pending ? "Deleting…" : "Delete post"}
+            {pending ? "Deleting…" : kind ? "Delete entry" : "Delete post"}
           </button>
         </div>
       </dialog>

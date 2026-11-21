@@ -2,6 +2,8 @@ import { randomUUID } from "node:crypto";
 import { mkdir, open, readdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { blogPosts, getBlogPost } from "@/lib/blogPosts";
+import { publicSupabase } from "@/lib/supabaseServer";
+import { deleteRemoteBlog, remoteBlog, remoteBlogs, saveRemoteBlog } from "@/lib/supabaseContent";
 
 export type EditablePost = {
   slug: string;
@@ -28,7 +30,7 @@ export class BlogInputError extends Error {}
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-function blogDirectory() {
+export function blogDirectory() {
   return resolve(/* turbopackIgnore: true */ process.env.AXSTUDIOS_BLOG_DIR ?? ".axstudios-data/blogs");
 }
 
@@ -85,6 +87,8 @@ function sampleView(post: (typeof blogPosts)[number]): EditablePost {
 }
 
 export async function getPublicBlogPosts() {
+  const client = publicSupabase();
+  if (client) return remoteBlogs(client);
   let slugs: string[];
   try {
     slugs = (await readdir(/* turbopackIgnore: true */ blogDirectory(), { withFileTypes: true }))
@@ -110,6 +114,9 @@ export async function getPublicBlogPosts() {
 }
 
 export async function getPublicBlogPost(slug: string) {
+  if (!validSlug(slug)) return undefined;
+  const client = publicSupabase();
+  if (client) return remoteBlog(client, slug);
   const record = await readRecord(slug);
   if (record) return "deleted" in record ? undefined : savedPostView(record);
 
@@ -138,7 +145,7 @@ function field(form: FormData, key: string, label: string, max: number, required
   return value;
 }
 
-function imageType(bytes: Buffer) {
+export function imageType(bytes: Buffer) {
   if (bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) return "image/png";
   if (bytes[0] === 255 && bytes[1] === 216 && bytes[2] === 255) return "image/jpeg";
   if (bytes.toString("ascii", 0, 4) === "RIFF" && bytes.toString("ascii", 8, 12) === "WEBP") return "image/webp";
@@ -208,6 +215,12 @@ export async function saveBlogPost(form: FormData, edit?: { slug: string; revisi
   const bytes = hasImage ? Buffer.from(await image.arrayBuffer()) : undefined;
   const newImageType = bytes ? imageType(bytes) : undefined;
 
+  if (publicSupabase()) {
+    if (!validSlug(slug)) throw new BlogInputError("Use lowercase letters, numbers, and hyphens for the URL slug.");
+    return saveRemoteBlog({ slug, title, category: existingCategory?.category ?? categoryInput, summary, author, content, imageAlt },
+      bytes && newImageType ? { bytes, type: newImageType } : undefined, edit?.revision);
+  }
+
   return writePost(slug, async (directory) => {
     const previous = await readRecord(slug);
     const current = await getPublicBlogPost(slug);
@@ -243,6 +256,7 @@ export async function saveBlogPost(form: FormData, edit?: { slug: string; revisi
 }
 
 export async function deleteBlogPost(slug: string, revision: string) {
+  if (publicSupabase()) return deleteRemoteBlog(slug, revision);
   return writePost(slug, async (directory) => {
     const previous = await readRecord(slug);
     const current = await getPublicBlogPost(slug);

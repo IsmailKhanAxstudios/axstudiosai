@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Plus, Search } from "lucide-react";
 import DeletePostButton from "@/components/admin/DeletePostButton";
+import AdminNavigation from "@/components/admin/AdminNavigation";
 import { hasAdminSession } from "@/lib/adminAuth";
 import { getPublicBlogPosts } from "@/lib/blogStore";
 import { logout } from "./actions";
@@ -49,6 +50,7 @@ export default async function AdminPage({
         </div>
       </header>
 
+      <AdminNavigation active="blogs" />
       {message && <p role="status" className="mb-4 rounded-xl border border-foreground/10 bg-surface px-4 py-3 text-sm">{message}</p>}
       <form action="/admin" className="mb-4 flex flex-wrap items-center gap-2">
         <label className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-line bg-surface px-3">

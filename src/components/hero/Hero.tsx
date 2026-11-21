@@ -87,7 +87,7 @@ export default function Hero() {
                 style={{ color: "rgb(var(--accent-text))" }}
               />
               <span className="text-sm text-foreground font-medium tracking-wider">
-                AI AUTOMATION STUDIO
+                AI AUTOMATION AGENCY IN DUBAI
               </span>
             </motion.div>
 

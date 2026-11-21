@@ -74,7 +74,7 @@ export default function BlogEditor({ categories, post }: { categories: string[];
         </label>
         {post && (
           <div className="relative aspect-video w-full max-w-xs overflow-hidden rounded-xl border border-foreground/10 sm:col-span-2">
-            <Image src={post.imageUrl} alt={post.imageAlt} fill sizes="320px" className="object-cover" />
+            <Image src={post.imageUrl} unoptimized={post.imageUrl.startsWith("https://")} alt={post.imageAlt} fill sizes="320px" className="object-cover" />
           </div>
         )}
         <label className={`${label} sm:col-span-2`}>

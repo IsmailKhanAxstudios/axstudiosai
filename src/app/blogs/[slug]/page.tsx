@@ -6,6 +6,8 @@ import { ArrowLeft } from "lucide-react";
 import ExploreWithAI from "@/components/blog/ExploreWithAI";
 import { getPublicBlogPost } from "@/lib/blogStore";
 import { siteOrigin } from "@/lib/site";
+import { absoluteUrl, articleMetadata, organizationId } from "@/lib/seo";
+import StructuredData from "@/components/ui/StructuredData";
 
 type BlogPageProps = { params: Promise<{ slug: string }> };
 
@@ -15,12 +17,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
   const post = await getPublicBlogPost((await params).slug);
   if (!post) return {};
 
-  return {
-    title: `${post.title} | AxStudios`,
-    description: post.summary,
-    alternates: { canonical: `/blogs/${post.slug}` },
-    openGraph: { images: [post.imageUrl] },
-  };
+  return articleMetadata(`/blogs/${post.slug}`, post.title, post.summary, post.imageUrl, post.publishedAt);
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
@@ -29,6 +26,13 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
   return (
     <article className="relative mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8">
+      <StructuredData data={{
+        "@context": "https://schema.org", "@type": "BlogPosting",
+        headline: post.title, description: post.summary, image: absoluteUrl(post.imageUrl),
+        mainEntityOfPage: absoluteUrl(`/blogs/${post.slug}`), datePublished: post.publishedAt,
+        author: post.author === "AxStudios" ? { "@id": organizationId } : { "@type": "Person", name: post.author },
+        publisher: { "@id": organizationId },
+      }} />
       <Link href="/blogs" className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[rgb(var(--accent-text))] hover:underline">
         <ArrowLeft className="size-4" aria-hidden="true" /> All blogs
       </Link>
@@ -48,6 +52,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         <div className="relative aspect-video overflow-hidden rounded-2xl border border-foreground/10 bg-field">
           <Image
             src={post.imageUrl}
+            unoptimized={post.imageUrl.startsWith("https://")}
             alt={post.imageAlt}
             fill
             sizes="(min-width: 768px) 720px, 100vw"

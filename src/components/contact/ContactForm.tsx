@@ -473,8 +473,19 @@ export default function ContactForm() {
     if (!validate()) return;
 
     setIsSubmitting(true);
+    let stored = false;
 
     try {
+      if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || "We could not save your inquiry.");
+        stored = true;
+      }
       // Match your working demo variable names
       const templateParams = {
         name: formData.name,
@@ -504,6 +515,10 @@ export default function ContactForm() {
         throw new Error("Failed to send email");
       }
     } catch (error) {
+      if (stored) {
+        setIsSubmitted(true);
+        return;
+      }
       console.error("Form submission error:", error);
       alert(
         error instanceof Error
@@ -772,6 +787,7 @@ export default function ContactForm() {
             onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
           >
             <option value="">Select option</option>
+            <option value="ai-cost-optimization">AI Cost &amp; Performance Optimization</option>
             <option value="ai-automation">AI Automation</option>
             <option value="ai-agents">AI Agents</option>
             <option value="ai-web-applications">AI Web Applications</option>

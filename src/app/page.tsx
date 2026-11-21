@@ -6,13 +6,21 @@ import AIWorkflowCanvas from "@/components/sections/AIWorkflowCanvas";
 import ProductsSection from "@/components/sections/ProductsSection";
 import ProcessSection from "@/components/sections/ProcessSection";
 import ExploreWithAI from "@/components/blog/ExploreWithAI";
+import { connection } from "next/server";
+import { getPublicServices } from "@/lib/catalogStore";
+import { pageMetadata } from "@/lib/seo";
 
-export default function HomePage() {
+export const metadata = pageMetadata("/", "AI Agency in Dubai for Automation, AI Cost Optimization & MVPs",
+  "AxStudios is a Dubai AI agency helping businesses automate workflows, optimize AI costs, and build custom AI software, SaaS products, and launch-ready MVPs.");
+
+export default async function HomePage() {
+  await connection();
+  const services = await getPublicServices();
   return (
     <>
       <Hero />
       <ExploreWithAI company />
-      <ServicesSection />
+      <ServicesSection services={services} />
       <AIWorkflowCanvas />
       <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
         <Link

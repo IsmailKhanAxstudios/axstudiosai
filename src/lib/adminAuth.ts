@@ -1,5 +1,6 @@
 import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
+import { sessionSupabase, supabaseConfig } from "@/lib/supabaseServer";
 
 const cookieName = "axstudios_admin";
 const lifetime = 8 * 60 * 60;
@@ -15,6 +16,7 @@ function equals(left: string, right: string) {
 }
 
 export function adminConfigured() {
+  if (supabaseConfig()) return true;
   return Boolean(
     process.env.AXSTUDIOS_ADMIN_EMAIL &&
     /^[a-f0-9]{32}:[a-f0-9]{128}$/i.test(process.env.AXSTUDIOS_ADMIN_PASSWORD_HASH ?? "") &&
@@ -42,6 +44,11 @@ export async function startAdminSession(secure: boolean) {
 }
 
 export async function hasAdminSession() {
+  const client = await sessionSupabase();
+  if (client) {
+    const { data } = await client.auth.getUser();
+    return data.user?.app_metadata.axstudios_role === "admin";
+  }
   const secret = process.env.AXSTUDIOS_ADMIN_SESSION_SECRET;
   const token = (await cookies()).get(cookieName)?.value;
   if (!adminConfigured() || !secret || !token || token.length > 128) return false;
@@ -54,5 +61,7 @@ export async function hasAdminSession() {
 }
 
 export async function endAdminSession() {
+  const client = await sessionSupabase();
+  if (client) await client.auth.signOut({ scope: "local" });
   (await cookies()).delete(cookieName);
 }

@@ -79,6 +79,8 @@ export default function Footer() {
                 { href: "/solutions", label: "Solutions" },
                 { href: "/products", label: "Products" },
                 { href: "/blogs", label: "Blogs" },
+                { href: "/case-studies", label: "Case Studies" },
+                { href: "/newsletter", label: "Newsletter" },
                 { href: "/about", label: "About" },
                 { href: "/contact", label: "Contact" },
               ].map((link) => (
@@ -109,11 +111,11 @@ export default function Footer() {
                   label: "Custom AI & SaaS",
                 },
                 {
-                  href: "/services#chrome-extensions",
+                  href: "/services/chrome-extensions",
                   label: "Chrome Extensions",
                 },
                 {
-                  href: "/services#mvp-development",
+                  href: "/services/mvp-development",
                   label: "MVP Development",
                 },
                 {
@@ -148,6 +150,7 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-4 text-foreground">Contact</h3>
             <div className="space-y-3">
+              <p className="text-sm text-secondary-text">Headquartered in Dubai, United Arab Emirates</p>
               <a
                 href="mailto:contact@axstudios.tech"
                 className="inline-flex items-center gap-2 text-sm text-secondary-text hover:text-foreground transition-colors"

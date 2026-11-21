@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -6,11 +6,11 @@ import ExploreWithAI from "@/components/blog/ExploreWithAI";
 import { getPublicBlogPosts } from "@/lib/blogStore";
 import { siteOrigin } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Blogs | AxStudios",
-  description: "Articles on AI automation, product development, and taking software from idea to launch.",
-  alternates: { canonical: "/blogs" },
-};
+export const metadata = pageMetadata(
+  "/blogs",
+  "AI Automation & Software Development Blog",
+  "Read guides from AxStudios on AI agents, workflow automation, product requirements, MVP development, and operating software after launch.",
+);
 
 export default async function BlogsPage({
   searchParams,
@@ -67,6 +67,7 @@ export default async function BlogsPage({
                 <div className="relative aspect-video overflow-hidden border-b border-foreground/10 bg-field">
                   <Image
                     src={imageUrl}
+                    unoptimized={imageUrl.startsWith("https://")}
                     alt={imageAlt}
                     fill
                     sizes="(min-width: 1280px) 392px, (min-width: 1024px) 32vw, (min-width: 640px) 49vw, 100vw"

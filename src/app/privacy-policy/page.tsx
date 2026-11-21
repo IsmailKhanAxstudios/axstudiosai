@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import LegalPage from "@/components/ui/LegalPage";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | AxStudios",
-  description: "How AxStudios handles project inquiries, email delivery, and your website theme preference.",
-};
+export const metadata = pageMetadata(
+  "/privacy-policy",
+  "Privacy Policy",
+  "Learn how AxStudios handles contact inquiries, newsletter subscriptions, and website preferences.",
+);
 
 export default function PrivacyPolicyPage() {
   return (
@@ -22,11 +23,16 @@ export default function PrivacyPolicyPage() {
       </section>
       <section>
         <h2>How inquiries are delivered</h2>
-        <p>The website form uses EmailJS to send your submission. The site’s separate contact endpoint uses Resend for email delivery. Email providers handle the messages they deliver. Depending on where these providers operate, they may process information outside your country.</p>
+        <p>The contact form uses Supabase to store inquiries and EmailJS to deliver email notifications. Email providers handle the messages they deliver. Depending on where these providers operate, they may process information outside your country.</p>
+        <p>If you contact us through WhatsApp, WhatsApp handles the conversation under its own privacy policy.</p>
       </section>
       <section>
         <h2>Theme preference</h2>
         <p>We save your selected light or dark theme in your browser’s local storage. You can remove this preference by clearing the site’s stored data in your browser settings.</p>
+      </section>
+      <section>
+        <h2>Newsletter subscriptions</h2>
+        <p>If you subscribe, we store your email address, sign-up time, and consent record in Supabase so we can manage your subscription. Email <a href="mailto:contact@axstudios.tech">contact@axstudios.tech</a> to withdraw consent or request deletion.</p>
       </section>
       <section>
         <h2>Retention and your choices</h2>

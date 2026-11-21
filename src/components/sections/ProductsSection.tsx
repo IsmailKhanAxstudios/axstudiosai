@@ -1,17 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { getPublicProducts } from "@/lib/catalogStore";
 
-const products = [
-  { name: "DomiumPro", image: "/products/domiumpro.png", imageAlt: "DomiumPro property management sign-in screen" },
-  { name: "FlowDesk", image: "/products/flowdesk.webp", description: "A workspace for team requests and approvals.", sample: true },
-  { name: "BriefBoard", image: "/products/briefboard.webp", description: "A space to organise project ideas, requirements, and decisions.", sample: true },
-  { name: "LaunchMeter", image: "/products/launchmeter.webp", description: "A dashboard for tracking adoption and feedback after launch.", sample: true },
-];
-
-export default function ProductsSection({ preview = false }: { preview?: boolean }) {
+export default async function ProductsSection({ preview = false }: { preview?: boolean }) {
   const Heading = preview ? "h2" : "h1";
   const ProductHeading = preview ? "h3" : "h2";
+  const products = await getPublicProducts();
   const visibleProducts = preview ? products.slice(0, 2) : products;
 
   return (
@@ -28,11 +23,12 @@ export default function ProductsSection({ preview = false }: { preview?: boolean
         </header>
 
         <ul className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 sm:gap-5">
-          {visibleProducts.map(({ name, image, imageAlt, description, sample }) => (
+          {visibleProducts.map(({ name, image, imageAlt, description, sample, website }) => (
             <li key={name} className="overflow-hidden rounded-2xl border bg-surface/80 [border-color:rgb(var(--primary)/0.25)]">
               <div className="relative aspect-[16/8] overflow-hidden border-b border-foreground/10 bg-field">
                 <Image
                   src={image}
+                  unoptimized={image.startsWith("https://")}
                   alt={imageAlt ?? ""}
                   fill
                   sizes="(min-width: 1088px) 500px, (min-width: 640px) 50vw, 100vw"
@@ -45,6 +41,11 @@ export default function ProductsSection({ preview = false }: { preview?: boolean
                   {sample && <span className="rounded-full border border-foreground/10 px-2.5 py-1 text-xs text-secondary-text">Sample concept</span>}
                 </div>
                 {description && <p className="mt-2 text-sm leading-relaxed text-secondary-text">{description}</p>}
+                {website && (
+                  <a href={website} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-[rgb(var(--accent-text))] hover:underline">
+                    Visit product <ArrowRight className="size-4" aria-hidden="true" />
+                  </a>
+                )}
               </div>
             </li>
           ))}
