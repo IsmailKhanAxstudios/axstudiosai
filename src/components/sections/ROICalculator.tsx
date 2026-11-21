@@ -116,13 +116,8 @@ export default function ROICalculator() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4"
             style={{ border: `1px solid ${PRIMARY_DARK}` }}
           >
-<<<<<<< HEAD
-            <Calculator className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
-            <span className="text-sm text-foreground/80">ROI CALCULATOR</span>
-=======
             <Calculator className="w-4 h-4" style={{ color: PRIMARY }} />
             <span className="text-sm text-white/80">SAVINGS CALCULATOR</span>
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
           </motion.div>
 
           <h2 className="text-3xl lg:text-5xl font-bold mb-4">
@@ -190,15 +185,9 @@ export default function ROICalculator() {
               {/* Hours */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-<<<<<<< HEAD
-                  <label className="flex items-center gap-2 text-sm text-secondary-text">
-                    <Clock className="w-4 h-4" style={{ color: "rgb(var(--accent-text))" }} />
-                    Hours per week (repetitive)
-=======
                   <label className="flex items-center gap-2 text-sm text-white/60">
                     <Clock className="w-4 h-4" style={{ color: PRIMARY }} />
                     Hours per employee per week
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
                   </label>
                   <motion.span
                     key={hoursPerWeek}
@@ -410,13 +399,8 @@ export default function ROICalculator() {
                     >
                       {formatCurrency(potentialSavings)}
                     </motion.p>
-<<<<<<< HEAD
-                    <p className="text-xs text-muted mt-1">
-                      Based on 70% automation potential
-=======
                     <p className="text-xs text-white/40 mt-1">
                       Illustrative estimate assuming 70% automation. Excludes setup and ongoing costs.
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
                     </p>
                   </div>
 
@@ -454,15 +438,9 @@ export default function ROICalculator() {
                     }}
                   >
                     <div className="flex items-center gap-2">
-<<<<<<< HEAD
-                      <Rocket className="w-5 h-5" style={{ color: "rgb(var(--accent-text))" }} />
-                      <span className="text-sm text-secondary-text">
-                        Projected ROI
-=======
                       <Rocket className="w-5 h-5" style={{ color: PRIMARY }} />
                       <span className="text-sm text-white/60">
                         Estimated cost reduction
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
                       </span>
                     </div>
                     <span
@@ -480,13 +458,8 @@ export default function ROICalculator() {
                     className="w-full flex items-center justify-between p-3 rounded-lg transition-colors"
                     style={{ background: PRIMARY_DARK }}
                   >
-<<<<<<< HEAD
-                    <span className="text-sm text-secondary-text">
-                      View Breakdown
-=======
                     <span className="text-sm text-white/60">
                       View calculation
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
                     </span>
                     <ChevronDown
                       className={`w-4 h-4 transition-transform ${showBreakdown ? "rotate-180" : ""}`}
@@ -508,25 +481,6 @@ export default function ROICalculator() {
                           style={{ background: PRIMARY_DARK }}
                         >
                           <div className="flex justify-between text-sm">
-<<<<<<< HEAD
-                            <span className="text-muted">Labor Cost</span>
-                            <span className="text-foreground">
-                              {formatCurrency(annualCost * 0.5)}
-                            </span>
-                          </div>
-                          <div className="flex justify-between text-sm">
-                            <span className="text-muted">Time Savings</span>
-                            <span className="text-foreground">
-                              {formatCurrency(annualCost * 0.3)}
-                            </span>
-                          </div>
-                          <div className="flex justify-between text-sm">
-                            <span className="text-muted">
-                              Error Reduction
-                            </span>
-                            <span className="text-foreground">
-                              {formatCurrency(annualCost * 0.2)}
-=======
                             <span className="text-white/40">Annual manual-work cost</span>
                             <span className="text-white">
                               {formatCurrency(annualCost)}
@@ -544,7 +498,6 @@ export default function ROICalculator() {
                             </span>
                             <span className="text-white">
                               {formatCurrency(annualCost - potentialSavings)}
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
                             </span>
                           </div>
                         </div>

@@ -53,11 +53,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-<<<<<<< HEAD
-      className="fixed inset-0 top-14 z-40 md:top-16 lg:hidden"
-=======
       className="fixed inset-0 z-[60] lg:hidden"
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
     >
       <div
         className="absolute inset-0 bg-black/80 backdrop-blur-sm"

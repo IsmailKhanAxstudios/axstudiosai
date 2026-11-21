@@ -47,30 +47,7 @@ export default function Footer() {
               AI automation systems for ambitious businesses.
             </p>
 
-<<<<<<< HEAD
-            {/* Social Links */}
-            <div className="flex items-center gap-3 mt-4">
-              {["Twitter", "LinkedIn", "GitHub"].map((social) => (
-                <a
-                  key={social}
-                  href="#"
-                  className="p-2 rounded-lg transition-all hover:scale-110"
-                  style={{
-                    background: PRIMARY_DARK,
-                    border: `1px solid ${PRIMARY_DARK}`,
-                  }}
-                  aria-label={social}
-                >
-                  <ArrowUpRight
-                    className="w-4 h-4"
-                    style={{ color: "rgb(var(--accent-text))" }}
-                  />
-                </a>
-              ))}
-            </div>
-=======
 
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
           </div>
 
           {/* Navigation */}
@@ -115,19 +92,7 @@ export default function Footer() {
                   label: "Custom AI & SaaS",
                 },
                 {
-<<<<<<< HEAD
-                  href: "/services/chrome-extensions",
-                  label: "Chrome Extensions",
-                },
-                {
-                  href: "/services/mvp-development",
-                  label: "MVP Development",
-                },
-                {
-                  href: "/services/ai-automation-audit",
-=======
                   href: "/services#ai-automation-audit",
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
                   label: "Strategy & Audit",
                 },
                 {
@@ -144,7 +109,7 @@ export default function Footer() {
                 },
               ].map((link) => (
                 <Link
-                  key={link.href}
+                  key={link.label}
                   href={link.href}
                   className="block text-sm text-secondary-text hover:text-foreground transition-colors"
                 >
@@ -190,19 +155,7 @@ export default function Footer() {
             <p className="text-sm text-muted">
               © {currentYear} AxStudios. All rights reserved.
             </p>
-<<<<<<< HEAD
-            <div className="flex items-center gap-4 text-xs text-muted">
-              <Link href="/privacy-policy" className="hover:text-foreground transition-colors">
-                Privacy Policy
-              </Link>
-              <span className="text-foreground/20" aria-hidden="true">•</span>
-              <Link href="/terms-and-conditions" className="hover:text-foreground transition-colors">
-                Terms &amp; Conditions
-              </Link>
-            </div>
-=======
 
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
           </div>
         </div>
       </div>

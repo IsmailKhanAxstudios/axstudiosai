@@ -68,13 +68,8 @@ export default function TrustBar() {
               </motion.div>
 
               {/* Value */}
-<<<<<<< HEAD
-              <div className="text-3xl lg:text-4xl font-bold mb-2 text-foreground">
-                <Counter value={stat.value} suffix={stat.suffix} />
-=======
               <div className="text-xl lg:text-2xl font-bold mb-2 text-white">
                 {stat.value}
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
               </div>
 
               {/* Label */}

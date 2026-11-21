@@ -29,13 +29,11 @@ const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
 const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
 const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
-<<<<<<< HEAD
-const serviceIcons = { Zap, Bot, Globe, Code, SearchCheck, Users, Network, Settings, Puzzle, Rocket, Sparkles, Gauge };
-=======
-const services = [
+const serviceIcons = { Zap, Bot, Code, Puzzle, Rocket, Settings, Globe, SearchCheck, Users, Network, Sparkles, Gauge };
+
+const incomingServices: PublicService[] = [
   {
-    number: "01",
-    icon: Zap,
+    icon: "Zap",
     title: "AI Automation",
     description:
       "Automate repetitive business processes using AI, intelligent workflows, and connected systems.",
@@ -49,8 +47,7 @@ const services = [
     ],
   },
   {
-    number: "02",
-    icon: Bot,
+    icon: "Bot",
     title: "AI Agents",
     description:
       "Build intelligent AI agents that understand context, use tools, and perform business tasks.",
@@ -64,8 +61,7 @@ const services = [
     ],
   },
   {
-    number: "03",
-    icon: Globe,
+    icon: "Globe",
     title: "AI-Powered Web Applications",
     description:
       "Build intelligent websites, portals, dashboards, and custom web applications powered by AI.",
@@ -79,8 +75,7 @@ const services = [
     ],
   },
   {
-    number: "04",
-    icon: Code,
+    icon: "Code",
     title: "Custom AI & SaaS Development",
     description:
       "Design and build scalable AI-powered software, SaaS platforms, internal tools, and custom systems.",
@@ -94,8 +89,7 @@ const services = [
     ],
   },
   {
-    number: "05",
-    icon: SearchCheck,
+    icon: "SearchCheck",
     title: "AI Strategy & Automation Audit",
     description:
       "Identify high-impact AI opportunities, eliminate bottlenecks, and create a practical implementation roadmap.",
@@ -109,8 +103,7 @@ const services = [
     ],
   },
   {
-    number: "06",
-    icon: Users,
+    icon: "Users",
     title: "AI Consultancy",
     description:
       "Expert guidance on AI adoption, strategy, technology selection, and implementation best practices.",
@@ -124,8 +117,7 @@ const services = [
     ],
   },
   {
-    number: "07",
-    icon: Network,
+    icon: "Network",
     title: "AI Integration",
     description:
       "Seamlessly integrate AI capabilities into your existing systems, tools, and business workflows.",
@@ -139,8 +131,7 @@ const services = [
     ],
   },
   {
-    number: "08",
-    icon: Settings,
+    icon: "Settings",
     title: "AI Systems Maintenance",
     description:
       "Monitor, maintain, optimize, and continuously improve AI systems and automations.",
@@ -154,9 +145,8 @@ const services = [
     ],
   },
 ];
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
 
-export default function ServicesSection({ services }: { services: PublicService[] }) {
+export default function ServicesSection({ services = incomingServices }: { services?: PublicService[] }) {
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [selectedService, setSelectedService] = useState<string | null>(null);
 

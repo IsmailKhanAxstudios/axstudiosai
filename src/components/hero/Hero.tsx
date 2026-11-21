@@ -98,11 +98,7 @@ export default function Hero() {
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6"
             >
               {/* Line 1 - White */}
-<<<<<<< HEAD
-              <span className="block h-[1.2em] leading-[1.2] text-foreground">
-=======
               <span className="block leading-[1.2] text-white">
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
                 Build Smarter.
               </span>
 
@@ -136,11 +132,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-2xl sm:text-3xl lg:text-4xl xl:text-4xl font-bold leading-tight mb-6"
             >
-<<<<<<< HEAD
-              <span className="block h-[1.2em] leading-[1.2] text-foreground">
-=======
               <span className="block leading-[1.2] text-white">
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
                 Innovate Automate Dominate.
               </span>
             </motion.h3>
@@ -188,11 +180,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-<<<<<<< HEAD
-              className="mt-8 flex items-center justify-center lg:justify-start gap-3 text-sm text-muted"
-=======
               className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3 text-sm text-zinc-500"
->>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
             >
               <Zap
                 className="w-4 h-4"
