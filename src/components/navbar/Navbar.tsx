@@ -91,7 +91,7 @@ export default function Navbar() {
           <div className="mx-auto flex h-[54px] max-w-7xl items-center justify-between gap-2 px-3 sm:px-5 md:h-[62px] lg:gap-3">
             {/* Logo */}
             <Link href="/" aria-label="AxStudios home" className="flex items-center group">
-              <Logo className="h-10 md:h-12 w-auto transition-all group-hover:opacity-80" />
+              <Logo className="h-7 w-auto sm:h-9 md:h-12 transition-all group-hover:opacity-80" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -131,7 +131,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2 text-white/60 hover:text-white transition-colors"
+                className="lg:hidden p-2 text-secondary-text hover:text-foreground transition-colors"
                 aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls={isMobileMenuOpen ? "mobile-navigation" : undefined}

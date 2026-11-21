@@ -97,8 +97,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6"
             >
-              {/* Line 1 - White */}
-              <span className="block leading-[1.2] text-white">
+              <span className="block leading-[1.2] text-foreground">
                 Build Smarter.
               </span>
 
@@ -132,7 +131,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-2xl sm:text-3xl lg:text-4xl xl:text-4xl font-bold leading-tight mb-6"
             >
-              <span className="block leading-[1.2] text-white">
+              <span className="block leading-[1.2] text-foreground">
                 Innovate Automate Dominate.
               </span>
             </motion.h3>
