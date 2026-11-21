@@ -1,3 +1,4 @@
+import { parseBlogTags, serializeBlogArticle, validBlogEventDate } from "@/lib/blogArticle";
 import { randomUUID } from "node:crypto";
 import { mkdir, open, readdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
@@ -205,7 +206,15 @@ export async function saveBlogPost(form: FormData, edit?: { slug: string; revisi
   const existingCategory = (await getPublicBlogPosts()).find((post) => post.category.toLowerCase() === categoryInput.toLowerCase());
   const summary = field(form, "summary", "a summary", 300);
   const author = field(form, "author", "an author", 100, false) || "AxStudios";
-  const content = field(form, "content", "the article content", 40000);
+  const body = field(form, "content", "the article content", 40000);
+  const tags = parseBlogTags(field(form, "tags", "tags", 280, false));
+  if (tags.length > 8 || tags.some((tag) => tag.length > 32 || /[\r\n]/.test(tag))) {
+    throw new BlogInputError("Use up to 8 tags, with 32 characters per tag.");
+  }
+  const eventDate = field(form, "eventDate", "an event date", 10, false);
+  if (eventDate && !validBlogEventDate(eventDate)) throw new BlogInputError("Enter a valid event date.");
+  const content = serializeBlogArticle(body, tags, eventDate);
+  if (content.length > 40000) throw new BlogInputError("Shorten the article to fit its tags within the 40,000 character limit.");
   const image = form.get("cover");
   const hasImage = image instanceof File && image.size > 0;
   if ((!edit && !hasImage) || (hasImage && image.size > 3 * 1024 * 1024)) {

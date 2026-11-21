@@ -1,3 +1,6 @@
+import ArticleBody from "@/components/blog/ArticleBody";
+import NewsletterSignup from "@/components/blog/NewsletterSignup";
+import { formatBlogEventDate, parseBlogArticle } from "@/lib/blogArticle";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,12 +26,13 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 export default async function BlogPage({ params }: BlogPageProps) {
   const post = await getPublicBlogPost((await params).slug);
   if (!post) notFound();
+  const { body, tags, eventDate } = parseBlogArticle(post.content);
 
   return (
     <article className="relative mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8">
       <StructuredData data={{
         "@context": "https://schema.org", "@type": "BlogPosting",
-        headline: post.title, description: post.summary, image: absoluteUrl(post.imageUrl),
+        headline: post.title, keywords: tags.length ? tags : undefined, description: post.summary, image: absoluteUrl(post.imageUrl),
         mainEntityOfPage: absoluteUrl(`/blogs/${post.slug}`), datePublished: post.publishedAt,
         author: post.author === "AxStudios" ? { "@id": organizationId } : { "@type": "Person", name: post.author },
         publisher: { "@id": organizationId },
@@ -40,6 +44,11 @@ export default async function BlogPage({ params }: BlogPageProps) {
         <p className="text-sm font-semibold uppercase tracking-widest text-[rgb(var(--accent-text))]">{post.category}</p>
         <h1 className="mt-3 text-3xl font-bold text-foreground sm:text-5xl">{post.title}</h1>
         <p className="mt-4 text-lg leading-relaxed text-secondary-text">{post.summary}</p>
+        {eventDate && (
+          <p className="mt-4 text-sm font-semibold text-foreground">
+            Event date <time dateTime={eventDate} className="ml-2 font-normal text-secondary-text">{formatBlogEventDate(eventDate)}</time>
+          </p>
+        )}
         {post.publishedAt && (
           <p className="mt-4 text-sm text-secondary-text">
             {post.author} <span aria-hidden="true">·</span>{" "}
@@ -66,21 +75,15 @@ export default async function BlogPage({ params }: BlogPageProps) {
           </figcaption>
         )}
       </figure>
-      <div className="space-y-8 pt-8">
-        {post.content.split(/\r?\n[ \t]*\r?\n/).map((block, index) => {
-          const heading = block.match(/^##\s+([^\r\n]+)(?:\r?\n|$)/);
-          if (heading) {
-            const body = block.slice(heading[0].length).trim();
-            return (
-              <div key={index}>
-                <h2 className="text-xl font-semibold text-foreground">{heading[1]}</h2>
-                {body && <p className="mt-2 whitespace-pre-wrap leading-relaxed text-secondary-text">{body}</p>}
-              </div>
-            );
-          }
-          return <p key={index} className="whitespace-pre-wrap leading-relaxed text-secondary-text">{block}</p>;
-        })}
-      </div>
+      <div className="pt-8"><ArticleBody content={body} /></div>
+      {tags.length > 0 && (
+        <ul aria-label="Article tags" className="mt-8 flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <li key={tag} className="rounded-full border border-line px-3 py-1 text-sm text-secondary-text">{tag}</li>
+          ))}
+        </ul>
+      )}
+      <NewsletterSignup />
     </article>
   );
 }

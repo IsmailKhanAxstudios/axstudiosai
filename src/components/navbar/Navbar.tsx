@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, Mail } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import ThemeToggle from "./ThemeToggle";
 
@@ -125,6 +125,15 @@ export default function Navbar() {
               >
                 Book a Strategy Call
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link
+                href="/newsletter"
+                aria-label="Subscribe to the newsletter"
+                aria-current={pathname === "/newsletter" ? "page" : undefined}
+                className="inline-flex min-h-10 min-w-10 items-center justify-center gap-1.5 rounded-full border border-foreground/15 px-2.5 text-xs font-semibold text-foreground hover:bg-foreground/5 xl:px-3"
+              >
+                <Mail className="size-4 shrink-0" aria-hidden="true" />
+                <span className="hidden whitespace-nowrap sm:inline lg:hidden xl:inline">Subscribe</span>
               </Link>
               <ThemeToggle />
               {/* Mobile Menu Button */}

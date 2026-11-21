@@ -1,3 +1,4 @@
+import { getBlogCategories } from "@/lib/blogCategories";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
@@ -16,7 +17,7 @@ export default async function EditPostPage({ params }: { params: Promise<{ slug:
   if (!post) notFound();
 
   const posts = await getPublicBlogPosts();
-  const categories = [...new Set(posts.map((entry) => entry.category))].sort();
+  const categories = getBlogCategories(posts.map((entry) => entry.category));
 
   return (
     <section className="relative mx-auto max-w-4xl px-4 pb-20 pt-28 sm:px-6 sm:pt-32">

@@ -1,3 +1,4 @@
+import { getBlogCategories } from "@/lib/blogCategories";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 export default async function NewPostPage() {
   if (!(await hasAdminSession())) redirect("/admin/login");
   const posts = await getPublicBlogPosts();
-  const categories = [...new Set(posts.map((post) => post.category))].sort();
+  const categories = getBlogCategories(posts.map((post) => post.category));
 
   return (
     <section className="relative mx-auto max-w-4xl px-4 pb-20 pt-28 sm:px-6 sm:pt-32">

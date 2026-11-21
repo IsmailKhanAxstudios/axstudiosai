@@ -45,6 +45,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
     { href: "/solutions", label: "Solutions" },
     { href: "/products", label: "Products" },
     { href: "/blogs", label: "Blogs" },
+    { href: "/newsletter", label: "Subscribe to the newsletter" },
     { href: "/about", label: "About" },
   ];
 
