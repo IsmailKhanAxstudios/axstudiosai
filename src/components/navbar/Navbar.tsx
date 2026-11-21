@@ -1,7 +1,7 @@
 // components/navbar/Navbar.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
@@ -55,6 +55,8 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const merged = isScrolled || isMobileMenuOpen;
 
+  const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), []);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -88,8 +90,13 @@ export default function Navbar() {
         >
           <div className="mx-auto flex h-[54px] max-w-7xl items-center justify-between gap-2 px-3 sm:px-5 md:h-[62px] lg:gap-3">
             {/* Logo */}
+<<<<<<< HEAD
             <Link href="/" aria-label="AxStudios home" className="group flex shrink-0 items-center rounded-full">
               <Logo className="h-7 w-auto transition-opacity group-hover:opacity-80 xl:h-9" />
+=======
+            <Link href="/" aria-label="AxStudios home" className="flex items-center group">
+              <Logo className="h-10 md:h-12 w-auto transition-all group-hover:opacity-80" />
+>>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
             </Link>
 
             {/* Desktop Navigation */}
@@ -139,6 +146,24 @@ export default function Navbar() {
                 )}
               </button>
             </div>
+<<<<<<< HEAD
+=======
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden p-2 text-white/60 hover:text-white transition-colors"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls={isMobileMenuOpen ? "mobile-navigation" : undefined}
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
+>>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
           </div>
         </nav>
       </header>
@@ -146,7 +171,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <MobileMenu onClose={() => setIsMobileMenuOpen(false)} />
+          <MobileMenu onClose={closeMobileMenu} />
         )}
       </AnimatePresence>
     </>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // // components/contact/ContactForm.tsx
 // "use client";
 
@@ -418,6 +419,8 @@
 // }
 // componen"use client";
 
+=======
+>>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
 "use client";
 import { useState, useRef } from "react";
 import Link from "next/link";
@@ -445,6 +448,7 @@ export default function ContactForm() {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitError, setSubmitError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -470,12 +474,14 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!validate()) return;
+    if (isSubmitting || !validate()) return;
+    setSubmitError("");
 
     setIsSubmitting(true);
     let stored = false;
 
     try {
+<<<<<<< HEAD
       if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
         const response = await fetch("/api/contact", {
           method: "POST",
@@ -487,6 +493,14 @@ export default function ContactForm() {
         stored = true;
       }
       // Match your working demo variable names
+=======
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error("The contact form is temporarily unavailable. Please email contact@axstudios.tech.");
+      }
+>>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
       const templateParams = {
         name: formData.name,
         email: formData.email,
@@ -500,27 +514,35 @@ export default function ContactForm() {
         timeline: formData.timeline || "N/A",
       };
 
+<<<<<<< HEAD
       // Use your demo service and template IDs
+=======
+
+>>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
       const result = await emailjs.send(
-        "service_efoxcdh", // Your service ID from demo
-        "template_nvt4rdj", // Your template ID from demo
+        serviceId,
+        templateId,
         templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+        publicKey,
       );
 
       if (result.status === 200) {
-        console.log("Form submission received!");
+
         setIsSubmitted(true);
       } else {
         throw new Error("Failed to send email");
       }
     } catch (error) {
+<<<<<<< HEAD
       if (stored) {
         setIsSubmitted(true);
         return;
       }
       console.error("Form submission error:", error);
       alert(
+=======
+      setSubmitError(
+>>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
         error instanceof Error
           ? error.message
           : "Something went wrong. Please try again.",
@@ -569,10 +591,16 @@ export default function ContactForm() {
         >
           <CheckCircle className="w-10 h-10" style={{ color: "rgb(var(--accent-text))" }} />
         </motion.div>
+<<<<<<< HEAD
         <h2 className="text-2xl font-bold mb-4 text-foreground">Request Sent!</h2>
         <p className="text-secondary-text mb-6">
           Thank you for reaching out. We&apos;ll get back to you within 24
           hours.
+=======
+        <h2 className="text-2xl font-bold mb-4 text-white">Request Sent!</h2>
+        <p className="text-white/60 mb-6">
+          Thank you for reaching out. We&apos;ll get back to you shortly.
+>>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
         </p>
         <button
           onClick={() => {
@@ -607,7 +635,7 @@ export default function ContactForm() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       onSubmit={handleSubmit}
-      className="glass rounded-3xl p-8 space-y-6"
+      className="glass rounded-3xl p-5 sm:p-8 space-y-6"
       style={{ border: `1px solid ${PRIMARY_DARK}` }}
     >
       <div className="grid sm:grid-cols-2 gap-6">
@@ -617,6 +645,9 @@ export default function ContactForm() {
           </label>
           <input
             type="text"
+            required
+            aria-invalid={Boolean(errors.name)}
+            aria-describedby={errors.name ? "name-error" : undefined}
             id="name"
             name="name"
             value={formData.name}
@@ -635,7 +666,7 @@ export default function ContactForm() {
             placeholder="John Doe"
           />
           {errors.name && (
-            <p className="text-sm text-red-500 mt-1">{errors.name}</p>
+            <p id="name-error" className="text-sm text-red-300 mt-1">{errors.name}</p>
           )}
         </div>
 
@@ -665,6 +696,9 @@ export default function ContactForm() {
           </label>
           <input
             type="email"
+            required
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "email-error" : undefined}
             id="email"
             name="email"
             value={formData.email}
@@ -678,7 +712,7 @@ export default function ContactForm() {
             placeholder="john@company.com"
           />
           {errors.email && (
-            <p className="text-sm text-red-500 mt-1">{errors.email}</p>
+            <p id="email-error" className="text-sm text-red-300 mt-1">{errors.email}</p>
           )}
         </div>
 
@@ -724,6 +758,9 @@ export default function ContactForm() {
           What does your business do? *
         </label>
         <textarea
+          required
+          aria-invalid={Boolean(errors.business)}
+          aria-describedby={errors.business ? "business-error" : undefined}
           id="business"
           name="business"
           value={formData.business}
@@ -738,7 +775,7 @@ export default function ContactForm() {
           placeholder="We provide..."
         />
         {errors.business && (
-          <p className="text-sm text-red-500 mt-1">{errors.business}</p>
+          <p id="business-error" className="text-sm text-red-300 mt-1">{errors.business}</p>
         )}
       </div>
 
@@ -750,6 +787,9 @@ export default function ContactForm() {
           What would you like to automate? *
         </label>
         <textarea
+          required
+          aria-invalid={Boolean(errors.automation)}
+          aria-describedby={errors.automation ? "automation-error" : undefined}
           id="automation"
           name="automation"
           value={formData.automation}
@@ -764,7 +804,7 @@ export default function ContactForm() {
           placeholder="We want to automate..."
         />
         {errors.automation && (
-          <p className="text-sm text-red-500 mt-1">{errors.automation}</p>
+          <p id="automation-error" className="text-sm text-red-300 mt-1">{errors.automation}</p>
         )}
       </div>
 
@@ -854,10 +894,14 @@ export default function ContactForm() {
         </select>
       </div>
 
+<<<<<<< HEAD
       <p className="text-sm leading-relaxed text-secondary-text">
         We use your details to respond to your inquiry. Read our{" "}
         <Link href="/privacy-policy" className="text-foreground underline underline-offset-4">Privacy Policy</Link>.
       </p>
+=======
+      {submitError && <p role="alert" className="text-sm text-red-300">{submitError}</p>}
+>>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
       <button
         type="submit"
         disabled={isSubmitting}

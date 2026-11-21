@@ -16,7 +16,7 @@ export default function CustomCursor() {
 
   useEffect(() => {
     if (
-      window.matchMedia("(max-width: 768px)").matches ||
+      window.matchMedia("(pointer: coarse)").matches ||
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) {
       return;
@@ -44,18 +44,12 @@ export default function CustomCursor() {
     };
   }, [cursorX, cursorY]);
 
-  if (
-    typeof window !== "undefined" &&
-    (window.matchMedia("(max-width: 768px)").matches ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-  ) {
-    return null;
-  }
 
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 z-[9999] pointer-events-none"
+        aria-hidden="true"
+        className="hidden md:block fixed top-0 left-0 z-[9999] pointer-events-none"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,

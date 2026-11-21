@@ -72,10 +72,10 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 pb-8 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-2">
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
+      <div className="w-full min-w-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Left Content */}
-          <div className="text-center lg:text-left">
+          <div className="min-w-0 text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -98,7 +98,11 @@ export default function Hero() {
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6"
             >
               {/* Line 1 - White */}
+<<<<<<< HEAD
               <span className="block h-[1.2em] leading-[1.2] text-foreground">
+=======
+              <span className="block leading-[1.2] text-white">
+>>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
                 Build Smarter.
               </span>
 
@@ -130,9 +134,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-3xl lg:text-4xl xl:text-4xl font-bold leading-tight mb-6"
+              className="text-2xl sm:text-3xl lg:text-4xl xl:text-4xl font-bold leading-tight mb-6"
             >
+<<<<<<< HEAD
               <span className="block h-[1.2em] leading-[1.2] text-foreground">
+=======
+              <span className="block leading-[1.2] text-white">
+>>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
                 Innovate Automate Dominate.
               </span>
             </motion.h3>
@@ -162,7 +170,7 @@ export default function Hero() {
                   boxShadow: "0 10px 30px rgb(var(--primary) / 0.3)",
                 }}
               >
-                <span className="flex items-center gap-2">
+                <span className="flex items-center justify-center gap-2">
                   Book a Strategy Call
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
@@ -180,7 +188,11 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
+<<<<<<< HEAD
               className="mt-8 flex items-center justify-center lg:justify-start gap-3 text-sm text-muted"
+=======
+              className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3 text-sm text-zinc-500"
+>>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
             >
               <Zap
                 className="w-4 h-4"

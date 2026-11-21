@@ -29,7 +29,132 @@ const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
 const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
 const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
+<<<<<<< HEAD
 const serviceIcons = { Zap, Bot, Globe, Code, SearchCheck, Users, Network, Settings, Puzzle, Rocket, Sparkles, Gauge };
+=======
+const services = [
+  {
+    number: "01",
+    icon: Zap,
+    title: "AI Automation",
+    description:
+      "Automate repetitive business processes using AI, intelligent workflows, and connected systems.",
+    href: "/services#ai-automation",
+    category: "Core Systems",
+    features: [
+      "Workflow automation",
+      "Process optimization",
+      "Tool integration",
+      "Scalable systems",
+    ],
+  },
+  {
+    number: "02",
+    icon: Bot,
+    title: "AI Agents",
+    description:
+      "Build intelligent AI agents that understand context, use tools, and perform business tasks.",
+    href: "/services#ai-agents",
+    category: "Intelligence",
+    features: [
+      "Context-aware reasoning",
+      "Tool usage",
+      "Autonomous operation",
+      "Multi-agent systems",
+    ],
+  },
+  {
+    number: "03",
+    icon: Globe,
+    title: "AI-Powered Web Applications",
+    description:
+      "Build intelligent websites, portals, dashboards, and custom web applications powered by AI.",
+    href: "/services#ai-web-applications",
+    category: "Development",
+    features: [
+      "AI websites",
+      "Customer portals",
+      "Business apps",
+      "Intelligent dashboards",
+    ],
+  },
+  {
+    number: "04",
+    icon: Code,
+    title: "Custom AI & SaaS Development",
+    description:
+      "Design and build scalable AI-powered software, SaaS platforms, internal tools, and custom systems.",
+    href: "/services#custom-ai-saas-development",
+    category: "Engineering",
+    features: [
+      "SaaS platforms",
+      "Custom software",
+      "API development",
+      "Infrastructure",
+    ],
+  },
+  {
+    number: "05",
+    icon: SearchCheck,
+    title: "AI Strategy & Automation Audit",
+    description:
+      "Identify high-impact AI opportunities, eliminate bottlenecks, and create a practical implementation roadmap.",
+    href: "/services#ai-automation-audit",
+    category: "Strategy",
+    features: [
+      "Opportunity mapping",
+      "Process analysis",
+      "ROI assessment",
+      "Roadmap creation",
+    ],
+  },
+  {
+    number: "06",
+    icon: Users,
+    title: "AI Consultancy",
+    description:
+      "Expert guidance on AI adoption, strategy, technology selection, and implementation best practices.",
+    href: "/services#ai-automation-audit",
+    category: "Advisory",
+    features: [
+      "Technology selection",
+      "AI adoption strategy",
+      "Best practices",
+      "Vendor evaluation",
+    ],
+  },
+  {
+    number: "07",
+    icon: Network,
+    title: "AI Integration",
+    description:
+      "Seamlessly integrate AI capabilities into your existing systems, tools, and business workflows.",
+    href: "/services#ai-automation",
+    category: "Integration",
+    features: [
+      "API integration",
+      "System connectivity",
+      "Data pipelines",
+      "Workflow embedding",
+    ],
+  },
+  {
+    number: "08",
+    icon: Settings,
+    title: "AI Systems Maintenance",
+    description:
+      "Monitor, maintain, optimize, and continuously improve AI systems and automations.",
+    href: "/services#ai-maintenance",
+    category: "Operations",
+    features: [
+      "24/7 monitoring",
+      "Performance tuning",
+      "Continuous updates",
+      "Technical support",
+    ],
+  },
+];
+>>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
 
 export default function ServicesSection({ services }: { services: PublicService[] }) {
   const [hoveredService, setHoveredService] = useState<string | null>(null);

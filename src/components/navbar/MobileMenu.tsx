@@ -1,6 +1,7 @@
 // components/navbar/MobileMenu.tsx
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { X, ArrowRight, Zap } from "lucide-react";
@@ -11,6 +12,33 @@ const PRIMARY_DARK = "rgb(var(--primary) / 0.3)";
 const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 export default function MobileMenu({ onClose }: { onClose: () => void }) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const focusable = () => Array.from(panelRef.current?.querySelectorAll<HTMLElement>('a[href], button') ?? []);
+    focusable()[0]?.focus();
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+      if (event.key !== "Tab") return;
+      const items = focusable();
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const handleResize = () => { if (desktop.matches) onClose(); };
+    desktop.addEventListener("change", handleResize);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKey);
+      desktop.removeEventListener("change", handleResize);
+      previousFocus?.focus();
+    };
+  }, [onClose]);
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
@@ -25,7 +53,11 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+<<<<<<< HEAD
       className="fixed inset-0 top-14 z-40 md:top-16 lg:hidden"
+=======
+      className="fixed inset-0 z-[60] lg:hidden"
+>>>>>>> ac30c2a607d97b3877acfbf927d7e1666aee63f1
     >
       <div
         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
@@ -33,6 +65,11 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
       />
 
       <motion.div
+        ref={panelRef}
+        id="mobile-navigation"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Main navigation"
         initial={{ x: "100%" }}
         animate={{ x: 0 }}
         exit={{ x: "100%" }}
