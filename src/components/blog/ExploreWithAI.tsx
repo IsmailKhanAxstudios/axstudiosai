@@ -43,7 +43,7 @@ export default function ExploreWithAI({ articleUrl, compact = false, company = f
     }
 
     function dismissOnEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") {
+      if (event.key === "Escape" && !event.defaultPrevented) {
         setOpen(false);
         trigger.current?.focus();
       }
@@ -71,7 +71,7 @@ export default function ExploreWithAI({ articleUrl, compact = false, company = f
       id={panelId}
       aria-labelledby={headingId}
       className={company
-        ? "absolute right-full top-1/2 mr-2 max-h-[85dvh] w-[min(15rem,calc(100vw-4.5rem))] -translate-y-1/2 overflow-y-auto rounded-2xl border border-foreground/15 bg-surface p-3 shadow-xl"
+        ? "absolute right-full top-1/2 mr-2 max-h-[70dvh] w-[min(15rem,calc(100vw-4.5rem))] -translate-y-1/2 overflow-y-auto rounded-2xl border border-foreground/15 bg-surface p-3 shadow-xl"
         : compact ? "border-b border-foreground/10 px-3 py-1.5"
         : "mt-6 rounded-2xl border border-foreground/10 bg-surface/70 p-4 sm:p-5"}
     >
@@ -121,7 +121,7 @@ export default function ExploreWithAI({ articleUrl, compact = false, company = f
   if (!company) return panel;
 
   return (
-    <div ref={launcher} className="fixed right-2 top-1/2 z-30 -translate-y-1/2 sm:right-4">
+    <div ref={launcher} className="relative">
       <button
         ref={trigger}
         type="button"
@@ -133,7 +133,7 @@ export default function ExploreWithAI({ articleUrl, compact = false, company = f
           if (!open) setClipboardStatus("idle");
           setOpen(!open);
         }}
-        className="grid size-11 cursor-pointer place-items-center rounded-full border border-background bg-[rgb(var(--primary))] text-[#24100b] ring-2 ring-[rgb(var(--primary)/0.35)] shadow-[0_4px_16px_rgb(0_0_0/0.24)] transition-[transform,box-shadow,filter] hover:scale-105 hover:brightness-110 active:scale-95 motion-reduce:transform-none motion-reduce:transition-none"
+        className="grid size-11 shrink-0 place-items-center rounded-xl border border-foreground/10 shadow-md transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[rgb(var(--accent-text))] bg-[rgb(var(--primary))] text-[#24100b] hover:brightness-110"
       >
         {open ? <X className="size-5" aria-hidden="true" /> : <Sparkles className="size-5" aria-hidden="true" />}
       </button>

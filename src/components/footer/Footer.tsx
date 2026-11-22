@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { whatsappUrl } from "@/lib/site";
+import { linkedinUrl, whatsappUrl } from "@/lib/site";
 import { ArrowUpRight, Mail, MessageCircle, Phone, Zap } from "lucide-react";
 
 const PRIMARY = "rgb(var(--primary))";
@@ -157,7 +157,7 @@ export default function Footer() {
             </p>
             <nav aria-label="AxStudios social links" className="flex items-center gap-2">
               <a
-                href="https://www.linkedin.com/company/axstudioss/"
+                href={linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="AxStudios on LinkedIn"

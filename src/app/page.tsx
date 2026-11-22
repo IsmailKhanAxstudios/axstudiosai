@@ -5,7 +5,6 @@ import ServicesSection from "@/components/sections/ServicesSection";
 import AIWorkflowCanvas from "@/components/sections/AIWorkflowCanvas";
 import ProductsSection from "@/components/sections/ProductsSection";
 import ProcessSection from "@/components/sections/ProcessSection";
-import ExploreWithAI from "@/components/blog/ExploreWithAI";
 import { connection } from "next/server";
 import { getPublicServices } from "@/lib/catalogStore";
 import { pageMetadata } from "@/lib/seo";
@@ -19,7 +18,6 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
-      <ExploreWithAI company />
       <ServicesSection services={services} />
       <AIWorkflowCanvas />
       <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">

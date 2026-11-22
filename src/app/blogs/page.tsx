@@ -43,7 +43,6 @@ export default async function BlogsPage({
             Perspectives on AI, technology, business, and markets.
           </p>
         </header>
-        <ExploreWithAI company />
         <nav
           aria-label="Blog categories"
           className="mb-9 -mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 sm:pb-0"

@@ -7,7 +7,7 @@ import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import Background from "@/components/ui/Background";
 import CustomCursor from "@/components/ui/CustomCursor";
-import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import FloatingTools from "@/components/ui/SocialLauncher";
 import { themeInitScript } from "@/lib/theme";
 import { siteOrigin } from "@/lib/site";
 import { organizationId, websiteId } from "@/lib/seo";
@@ -73,7 +73,7 @@ export default function RootLayout({
         <CustomCursor />
         <Navbar />
         <main>{children}</main>
-        <WhatsAppButton />
+        <FloatingTools />
         <Footer />
       </body>
     </html>
