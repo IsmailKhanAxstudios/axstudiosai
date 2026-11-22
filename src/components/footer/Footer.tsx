@@ -2,7 +2,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Mail, Sparkles, Zap } from "lucide-react";
+import { whatsappUrl } from "@/lib/site";
+import { ArrowUpRight, Mail, MessageCircle, Phone, Zap } from "lucide-react";
 
 const PRIMARY = "rgb(var(--primary))";
 const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
@@ -46,7 +47,6 @@ export default function Footer() {
             <p className="text-secondary-text text-sm">
               AI automation systems for ambitious businesses.
             </p>
-
 
           </div>
 
@@ -155,6 +155,31 @@ export default function Footer() {
             <p className="text-sm text-muted">
               © {currentYear} AxStudios. All rights reserved.
             </p>
+            <nav aria-label="AxStudios social links" className="flex items-center gap-2">
+              <a
+                href="https://www.linkedin.com/company/axstudioss/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="AxStudios on LinkedIn"
+                title="LinkedIn"
+                className="grid size-11 place-items-center rounded-full border border-foreground/15 text-foreground transition-colors hover:bg-foreground/5 hover:text-[rgb(var(--accent-text))]"
+              >
+                <span aria-hidden="true" className="rounded-sm bg-current px-0.5">
+                  <span className="block text-sm font-bold leading-4 text-background">in</span>
+                </span>
+              </a>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Chat with AxStudios on WhatsApp"
+                title="WhatsApp"
+                className="relative grid size-11 place-items-center rounded-full border border-foreground/15 text-foreground transition-colors hover:bg-foreground/5 hover:text-[rgb(var(--accent-text))]"
+              >
+                <MessageCircle className="size-5" aria-hidden="true" />
+                <Phone className="absolute size-2.5" aria-hidden="true" />
+              </a>
+            </nav>
 
           </div>
         </div>
