@@ -44,7 +44,10 @@ export default async function BlogsPage({
           </p>
         </header>
         <ExploreWithAI company />
-        <nav aria-label="Blog categories" className="mb-9 flex flex-wrap justify-center gap-2">
+        <nav
+          aria-label="Blog categories"
+          className="mb-9 -mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 sm:pb-0"
+        >
           {[undefined, ...categories].map((topic) => {
             const selected = topic === active;
 
@@ -54,7 +57,7 @@ export default async function BlogsPage({
                 href={topic ? `/blogs?category=${encodeURIComponent(topic.toLowerCase())}` : "/blogs"}
                 scroll={false}
                 aria-current={selected ? "page" : undefined}
-                className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+                className={`shrink-0 snap-start rounded-full border px-3 py-2 text-xs font-medium transition-colors sm:px-4 sm:text-sm ${
                   selected
                     ? "bg-[rgb(var(--primary)/0.1)] text-[rgb(var(--accent-text))] [border-color:rgb(var(--primary)/0.45)]"
                     : "border-foreground/10 bg-surface/70 text-secondary-text hover:bg-foreground/5 hover:text-foreground"

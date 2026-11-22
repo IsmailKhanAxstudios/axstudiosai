@@ -12,14 +12,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, message: "Invalid form data" }, { status: 400 });
     }
     const input = body as Record<string, unknown>;
-    const fields = ["name", "email", "company", "phone", "website", "business", "automation", "projectSize", "timeline", "interest"];
+    const fields = ["name", "email", "company", "phone", "website", "linkedin", "instagram", "x", "business", "automation", "projectSize", "timeline", "interest"];
     for (const field of fields) {
       const value = input[field];
       if (value !== undefined && (typeof value !== "string" || value.length > 5000)) {
         return NextResponse.json({ success: false, message: "Invalid or oversized form field" }, { status: 400 });
       }
     }
-    for (const field of ["name", "email", "business", "automation"]) {
+    for (const field of ["name", "email"]) {
       if (typeof input[field] !== "string" || !(input[field] as string).trim()) {
         return NextResponse.json({ success: false, message: "Required fields are missing" }, { status: 400 });
       }
@@ -53,6 +53,9 @@ export async function POST(request: Request) {
       company,
       phone,
       website,
+      linkedin,
+      instagram,
+      x,
       business,
       automation,
       projectSize,
@@ -235,6 +238,21 @@ export async function POST(request: Request) {
                         : "Not provided"
                     }
                   </td>
+                </tr>
+
+                <tr>
+                  <td style="padding: 16px; color: #777777; font-size: 13px;">LinkedIn</td>
+                  <td style="padding: 16px; color: #ffffff; font-size: 14px;">${linkedin || "Not provided"}</td>
+                </tr>
+
+                <tr>
+                  <td style="padding: 16px; color: #777777; font-size: 13px;">Instagram</td>
+                  <td style="padding: 16px; color: #ffffff; font-size: 14px;">${instagram || "Not provided"}</td>
+                </tr>
+
+                <tr>
+                  <td style="padding: 16px; color: #777777; font-size: 13px;">X / Twitter</td>
+                  <td style="padding: 16px; color: #ffffff; font-size: 14px;">${x || "Not provided"}</td>
                 </tr>
 
               </table>

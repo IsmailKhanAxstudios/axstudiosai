@@ -17,6 +17,9 @@ export default function ContactForm() {
     email: "",
     phone: "",
     website: "",
+    linkedin: "",
+    instagram: "",
+    x: "",
     business: "",
     automation: "",
     projectSize: "",
@@ -39,11 +42,6 @@ export default function ContactForm() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Invalid email address";
     }
-    if (!formData.business.trim())
-      newErrors.business = "Please describe your business";
-    if (!formData.automation.trim())
-      newErrors.automation = "Please describe what you'd like to automate";
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -69,6 +67,9 @@ export default function ContactForm() {
         company: formData.company || "N/A",
         phone: formData.phone || "N/A",
         website: formData.website || "N/A",
+        linkedin: formData.linkedin || "N/A",
+        instagram: formData.instagram || "N/A",
+        x: formData.x || "N/A",
         business: formData.business,
         automation: formData.automation,
         interest: formData.interest || "N/A",
@@ -151,6 +152,9 @@ export default function ContactForm() {
               email: "",
               phone: "",
               website: "",
+              linkedin: "",
+              instagram: "",
+              x: "",
               business: "",
               automation: "",
               projectSize: "",
@@ -293,30 +297,49 @@ export default function ContactForm() {
         />
       </div>
 
+      <fieldset className="space-y-3">
+        <legend className="text-sm text-secondary-text">Social profiles (optional)</legend>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {([
+            ["linkedin", "LinkedIn", "https://linkedin.com/in/your-name"],
+            ["instagram", "Instagram", "@yourhandle"],
+            ["x", "X / Twitter", "@yourhandle"],
+          ] as const).map(([name, label, placeholder]) => (
+            <div key={name}>
+              <label htmlFor={name} className="mb-2 block text-sm text-secondary-text">{label}</label>
+              <input
+                type="text"
+                id={name}
+                name={name}
+                value={formData[name]}
+                onChange={handleChange}
+                className="w-full rounded-lg border border-line bg-field/50 px-4 py-3 text-foreground transition-colors placeholder:text-muted focus:outline-none focus:ring-1"
+                style={{ borderColor: PRIMARY_DARK, "--tw-ring-color": PRIMARY } as React.CSSProperties}
+                onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
+                onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
+                placeholder={placeholder}
+              />
+            </div>
+          ))}
+        </div>
+      </fieldset>
+
       <div>
         <label htmlFor="business" className="block text-sm mb-2 text-secondary-text">
-          What does your business do? *
+          What does your business do? (optional)
         </label>
         <textarea
-          required
-          aria-invalid={Boolean(errors.business)}
-          aria-describedby={errors.business ? "business-error" : undefined}
           id="business"
           name="business"
           value={formData.business}
           onChange={handleChange}
           rows={3}
-          className={`w-full px-4 py-3 rounded-lg bg-field/50 border ${
-            errors.business ? "border-red-500" : "border-line"
-          } focus:outline-none focus:ring-1 transition-colors resize-none text-foreground placeholder:text-muted`}
-          style={{ borderColor: errors.business ? undefined : PRIMARY_DARK }}
+          className="w-full rounded-lg border border-line bg-field/50 px-4 py-3 text-foreground transition-colors placeholder:text-muted focus:outline-none focus:ring-1 resize-none"
+          style={{ borderColor: PRIMARY_DARK, "--tw-ring-color": PRIMARY } as React.CSSProperties}
           onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
           onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
           placeholder="We provide..."
         />
-        {errors.business && (
-          <p id="business-error" className="text-sm text-red-300 mt-1">{errors.business}</p>
-        )}
       </div>
 
       <div>
@@ -324,28 +347,20 @@ export default function ContactForm() {
           htmlFor="automation"
           className="block text-sm mb-2 text-secondary-text"
         >
-          What would you like to automate? *
+          What would you like to automate? (optional)
         </label>
         <textarea
-          required
-          aria-invalid={Boolean(errors.automation)}
-          aria-describedby={errors.automation ? "automation-error" : undefined}
           id="automation"
           name="automation"
           value={formData.automation}
           onChange={handleChange}
           rows={3}
-          className={`w-full px-4 py-3 rounded-lg bg-field/50 border ${
-            errors.automation ? "border-red-500" : "border-line"
-          } focus:outline-none focus:ring-1 transition-colors resize-none text-foreground placeholder:text-muted`}
-          style={{ borderColor: errors.automation ? undefined : PRIMARY_DARK }}
+          className="w-full rounded-lg border border-line bg-field/50 px-4 py-3 text-foreground transition-colors placeholder:text-muted focus:outline-none focus:ring-1 resize-none"
+          style={{ borderColor: PRIMARY_DARK, "--tw-ring-color": PRIMARY } as React.CSSProperties}
           onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
           onBlur={(e) => (e.target.style.borderColor = PRIMARY_DARK)}
           placeholder="We want to automate..."
         />
-        {errors.automation && (
-          <p id="automation-error" className="text-sm text-red-300 mt-1">{errors.automation}</p>
-        )}
       </div>
 
       <div className="grid sm:grid-cols-2 gap-6">

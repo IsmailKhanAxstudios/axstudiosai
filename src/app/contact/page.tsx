@@ -2,7 +2,8 @@ import { pageMetadata } from "@/lib/seo";
 // app/contact/page.tsx
 import ContactForm from '@/components/contact/ContactForm'
 import ContactInfo from '@/components/contact/ContactInfo'
-import { companyLocation, companyPhone, whatsappUrl } from "@/lib/site";
+import { companyLocation, whatsappUrl } from "@/lib/site";
+import { MessageCircle } from "lucide-react";
 
 export const metadata = pageMetadata(
   "/contact",
@@ -21,9 +22,11 @@ export default function ContactPage() {
           <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
             Tell us what you’d like to automate, where AI costs are rising, or what you want to build.
           </p>
-          <p className="mt-3 text-sm text-secondary-text">
-            Headquartered in {companyLocation}. <a href={whatsappUrl} className="font-medium text-foreground underline underline-offset-4">WhatsApp {companyPhone}</a>
-          </p>
+          <p className="mt-3 text-sm text-secondary-text">Headquartered in {companyLocation}.</p>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#137640] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0c5d31]">
+            <MessageCircle className="size-4" aria-hidden="true" />
+            Chat with us on WhatsApp
+          </a>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">

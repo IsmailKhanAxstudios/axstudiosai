@@ -15,17 +15,17 @@ export default async function ProductsSection({ preview = false }: { preview?: b
       className={preview ? "relative pb-8 pt-14 sm:pt-16" : "relative pb-16 pt-28 sm:pt-32"}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <header className="mx-auto mb-8 max-w-2xl text-center">
-          <Heading id="products-heading" className="text-3xl font-bold text-foreground lg:text-5xl">
+        <header className="mx-auto mb-8 max-w-2xl px-2 text-center sm:mb-10">
+          <Heading id="products-heading" className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
             Our <span className="text-[rgb(var(--accent-text))]">Products</span>
           </Heading>
-          <p className="mt-4 text-lg text-secondary-text">Explore the products we build at AxStudios.</p>
+          <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-secondary-text sm:mt-4 sm:text-lg">Explore the products we build at AxStudios.</p>
         </header>
 
-        <ul className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 sm:gap-5">
+        <ul className="mx-auto grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
           {visibleProducts.map(({ name, image, imageAlt, description, sample, website }) => (
             <li key={name} className="overflow-hidden rounded-2xl border bg-surface/80 [border-color:rgb(var(--primary)/0.25)]">
-              <div className="relative aspect-[16/8] overflow-hidden border-b border-foreground/10 bg-field">
+              <div className="relative aspect-[16/9] overflow-hidden border-b border-foreground/10 bg-field sm:aspect-[16/8]">
                 <Image
                   src={image}
                   unoptimized={image.startsWith("https://")}
@@ -35,9 +35,9 @@ export default async function ProductsSection({ preview = false }: { preview?: b
                   className="object-cover"
                 />
               </div>
-              <div className="px-5 py-4">
+              <div className="p-4 sm:px-5 sm:py-5">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <ProductHeading className="text-xl font-semibold text-foreground">{name}</ProductHeading>
+                  <ProductHeading className="min-w-0 break-words text-lg font-semibold text-foreground sm:text-xl">{name}</ProductHeading>
                   {sample && <span className="rounded-full border border-foreground/10 px-2.5 py-1 text-xs text-secondary-text">Sample concept</span>}
                 </div>
                 {description && <p className="mt-2 text-sm leading-relaxed text-secondary-text">{description}</p>}
