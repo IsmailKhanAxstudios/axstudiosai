@@ -11,8 +11,8 @@ import { siteOrigin } from "@/lib/site";
 
 export const metadata = pageMetadata(
   "/blogs",
-  "AI, Business & Markets Blog",
-  "Explore AxStudios articles on AI innovation, software development, business, finance, stocks, and commodities.",
+  "AI, Software Development & Markets Blog",
+  "Read AxStudios articles on AI tools, software development, product engineering, and business trends, alongside coverage of stocks and commodities.",
 );
 
 export default async function BlogsPage({
@@ -37,10 +37,10 @@ export default async function BlogsPage({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <header className="mx-auto mb-8 max-w-2xl text-center">
           <h1 id="blogs-heading" className="text-3xl font-bold text-foreground lg:text-5xl">
-            Our <span className="text-[rgb(var(--accent-text))]">Blogs</span>
+            AI, Software &amp; <span className="text-[rgb(var(--accent-text))]">Markets Blog</span>
           </h1>
           <p className="mt-4 text-lg text-secondary-text">
-            Perspectives on AI, technology, business, and markets.
+            Articles on AI tools, software development, product engineering, and the business and market trends shaping technology.
           </p>
         </header>
         <nav

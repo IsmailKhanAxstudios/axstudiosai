@@ -10,8 +10,8 @@ import ProjectExamples from "@/components/sections/ProjectExamples";
 
 export const metadata = pageMetadata(
   "/solutions",
-  "AI Automation Solutions, Use Cases & ROI",
-  "Explore AI workflow demos, business automation use cases, and case studies. Estimate time and cost savings with the AI automation ROI calculator.",
+  "AI Workflow Automation Solutions & ROI Calculator",
+  "Explore AI automation for lead routing, customer support, and back-office operations. Try workflow demos and estimate savings with our ROI calculator.",
 );
 
 export default async function SolutionsPage() {
@@ -20,7 +20,7 @@ export default async function SolutionsPage() {
     <>
       <header className="relative mx-auto max-w-3xl px-4 pt-28 text-center sm:pt-32">
         <h1 className="text-3xl font-bold sm:text-5xl">AI Automation <span className="text-[rgb(var(--accent-text))]">Solutions</span></h1>
-        <p className="mt-4 text-lg text-secondary-text">Explore use cases for sales, support, and operations, then estimate the value of automating a workflow.</p>
+        <p className="mt-4 text-lg text-secondary-text">See how sales teams can route leads, support teams can triage tickets, and operations teams can automate repetitive handoffs. Try a workflow demo or estimate potential time and cost savings.</p>
       </header>
       <UseCases />
       <CaseStudiesSection />

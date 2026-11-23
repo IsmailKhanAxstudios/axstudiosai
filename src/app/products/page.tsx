@@ -5,8 +5,8 @@ import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
 
 export const metadata = pageMetadata(
   "/products",
-  "Software Products & Micro-SaaS",
-  "Explore software products from AxStudios, including DomiumPro for property management, and preview micro-SaaS product concepts.",
+  "Property Management Software & Micro-SaaS Products",
+  "Explore DomiumPro property management software and AxStudios micro-SaaS concepts for workflow approvals, project briefs, and product feedback.",
 );
 
 export default async function ProductsPage() {

@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import StructuredData from "@/components/ui/StructuredData";
 import { getPublicServices } from "@/lib/catalogStore";
 import { absoluteUrl, breadcrumbData, organizationId, pageMetadata } from "@/lib/seo";
-import { serviceDetails } from "@/lib/serviceDetails";
+import { serviceDetails, serviceSearchContent } from "@/lib/serviceDetails";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -15,8 +15,11 @@ async function findService(slug: string) {
 }
 
 export async function generateMetadata({ params }: Props) {
-  const service = await findService((await params).slug);
-  return service ? pageMetadata(service.href, `${service.title} Services`, service.description) : {};
+  const { slug } = await params;
+  const service = await findService(slug);
+  if (!service) return {};
+  const content = serviceSearchContent[slug];
+  return pageMetadata(service.href, content?.title ?? service.title, service.description);
 }
 
 export default async function ServicePage({ params }: Props) {
@@ -24,6 +27,7 @@ export default async function ServicePage({ params }: Props) {
   const service = await findService(slug);
   if (!service) notFound();
   const details = serviceDetails[slug];
+  const content = serviceSearchContent[slug];
 
   return (
     <article className="relative mx-auto max-w-4xl px-4 pb-20 pt-28 sm:px-6 sm:pt-32">
@@ -44,6 +48,12 @@ export default async function ServicePage({ params }: Props) {
         <p className="mt-4 text-lg leading-relaxed text-secondary-text">{service.description}</p>
       </header>
       <div className="space-y-4">
+        {content && (
+          <section className="rounded-2xl border border-foreground/10 bg-surface/80 p-5 sm:p-6">
+            <h2 className="text-xl font-semibold">What you could build</h2>
+            <p className="mt-2 leading-relaxed text-secondary-text">{content.example}</p>
+          </section>
+        )}
         {details && (
           <section className="rounded-2xl border border-foreground/10 bg-surface/80 p-5 sm:p-6">
             <h2 className="text-xl font-semibold">Who is this service for?</h2>

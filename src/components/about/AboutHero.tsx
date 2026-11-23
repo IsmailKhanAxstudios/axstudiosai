@@ -105,7 +105,8 @@ export default function AboutHero() {
           >
             AxStudios is an AI agency headquartered in Dubai, United Arab
             Emirates. We help businesses automate workflows, control AI costs,
-            and build custom software they can put into production.
+            and build custom AI agents, web applications, and SaaS products they
+            can put into production.
           </motion.p>
 
           {/* Stats */}

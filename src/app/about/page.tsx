@@ -5,8 +5,8 @@ import Mission from "@/components/about/Mission";
 import Philosophy from "@/components/about/Philosophy";
 export const metadata = pageMetadata(
   "/about",
-  "About Our Dubai AI Agency",
-  "AxStudios is an AI agency headquartered in Dubai, United Arab Emirates. We build AI automation, custom AI agents, and software for businesses.",
+  "About Our Dubai AI Automation Agency",
+  "Meet AxStudios, a Dubai-based AI automation and software development agency building custom AI agents, business integrations, and SaaS products.",
 );
 
 export default function AboutPage() {

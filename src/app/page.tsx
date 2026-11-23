@@ -9,8 +9,8 @@ import { connection } from "next/server";
 import { getPublicServices } from "@/lib/catalogStore";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata("/", "AI Agency in Dubai for Automation, AI Cost Optimization & MVPs",
-  "AxStudios is a Dubai AI agency helping businesses automate workflows, optimize AI costs, and build custom AI software, SaaS products, and launch-ready MVPs.");
+export const metadata = pageMetadata("/", "AI Automation Agency in Dubai",
+  "AxStudios builds custom AI agents, workflow automation, and AI software in Dubai. Explore AI audits, LLM cost optimization, and SaaS development.");
 
 export default async function HomePage() {
   await connection();
@@ -25,7 +25,7 @@ export default async function HomePage() {
           href="/solutions"
           className="inline-flex items-center gap-2 rounded-full border border-foreground/20 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-foreground/5"
         >
-          Explore more solutions
+          Explore workflow automation solutions
           <ArrowRight className="size-4" aria-hidden="true" />
         </Link>
       </div>

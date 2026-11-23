@@ -15,7 +15,7 @@ async function getService() {
 
 export async function generateMetadata(): Promise<Metadata> {
   const service = await getService();
-  return service ? pageMetadata(service.href, "AI Cost Optimization Agency & LLM Performance", service.description) : {};
+  return service ? pageMetadata(service.href, "LLM Cost Optimization & AI FinOps", "Reduce LLM API costs and latency with model routing, prompt caching, and token usage analysis. Benchmark changes against your current AI workflows.") : {};
 }
 
 export default async function AICostOptimizationPage() {

@@ -19,7 +19,7 @@ export default async function ProductsSection({ preview = false }: { preview?: b
           <Heading id="products-heading" className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
             Our <span className="text-[rgb(var(--accent-text))]">Products</span>
           </Heading>
-          <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-secondary-text sm:mt-4 sm:text-lg">Explore the products we build at AxStudios.</p>
+          <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-secondary-text sm:mt-4 sm:text-lg">Explore DomiumPro for property management and see our micro-SaaS concepts for team approvals, project briefs, and product feedback.</p>
         </header>
 
         <ul className="mx-auto grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">

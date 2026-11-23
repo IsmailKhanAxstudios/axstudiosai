@@ -1,4 +1,6 @@
 import { pageMetadata } from "@/lib/seo";
+import { connection } from "next/server";
+import { getPublicServices } from "@/lib/catalogStore";
 // app/services/page.tsx
 import ServicesSection from "@/components/sections/ServicesSection";
 import AIAgentsSection from "@/components/sections/AIAgentsSection";
@@ -9,14 +11,16 @@ import UseCases from "@/components/sections/UseCases";
 import AISystemsMaintenance from "@/components/sections/AISystemMainetnance";
 export const metadata = pageMetadata(
   "/services",
-  "AI Automation, Cost Optimization & MVP Services",
-  "Explore AxStudios AI agency services, including AI cost optimization, AI audits, AI automation, AI agents, SaaS and MVP development, and Chrome extensions.",
+  "AI Automation & Custom Software Services",
+  "Explore AxStudios services in Dubai, from workflow automation, AI agent development, and AI audits to LLM cost optimization, custom SaaS, and MVP builds.",
 );
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  await connection();
+  const services = await getPublicServices();
   return (
     <>
-      <ServicesSection />
+      <ServicesSection services={services} directory />
       <div id="ai-automation" className="scroll-mt-24"><UseCases /></div>
       <div id="ai-agents" className="scroll-mt-24"><AIAgentsSection /></div>
       <div id="ai-web-applications" className="scroll-mt-24"><AIWebApplications /></div>

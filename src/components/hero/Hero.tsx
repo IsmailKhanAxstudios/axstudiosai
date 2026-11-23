@@ -142,9 +142,9 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg text-foreground/70 mb-8 max-w-xl mx-auto lg:mx-0"
             >
-              AxStudios designs and builds intelligent AI automation systems
-              that eliminate repetitive work, connect your tools, and help your
-              business operate at a completely different level.
+              AxStudios is an AI automation agency in Dubai. We build custom AI
+              agents, connect CRMs and business tools, and automate workflows
+              for sales, customer support, and operations.
             </motion.p>
 
             <motion.div

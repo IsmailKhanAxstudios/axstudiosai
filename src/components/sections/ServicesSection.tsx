@@ -31,122 +31,8 @@ const PRIMARY_GLOW = "rgb(var(--primary) / 0.5)";
 
 const serviceIcons = { Zap, Bot, Code, Puzzle, Rocket, Settings, Globe, SearchCheck, Users, Network, Sparkles, Gauge };
 
-const incomingServices: PublicService[] = [
-  {
-    icon: "Zap",
-    title: "AI Automation",
-    description:
-      "Automate repetitive business processes using AI, intelligent workflows, and connected systems.",
-    href: "/services#ai-automation",
-    category: "Core Systems",
-    features: [
-      "Workflow automation",
-      "Process optimization",
-      "Tool integration",
-      "Scalable systems",
-    ],
-  },
-  {
-    icon: "Bot",
-    title: "AI Agents",
-    description:
-      "Build intelligent AI agents that understand context, use tools, and perform business tasks.",
-    href: "/services#ai-agents",
-    category: "Intelligence",
-    features: [
-      "Context-aware reasoning",
-      "Tool usage",
-      "Autonomous operation",
-      "Multi-agent systems",
-    ],
-  },
-  {
-    icon: "Globe",
-    title: "AI-Powered Web Applications",
-    description:
-      "Build intelligent websites, portals, dashboards, and custom web applications powered by AI.",
-    href: "/services#ai-web-applications",
-    category: "Development",
-    features: [
-      "AI websites",
-      "Customer portals",
-      "Business apps",
-      "Intelligent dashboards",
-    ],
-  },
-  {
-    icon: "Code",
-    title: "Custom AI & SaaS Development",
-    description:
-      "Design and build scalable AI-powered software, SaaS platforms, internal tools, and custom systems.",
-    href: "/services#custom-ai-saas-development",
-    category: "Engineering",
-    features: [
-      "SaaS platforms",
-      "Custom software",
-      "API development",
-      "Infrastructure",
-    ],
-  },
-  {
-    icon: "SearchCheck",
-    title: "AI Strategy & Automation Audit",
-    description:
-      "Identify high-impact AI opportunities, eliminate bottlenecks, and create a practical implementation roadmap.",
-    href: "/services#ai-automation-audit",
-    category: "Strategy",
-    features: [
-      "Opportunity mapping",
-      "Process analysis",
-      "ROI assessment",
-      "Roadmap creation",
-    ],
-  },
-  {
-    icon: "Users",
-    title: "AI Consultancy",
-    description:
-      "Expert guidance on AI adoption, strategy, technology selection, and implementation best practices.",
-    href: "/services#ai-automation-audit",
-    category: "Advisory",
-    features: [
-      "Technology selection",
-      "AI adoption strategy",
-      "Best practices",
-      "Vendor evaluation",
-    ],
-  },
-  {
-    icon: "Network",
-    title: "AI Integration",
-    description:
-      "Seamlessly integrate AI capabilities into your existing systems, tools, and business workflows.",
-    href: "/services#ai-automation",
-    category: "Integration",
-    features: [
-      "API integration",
-      "System connectivity",
-      "Data pipelines",
-      "Workflow embedding",
-    ],
-  },
-  {
-    icon: "Settings",
-    title: "AI Systems Maintenance",
-    description:
-      "Monitor, maintain, optimize, and continuously improve AI systems and automations.",
-    href: "/services#ai-maintenance",
-    category: "Operations",
-    features: [
-      "24/7 monitoring",
-      "Performance tuning",
-      "Continuous updates",
-      "Technical support",
-    ],
-  },
-];
-
-export default function ServicesSection({ services = incomingServices }: { services?: PublicService[] }) {
+export default function ServicesSection({ services, directory = false }: { services: PublicService[]; directory?: boolean }) {
+  const Heading = directory ? "h1" : "h2";
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [selectedService, setSelectedService] = useState<string | null>(null);
 
@@ -193,13 +79,15 @@ export default function ServicesSection({ services = incomingServices }: { servi
             <span className="text-sm text-foreground/80">CORE SERVICES</span>
           </motion.div>
 
-          <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight">
-            <span className="text-foreground">AI systems built </span>
-            <span style={{ color: "rgb(var(--accent-text))" }}>around your business.</span>
-          </h2>
+          <Heading className="text-3xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight">
+            <span className="text-foreground">AI automation </span>
+            <span style={{ color: "rgb(var(--accent-text))" }}>
+              {directory ? "and development services" : "for your business."}
+            </span>
+          </Heading>
           <p className="text-lg text-secondary-text max-w-2xl mx-auto">
-            From single workflows to complete automation infrastructure, we
-            build systems that scale.
+            Explore custom AI agents, workflow integrations, AI audits, LLM cost optimization,
+            and SaaS development for new products and internal tools.
           </p>
         </motion.div>
 
@@ -328,7 +216,7 @@ export default function ServicesSection({ services = incomingServices }: { servi
                     className="inline-flex items-center gap-1 text-xs font-medium transition-colors"
                     style={{ color: "rgb(var(--accent-text))" }}
                   >
-                    {service.linkLabel ?? "Explore Service"}
+                    Explore {service.title}
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </motion.div>
