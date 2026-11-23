@@ -35,7 +35,10 @@ export default function OpenGraphImage() {
             AxStudios
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-            <div style={{ fontSize: 62, lineHeight: 1.08, fontWeight: 700, letterSpacing: -2 }}>Build smarter.<br />Automate everything.</div>
+          <div style={{ display: "flex", flexDirection: "column", fontSize: 62, lineHeight: 1.08, fontWeight: 700, letterSpacing: -2 }}>
+              <span style={{ display: "block" }}>Build smarter.</span>
+              <span style={{ display: "block" }}>Automate everything.</span>
+            </div>
             <div style={{ color: "#d0c8c9", fontSize: 25 }}>AI automation · Intelligent software · Dubai</div>
           </div>
           <div style={{ display: "flex", color: "#ff947d", fontSize: 20 }}>axstudios.tech</div>
