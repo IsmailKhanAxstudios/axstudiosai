@@ -20,7 +20,8 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
   const post = await getPublicBlogPost((await params).slug);
   if (!post) return {};
 
-  return articleMetadata(`/blogs/${post.slug}`, post.title, post.summary, post.imageUrl, post.publishedAt);
+  const { tags } = parseBlogArticle(post.content);
+  return articleMetadata(`/blogs/${post.slug}`, post.title, post.summary, post.imageUrl, post.publishedAt, tags);
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {

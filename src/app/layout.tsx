@@ -10,7 +10,7 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import FloatingTools from "@/components/ui/SocialLauncher";
 import { themeInitScript } from "@/lib/theme";
 import { companyPhone, siteOrigin } from "@/lib/site";
-import { organizationId, websiteId } from "@/lib/seo";
+import { homeSearchDescription, homeSearchTitle, organizationId, pageMetadata, websiteId } from "@/lib/seo";
 import StructuredData from "@/components/ui/StructuredData";
 
 const googleTagManagerId = "GTM-PVKJJ2W3";
@@ -36,31 +36,12 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  ...pageMetadata("/", homeSearchTitle, homeSearchDescription),
   metadataBase: new URL(siteOrigin),
   applicationName: "AxStudios",
   creator: "AxStudios",
   publisher: "AxStudios",
   referrer: "strict-origin-when-cross-origin",
-  alternates: { canonical: siteOrigin },
-  title: "AxStudios — AI Automation & Intelligent Business Systems",
-  description:
-    "AxStudios builds AI automation systems, AI agents, custom software, and intelligent workflows that help businesses work smarter and scale faster.",
-  openGraph: {
-    title: "AxStudios — AI Automation & Intelligent Business Systems",
-    description:
-      "Build smarter. Automate everything. Scale faster with intelligent AI automation systems.",
-    type: "website",
-    locale: "en_US",
-    url: "https://axstudios.tech",
-    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "AxStudios — AI automation and software" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "AxStudios — AI Automation & Intelligent Business Systems",
-    description:
-      "Build smarter. Automate everything. Scale faster with intelligent AI automation systems.",
-    images: ["/opengraph-image"],
-  },
 };
 
 export default function RootLayout({
