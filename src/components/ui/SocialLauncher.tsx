@@ -4,11 +4,12 @@ import { usePathname } from "next/navigation";
 import ExploreWithAI from "@/components/blog/ExploreWithAI";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, MessageCircle, X } from "lucide-react";
-import { linkedinUrl, whatsappUrl } from "@/lib/site";
+import { linkedinUrl, whatsappUrl, xUrl } from "@/lib/site";
 
 const links = [
   { label: "WhatsApp", href: whatsappUrl },
   { label: "LinkedIn", href: linkedinUrl },
+  { label: "X", href: xUrl },
 ];
 
 function SocialLauncher() {
@@ -69,8 +70,10 @@ function SocialLauncher() {
           >
             {label === "WhatsApp" ? (
               <MessageCircle className="size-4 text-[rgb(var(--accent-text))]" aria-hidden="true" />
-            ) : (
+            ) : label === "LinkedIn" ? (
               <span className="grid size-4 place-items-center rounded-sm bg-[#0a66c2] text-xs font-bold text-white" aria-hidden="true">in</span>
+            ) : (
+              <span className="grid size-4 place-items-center text-sm font-bold" aria-hidden="true">𝕏</span>
             )}
             {label}
             <ArrowUpRight className="ml-auto size-3.5 text-secondary-text" aria-hidden="true" />

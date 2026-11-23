@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { linkedinUrl, whatsappUrl } from "@/lib/site";
+import { linkedinUrl, whatsappUrl, xUrl } from "@/lib/site";
 import { ArrowUpRight, Mail, MessageCircle, Phone, Zap } from "lucide-react";
 
 const PRIMARY = "rgb(var(--primary))";
@@ -178,6 +178,16 @@ export default function Footer() {
               >
                 <MessageCircle className="size-5" aria-hidden="true" />
                 <Phone className="absolute size-2.5" aria-hidden="true" />
+              </a>
+              <a
+                href={xUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="AxStudios on X"
+                title="X"
+                className="grid size-11 place-items-center rounded-full border border-foreground/15 text-foreground transition-colors hover:bg-foreground/5 hover:text-[rgb(var(--accent-text))]"
+              >
+                <span aria-hidden="true" className="text-lg font-semibold">𝕏</span>
               </a>
             </nav>
 

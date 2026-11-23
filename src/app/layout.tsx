@@ -9,7 +9,7 @@ import Background from "@/components/ui/Background";
 import CustomCursor from "@/components/ui/CustomCursor";
 import FloatingTools from "@/components/ui/SocialLauncher";
 import { themeInitScript } from "@/lib/theme";
-import { siteOrigin } from "@/lib/site";
+import { companyPhone, siteOrigin } from "@/lib/site";
 import { organizationId, websiteId } from "@/lib/seo";
 import StructuredData from "@/components/ui/StructuredData";
 
@@ -70,7 +70,7 @@ export default function RootLayout({
           "@graph": [
             { "@type": "Organization", "@id": organizationId, name: "AxStudios", alternateName: "AX Studios", url: siteOrigin,
               description: "AxStudios builds AI automation systems, AI agents, custom software, and intelligent workflows for ambitious businesses.",
-              logo: `${siteOrigin}/logo-land.svg`, email: "contact@axstudios.tech", telephone: "+918591897818",
+              logo: `${siteOrigin}/logo-land.svg`, email: "contact@axstudios.tech", telephone: companyPhone.replace(/\s/g, ""),
               address: { "@type": "PostalAddress", addressLocality: "Dubai", addressRegion: "Dubai", addressCountry: "AE" },
               contactPoint: { "@type": "ContactPoint", contactType: "sales", email: "contact@axstudios.tech", availableLanguage: ["English"] },
               knowsAbout: ["AI automation", "AI agents", "AI cost optimization", "custom software development", "AI web applications"] },
