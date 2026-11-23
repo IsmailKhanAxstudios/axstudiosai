@@ -13,6 +13,16 @@ import { companyPhone, siteOrigin } from "@/lib/site";
 import { organizationId, websiteId } from "@/lib/seo";
 import StructuredData from "@/components/ui/StructuredData";
 
+const googleTagManagerId = "GTM-PVKJJ2W3";
+const googleTagManagerScript = `
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+  const tag = document.createElement('script');
+  tag.async = true;
+  tag.src = 'https://www.googletagmanager.com/gtm.js?id=${googleTagManagerId}';
+  document.head.appendChild(tag);
+`;
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -65,6 +75,16 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-background text-foreground antialiased">
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}`}
+            title="Google Tag Manager"
+            hidden
+          />
+        </noscript>
+        <Script id="google-tag-manager" strategy="afterInteractive">
+          {googleTagManagerScript}
+        </Script>
         <StructuredData data={{
           "@context": "https://schema.org",
           "@graph": [
