@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCaseStudies } from "@/lib/caseStudies";
-import { absoluteUrl, articleMetadata, organizationId } from "@/lib/seo";
+import { absoluteUrl, articleMetadata, breadcrumbData, organizationId } from "@/lib/seo";
 import StructuredData from "@/components/ui/StructuredData";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -26,6 +26,11 @@ export default async function CaseStudyPage({ params }: Props) {
         description: study.summary, datePublished: study.created_at, image: study.image,
         mainEntityOfPage: absoluteUrl(`/case-studies/${study.slug}`), author: { "@id": organizationId }, publisher: { "@id": organizationId },
       }} />
+      <StructuredData data={breadcrumbData([
+        { name: "Home", path: "/" },
+        { name: "Case Studies", path: "/case-studies" },
+        { name: study.title, path: `/case-studies/${study.slug}` },
+      ])} />
       <Link href="/case-studies" className="text-sm text-[rgb(var(--accent-text))] hover:underline">← Case studies</Link>
       <h1 className="mt-4 break-words text-3xl font-bold sm:text-5xl">{study.title}</h1>
       {study.client_name && <p className="mt-3 text-sm font-medium text-[rgb(var(--accent-text))]">{study.client_name}</p>}

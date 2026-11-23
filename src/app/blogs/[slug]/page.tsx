@@ -9,7 +9,7 @@ import { ArrowLeft } from "lucide-react";
 import ExploreWithAI from "@/components/blog/ExploreWithAI";
 import { getPublicBlogPost } from "@/lib/blogStore";
 import { siteOrigin } from "@/lib/site";
-import { absoluteUrl, articleMetadata, organizationId } from "@/lib/seo";
+import { absoluteUrl, articleMetadata, breadcrumbData, organizationId } from "@/lib/seo";
 import StructuredData from "@/components/ui/StructuredData";
 
 type BlogPageProps = { params: Promise<{ slug: string }> };
@@ -37,6 +37,11 @@ export default async function BlogPage({ params }: BlogPageProps) {
         author: post.author === "AxStudios" ? { "@id": organizationId } : { "@type": "Person", name: post.author },
         publisher: { "@id": organizationId },
       }} />
+      <StructuredData data={breadcrumbData([
+        { name: "Home", path: "/" },
+        { name: "Blogs", path: "/blogs" },
+        { name: post.title, path: `/blogs/${post.slug}` },
+      ])} />
       <Link href="/blogs" className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[rgb(var(--accent-text))] hover:underline">
         <ArrowLeft className="size-4" aria-hidden="true" /> All blogs
       </Link>

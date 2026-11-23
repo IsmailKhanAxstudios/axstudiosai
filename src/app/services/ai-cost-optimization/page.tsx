@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { aiOptimization } from "@/lib/aiOptimization";
 import { getPublicServices } from "@/lib/catalogStore";
-import { absoluteUrl, organizationId, pageMetadata } from "@/lib/seo";
+import { absoluteUrl, breadcrumbData, organizationId, pageMetadata } from "@/lib/seo";
 import StructuredData from "@/components/ui/StructuredData";
 
 export const dynamic = "force-dynamic";
@@ -26,6 +26,11 @@ export default async function AICostOptimizationPage() {
       <StructuredData data={{ "@context": "https://schema.org", "@type": "Service", name: service.title,
         description: service.description, url: absoluteUrl(service.href), serviceType: "AI cost optimization",
         provider: { "@id": organizationId } }} />
+      <StructuredData data={breadcrumbData([
+        { name: "Home", path: "/" },
+        { name: "Services", path: "/services" },
+        { name: service.title, path: service.href },
+      ])} />
       <Link href="/services" className="inline-flex items-center gap-2 text-sm font-medium text-[rgb(var(--accent-text))] hover:underline">
         <ArrowLeft className="size-4" aria-hidden="true" /> All services
       </Link>

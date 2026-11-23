@@ -27,6 +27,11 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteOrigin),
+  applicationName: "AxStudios",
+  creator: "AxStudios",
+  publisher: "AxStudios",
+  referrer: "strict-origin-when-cross-origin",
+  alternates: { canonical: siteOrigin },
   title: "AxStudios — AI Automation & Intelligent Business Systems",
   description:
     "AxStudios builds AI automation systems, AI agents, custom software, and intelligent workflows that help businesses work smarter and scale faster.",
@@ -35,13 +40,16 @@ export const metadata: Metadata = {
     description:
       "Build smarter. Automate everything. Scale faster with intelligent AI automation systems.",
     type: "website",
+    locale: "en_US",
     url: "https://axstudios.tech",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "AxStudios — AI automation and software" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "AxStudios — AI Automation & Intelligent Business Systems",
     description:
       "Build smarter. Automate everything. Scale faster with intelligent AI automation systems.",
+    images: ["/opengraph-image"],
   },
 };
 
@@ -60,10 +68,13 @@ export default function RootLayout({
         <StructuredData data={{
           "@context": "https://schema.org",
           "@graph": [
-            { "@type": "Organization", "@id": organizationId, name: "AxStudios", url: siteOrigin,
+            { "@type": "Organization", "@id": organizationId, name: "AxStudios", alternateName: "AX Studios", url: siteOrigin,
+              description: "AxStudios builds AI automation systems, AI agents, custom software, and intelligent workflows for ambitious businesses.",
               logo: `${siteOrigin}/logo-land.svg`, email: "contact@axstudios.tech", telephone: "+918591897818",
-              address: { "@type": "PostalAddress", addressLocality: "Dubai", addressCountry: "AE" } },
-            { "@type": "WebSite", "@id": websiteId, name: "AxStudios", url: siteOrigin, publisher: { "@id": organizationId } },
+              address: { "@type": "PostalAddress", addressLocality: "Dubai", addressRegion: "Dubai", addressCountry: "AE" },
+              contactPoint: { "@type": "ContactPoint", contactType: "sales", email: "contact@axstudios.tech", availableLanguage: ["English"] },
+              knowsAbout: ["AI automation", "AI agents", "AI cost optimization", "custom software development", "AI web applications"] },
+            { "@type": "WebSite", "@id": websiteId, name: "AxStudios", url: siteOrigin, inLanguage: "en", publisher: { "@id": organizationId } },
           ],
         }} />
         <Script id="theme-init" strategy="beforeInteractive">

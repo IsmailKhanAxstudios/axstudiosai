@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import StructuredData from "@/components/ui/StructuredData";
 import { getPublicServices } from "@/lib/catalogStore";
-import { absoluteUrl, organizationId, pageMetadata } from "@/lib/seo";
+import { absoluteUrl, breadcrumbData, organizationId, pageMetadata } from "@/lib/seo";
 import { serviceDetails } from "@/lib/serviceDetails";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -30,6 +30,11 @@ export default async function ServicePage({ params }: Props) {
       <StructuredData data={{ "@context": "https://schema.org", "@type": "Service", name: service.title,
         description: service.description, url: absoluteUrl(service.href), serviceType: service.title,
         provider: { "@id": organizationId } }} />
+      <StructuredData data={breadcrumbData([
+        { name: "Home", path: "/" },
+        { name: "Services", path: "/services" },
+        { name: service.title, path: service.href },
+      ])} />
       <Link href="/services" className="inline-flex items-center gap-2 text-sm font-medium text-[rgb(var(--accent-text))] hover:underline">
         <ArrowLeft className="size-4" aria-hidden="true" /> All services
       </Link>
