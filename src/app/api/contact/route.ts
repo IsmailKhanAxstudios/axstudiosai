@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { privilegedSupabase } from "@/lib/supabaseServer";
 
 export async function POST(request: Request) {
+  let submissionSaved = false;
   try {
     const receiver = process.env.CONTACT_RECEIVER_EMAIL;
     const apiKey = process.env.RESEND_API_KEY;
@@ -28,20 +30,44 @@ export async function POST(request: Request) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(replyTo) || /[\r\n]/.test(replyTo)) {
       return NextResponse.json({ success: false, message: "Invalid email address" }, { status: 400 });
     }
+    const submittedName = (input.name as string).trim();
+    if (submittedName.length > 150 || replyTo.length > 254) {
+      return NextResponse.json({ success: false, message: "Name or email address is too long" }, { status: 400 });
+    }
     if (input.website) {
       try {
         const url = new URL(input.website as string);
         if (!["https:", "http:"].includes(url.protocol)) throw new Error();
       } catch { return NextResponse.json({ success: false, message: "Invalid website URL" }, { status: 400 }); }
     }
+    const database = privilegedSupabase();
+    if (!database) {
+      console.error("Contact database is not configured");
+      return NextResponse.json({ success: false, message: "Contact submissions are temporarily unavailable. Please email contact@axstudios.tech." }, { status: 503 });
+    }
+    const { error: databaseError } = await database.from("contact_submissions").insert({
+      name: submittedName,
+      email: replyTo,
+      company: input.company || null,
+      phone: input.phone || null,
+      website: input.website || null,
+      business: input.business || "Not provided",
+      automation: input.automation || "Not provided",
+      interest: input.interest || null,
+      project_size: input.projectSize || null,
+      timeline: input.timeline || null,
+    });
+    if (databaseError) {
+      console.error("Contact submission could not be saved:", databaseError.message);
+      return NextResponse.json({ success: false, message: "We couldn’t save your request. Please try again or email contact@axstudios.tech." }, { status: 500 });
+    }
+    submissionSaved = true;
+
     const escapeHtml = (value: string) => value.replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]!);
     const safe = Object.fromEntries(fields.map(field => [field, escapeHtml(((input[field] as string) || "").trim())]));
     if (!receiver || !apiKey) {
       console.error("Contact email provider is not configured");
-      return NextResponse.json(
-        { success: false, message: "Server is not configured to accept messages" },
-        { status: 500 },
-      );
+      return NextResponse.json({ success: true, message: "Your request was received." });
     }
 
     const resend = new Resend(apiKey);
@@ -419,10 +445,9 @@ export async function POST(request: Request) {
 
       return NextResponse.json(
         {
-          success: false,
-          message: "Failed to send company notification",
+          success: true,
+          message: "Your request was received, but email notification could not be sent.",
         },
-        { status: 500 },
       );
     }
 
@@ -655,6 +680,9 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Contact API error:", error);
+    if (submissionSaved) {
+      return NextResponse.json({ success: true, message: "Your request was received." });
+    }
 
     return NextResponse.json(
       {

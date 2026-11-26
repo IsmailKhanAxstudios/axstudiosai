@@ -2,7 +2,6 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Send, Loader2, CheckCircle } from "lucide-react";
-import emailjs from "@emailjs/browser";
 
 const PRIMARY = "rgb(var(--primary))";
 const PRIMARY_LIGHT = "rgb(var(--primary) / 0.6)";
@@ -51,37 +50,27 @@ export default function ContactForm() {
     setIsSubmitting(true);
 
     try {
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-      if (!serviceId || !templateId || !publicKey) {
-        throw new Error("The contact form is temporarily unavailable. Please email contact@axstudios.tech.");
-      }
-      const templateParams = {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
         name: formData.name,
         email: formData.email,
-        company: formData.company || "N/A",
-        phone: formData.phone || "N/A",
-        website: formData.website || "N/A",
+        company: formData.company,
+        phone: formData.phone,
+        website: formData.website,
         business: formData.business,
         automation: formData.automation,
-        interest: formData.interest || "N/A",
-        project_size: formData.projectSize || "N/A",
-        timeline: formData.timeline || "N/A",
-      };
-
-      const result = await emailjs.send(
-        serviceId,
-        templateId,
-        templateParams,
-        publicKey,
-      );
-
-      if (result.status === 200) {
-        setIsSubmitted(true);
-      } else {
-        throw new Error("Failed to send email");
+        interest: formData.interest,
+        projectSize: formData.projectSize,
+        timeline: formData.timeline,
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "We couldn’t send your request. Please try again or email contact@axstudios.tech.");
       }
+      setIsSubmitted(true);
     } catch (error) {
       setSubmitError(
         error instanceof Error

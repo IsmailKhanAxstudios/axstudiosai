@@ -13,17 +13,7 @@ Open http://localhost:3000. Run `npm run build` for a production build and `npm 
 
 ## Contact form configuration
 
-The browser form uses EmailJS. Set these values in `.env.local` and rebuild after changing them:
-
-```dotenv
-NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
-NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
-NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
-```
-
-Configure the EmailJS template to accept `name`, `email`, `company`, `phone`, `website`, `business`, `automation`, `interest`, `project_size`, and `timeline`. Restrict permitted origins in EmailJS. If configuration is missing, the form displays an email fallback instead of claiming success.
-
-The separate `/api/contact` endpoint uses Resend and requires `RESEND_API_KEY` and `CONTACT_RECEIVER_EMAIL`. Set `CONTACT_SENDER_EMAIL` to an address on your verified sending domain for production delivery. The default Resend onboarding address is for testing. Server credentials must never use a `NEXT_PUBLIC_` prefix. Builds do not require email credentials.
+The contact form posts to `/api/contact`, which stores inquiries in Supabase using the server-only `SUPABASE_SECRET_KEY`. Apply the `contact_submissions` migration and set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and `SUPABASE_SECRET_KEY` in the deployment environment. Resend settings (`RESEND_API_KEY`, `CONTACT_RECEIVER_EMAIL`, and a verified `CONTACT_SENDER_EMAIL`) enable email notifications; submissions are still saved when email notifications are not configured.
 
 ## Content and estimates
 
